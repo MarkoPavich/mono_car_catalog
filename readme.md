@@ -1,4 +1,4 @@
-# Mono Car Catalogue
+# Mono Car Catalog
 Web-based interactive vehicle catalog
 
 ## Description
