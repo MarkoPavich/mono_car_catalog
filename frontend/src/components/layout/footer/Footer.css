@@ -1,0 +1,27 @@
+.l-footer{
+	height: 60px;
+	width: 100%;
+
+	background-color: black;
+
+	margin-top: 100px;
+
+	display: flex;
+	justify-content: space-between;
+
+	padding: 15px;
+}
+
+.l-footer a, .l-footer span{
+	color: white;
+	font-size: 14px;
+
+	text-decoration: none; 
+}
+
+.l-footer-txt-box{
+	display: flex;
+	flex-direction: column;
+
+	justify-content: space-around;
+}

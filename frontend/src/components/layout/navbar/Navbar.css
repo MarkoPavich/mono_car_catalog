@@ -1,0 +1,42 @@
+.l-navbar{
+	position: fixed;
+	background-color: black;
+	color: white;
+
+	height: 70px;
+	width: 100%;
+
+	top: 0%;
+
+	padding-left: 8px;
+	padding-top: 8px;
+	padding-right: 8px;
+}
+
+.l-navbar-content-container-left{
+	display: flex;
+}
+
+.l-navbar-content-container-left img{
+	margin-left: 2px;
+}
+
+.l-navbar-c-left-text-box{
+	margin-left: 15px;
+
+	display: flex;
+	flex-direction: column;
+
+	font-style: italic;
+}
+
+.l-navbar-c-left-text-box h1{
+	font-size: 21px;
+}
+
+.l-navbar-c-left-text-box span{
+	margin-left: 7px;
+	margin-top: -3px;
+
+	font-size: 14px;
+}

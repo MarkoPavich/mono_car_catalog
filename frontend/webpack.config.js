@@ -1,4 +1,5 @@
 module.exports = {
+	cache: false,
 	module: {
 		rules: [
 			{
@@ -12,7 +13,13 @@ module.exports = {
 				test: /\.css$/i,
 				exclude: /node_modules/,
 				use: ["style-loader", "css-loader"]
+			},
+			{
+				test: /\.(jpg|gif|png)$/i,
+				use: {
+					loader: 'url-loader'
+				}
 			}
 		]
 	}
-}
+};
