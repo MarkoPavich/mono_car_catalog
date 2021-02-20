@@ -1,5 +1,5 @@
 .l-footer{
-	height: 60px;
+	min-height: 60px;
 	width: 100%;
 
 	background-color: black;
@@ -26,4 +26,10 @@
 	flex-direction: column;
 
 	justify-content: space-around;
+}
+
+@media(max-width: 500px){
+	.l-footer{
+		flex-direction: column;
+	}
 }
