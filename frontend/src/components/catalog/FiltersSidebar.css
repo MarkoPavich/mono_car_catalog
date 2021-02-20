@@ -1,0 +1,35 @@
+.c-filtersSidebar-filter-params-container{
+	min-width: 170px;
+	margin-left: 50px;
+}
+
+.c-filtersSidebar-filters-unit-container{
+	margin-bottom: 30px;
+}
+
+.c-filtersSidebar-filters-unit-container span{
+	font-size: 20px;
+	font-weight: bold;
+
+	display: block;
+
+	margin-bottom: 15px;
+}
+
+.c-filtersSidebar-filters-unit-container ul {
+	list-style: none;
+}
+
+.c-filtersSidebar-filters-unit-container ul li{
+	display: flex;
+	align-items: center;
+
+	margin-bottom: 15px;
+}
+
+.c-filtersSidebar-filters-unit-container ul li input{
+	height: 23px;
+	width: 23px;
+
+	margin-right: 15px;
+}

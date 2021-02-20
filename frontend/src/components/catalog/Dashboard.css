@@ -1,0 +1,14 @@
+
+.c-dashboard-container{
+	padding-top: 150px;
+	padding-left: 25px;
+	padding-right: 25px;
+
+	margin: auto;
+
+	min-height: 800px;
+	max-width: 1600px;
+
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,22 @@
+.c-carsGrid-top-container{
+	width: 100%;
+	border: solid 1px black;
+
+	margin-bottom: 100px;
+}
+
+.c-carsGrid-top-container header{
+	display: flex;
+	justify-content: space-between;
+
+	color: rgba(0,0,0,0.6);
+}
+
+.c-carsGrid-card-container{
+	padding: 15px;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-row-gap: 30px;
+	justify-items: center;
+}
