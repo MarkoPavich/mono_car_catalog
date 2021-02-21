@@ -1,8 +1,5 @@
 .c-carsGrid-top-container{
 	width: 100%;
-	border: solid 1px black;
-
-	margin-bottom: 100px;
 }
 
 .c-carsGrid-top-container header{
@@ -13,6 +10,7 @@
 }
 
 .c-carsGrid-card-container{
+	margin-top: 5px;
 	padding: 15px;
 
 	display: grid;

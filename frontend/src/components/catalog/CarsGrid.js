@@ -39,6 +39,8 @@ const vehicles = [
         engine_abrv: "2.0d",
         img_url: "https://images.dealer.com/ddc/vehicles/2020/Audi/A4/Sedan/perspective/front-left/2020_24.png",
         odo: "80,000 km",
-        desc: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium"
+        desc: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium ducimus blanditiis et iusto",
+        price: "12000,00 €"
     },
+
 ]
