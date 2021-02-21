@@ -18,3 +18,9 @@
 	grid-row-gap: 30px;
 	justify-items: center;
 }
+
+@media(max-width: 1250px){
+	.c-carsGrid-card-container{
+		grid-template-columns: 1fr 1fr;
+	}
+}

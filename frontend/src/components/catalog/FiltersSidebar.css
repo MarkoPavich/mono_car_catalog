@@ -1,6 +1,22 @@
 .c-filtersSidebar-filter-params-container{
 	min-width: 170px;
 	margin-left: 50px;
+
+	animation: springUp 0.4s, fadeIn 1s;
+}
+
+@keyframes springUp{
+	from {
+		transform: translate(0, 50px);
+	}
+	to {
+		transform: translate(0,0);
+	}
+}
+
+@keyframes fadeIn{
+	from {opacity: 0;}
+	to: {opacity: 1;}
 }
 
 .c-filtersSidebar-filters-unit-container{

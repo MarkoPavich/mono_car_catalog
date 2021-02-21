@@ -5,6 +5,10 @@
 	font-family: Poppins, sans-serif;
 }
 
+input, select, option{
+	background-color: ghostwhite;
+}
+
 body{
 	background-color: ghostwhite;
 }
