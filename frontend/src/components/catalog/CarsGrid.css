@@ -5,6 +5,7 @@
 .c-carsGrid-top-container header{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 
 	color: rgba(0,0,0,0.6);
 }
@@ -19,8 +20,101 @@
 	justify-items: center;
 }
 
+.c-carsGrid-filters-mobile-toggle{
+	width: 140px;
+	height: 30px;
+
+	padding-left: 10px;
+	padding-right: 10px;
+
+	transition: border 0.5s, color 0.5s;
+
+	border: solid 1px rgba(0,0,0,0.6);
+	border-radius: 20px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	font-size: 12px;
+	color: black;
+}
+
+.c-carsGrid-filters-mobile-toggle:hover,
+.c-carsGrid-filters-mobile-toggle:hover > .c-carsGrid-hamburger-ico li{
+	cursor: pointer;
+
+	border: 1px solid #6871c9;
+	color: #6871c9;
+}
+
+.c-carsGrid-hamburger-ico ul li{
+	list-style: none;
+
+	width: 13px;
+	height: 2px;
+
+	transition: border 0.5s;
+
+	border: solid 1px black;
+}
+
+.c-carsGrid-hamburger-ico ul li:not(:last-child){
+	margin-bottom: 3px;
+}
+
+.c-carsGrid-filters-mobile-toggle div:last-child{
+	width: 18px;
+	height: 18px;
+
+	border-radius: 50%;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #6871c9;
+
+	color: white;
+
+	font-size: 11px;
+}
+
 @media(max-width: 1250px){
 	.c-carsGrid-card-container{
 		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media(max-width: 950px){
+	.c-carsGrid-header-sort-filter{
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 15px;
+	}
+}
+
+@media(max-width: 950px) and (min-width: 600px){
+	.c-carsGrid-top-container header{
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+}
+
+@media(max-width: 450px){
+	.c-carsGrid-header-sort-filter{
+		max-width: 130px;
+	}
+
+	.c-carsGrid-header-sort-filter select{
+		font-size: 12px;
+	}
+}
+
+@media(max-width: 710px){
+	.c-carsGrid-card-container{
+		grid-template-columns: 1fr;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }

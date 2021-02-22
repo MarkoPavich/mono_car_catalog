@@ -3,7 +3,8 @@ import './FiltersSidebar.css'
 
 function SideFilters() {
     return (
-        <aside className="c-filtersSidebar-filter-params-container">
+        <aside className="c-filtersSidebar-filter-params-container" id="c-filtersSidebar-filter-params-container">
+            <button onClick={closeSidebar}>X</button>
             <div className="c-filtersSidebar-filters-unit-container">
                 <span>Marka</span>
                 <select name="brand_filter" id="brand_filter">
@@ -30,8 +31,26 @@ function SideFilters() {
                     <li><input value="hybrid" type="checkbox"/>Benzin</li>
                 </ul>
             </div>
+            <div className="c-filtersSidebar-mobile-confirm-button-box">
+                <button onClick={closeSidebar}>Potvrdi</button>
+            </div>
         </aside>
     )
 }
 
-export default SideFilters
+export default SideFilters;
+
+
+/* Helper fns */
+export function toggleMobileSidebar(){
+    const sidebarClassName = "c-filtersSidebar-filter-params-container";
+    const activeClassName = `${sidebarClassName} c-filtersSidebar-modal-active`;
+
+    document.querySelector(".c-filtersSidebar-filter-params-container").className = activeClassName;
+}
+
+
+export function closeSidebar(){
+    const sidebarClassName = "c-filtersSidebar-filter-params-container";
+    document.querySelector(".c-filtersSidebar-filter-params-container").className = sidebarClassName;
+}
