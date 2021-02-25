@@ -1,9 +1,27 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './NavBar.css'
 import logoPNG from './assets/car_shape_silh.png'
 import magnifierPNG from './assets/magnifier_ico.png'
+import NavbarResponsiveUserMenu from './NavbarResponsiveUserMenu'
 
 function Navbar() {
+    const [smallScreen, setSmallScreen] = useState(false);
+
+    useEffect(() => {
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        function handleResize(){
+            setSmallScreen(window.innerWidth < 1250);
+        };
+
+        return function listenerCleanup(){
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+
     return ( 
         <nav className="l-navbar">
             <div className="l-navbar-content-container-left">
@@ -11,7 +29,7 @@ function Navbar() {
                     <img src={logoPNG} alt="logo"/>
                     <div className="l-navbar-c-left-text-box">
                         <h1>Mono car catalog</h1>
-                        <span>Powered by V8</span>  {/* V8 - js reference, get it ? :)) ..I'll, show myself out.. */}
+                        <span>Powered by V8</span>
                     </div>
                 </div>
                 <div onClick={focusSearchbar} className="l-navbar-searchbox-container">
@@ -22,7 +40,7 @@ function Navbar() {
                 </div>
             </div>
             <div className="l-navbar-content-container-right">
-                {responsiveUserMenu(true)}
+                {NavbarResponsiveUserMenu(smallScreen)}
                 <div className="l-navbar-locale-toggle-container">
                     <select name="navbar_locale_toggle" id="navbar_locale_toggle">
                         <option value="HR">HR</option>
@@ -44,29 +62,3 @@ function focusSearchbar(){
 }
 
 
-function responsiveUserMenu(smallScreen){
-    const userMenu = (
-        <div className="l-navbar-user-menu">
-            <ul>
-                <li>Add vehicle</li>
-                <li>My vehicles</li>
-                <li>Logout</li>
-            </ul>
-        </div>
-    )
-
-    const userMenuSmallScreen = (
-        <div className="l-navbar-user-menu-mobile">
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-            <div>
-            </div>
-        </div>
-    )
-
-    if(smallScreen) return userMenuSmallScreen;
-    else return userMenu;
-}
