@@ -64,7 +64,7 @@ export const vehicles = [
         odo: "80,000 km",
         desc: "At vero eos.",
         price: "12000,00 €"
-    },
+    }, /*
     {
         id: 7,
         make: "Audi",
@@ -86,7 +86,7 @@ export const vehicles = [
         odo: "80,000 km",
         desc: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium",
         price: "12000,00 €"
-    },
+    }, 
     {
         id: 9,
         make: "Hyundai",
@@ -262,5 +262,5 @@ export const vehicles = [
         odo: "80,000 km",
         desc: "At vero eos.",
         price: "12000,00 €"
-    },
+    },*/
 ]

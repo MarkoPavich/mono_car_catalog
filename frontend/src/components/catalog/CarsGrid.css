@@ -80,6 +80,31 @@
 	font-size: 11px;
 }
 
+.c-carsGrid-pagination-footer{
+	display: flex;
+	justify-content: space-between;
+
+	max-width: 85%;
+
+	margin: auto;
+	margin-top: 20px;
+}
+
+.c-carsGrid-pagination-footer a{
+	text-decoration: none;
+
+	color: black;
+}
+
+.c-carsGrid-pagination-nums{
+	display: flex;
+	justify-content: space-between;
+}
+
+.c-carsGrid-pagination-nums span:not(:last-child){
+	margin-right: 10px;
+}
+
 @media(max-width: 1250px){
 	.c-carsGrid-card-container{
 		grid-template-columns: 1fr 1fr;
@@ -108,6 +133,10 @@
 
 	.c-carsGrid-header-sort-filter select{
 		font-size: 12px;
+	}
+
+	.c-carsGrid-pagination-footer{
+		max-width: 100%;
 	}
 }
 

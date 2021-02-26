@@ -44,6 +44,24 @@ function CarsGrid() {
                     return <CarCard key={car.id} {...car} />
                 })}
             </div>
+
+            <footer className="c-carsGrid-pagination-footer">
+                <div className="c-carsGrid-pagination-previous-box">
+                    <span><a href="#">Prethodna</a></span>
+                </div>
+                <div className="c-carsGrid-pagination-nums">
+                    <span><a href="#">1</a></span>
+                    <span><a href="#">2</a></span>
+                    <span><a href="#">3</a></span>
+                    <span><a href="#">4</a></span>
+                    <span><a href="#">...</a></span>
+                    
+                </div>
+                <div className="c-carsGrid-pagination-next-box">
+                    <span><a href="#">Iduća</a></span>
+                </div>
+            </footer>
+
         </div>
     )
 }
