@@ -101,6 +101,22 @@
 	justify-content: space-between;
 }
 
+.c-carsGrid-pagination-nums span{
+	height: 20px;
+	width: 20px;
+
+	border: solid 1px transparent;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pagination-page-link-current{
+	border-color: black !important;
+	font-weight: bold;
+}
+
 .c-carsGrid-pagination-nums span:not(:last-child){
 	margin-right: 10px;
 }

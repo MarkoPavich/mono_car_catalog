@@ -52,7 +52,7 @@ function CarsGrid() {
                 <div className="c-carsGrid-pagination-nums">
                     <span><a href="#">1</a></span>
                     <span><a href="#">2</a></span>
-                    <span><a href="#">3</a></span>
+                    <span className="pagination-page-link-current"><a href="#">3</a></span>
                     <span><a href="#">4</a></span>
                     <span><a href="#">...</a></span>
                     
