@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import ModalRegisterForm from './forms/ModalRegisterForm'
 import LoginForm from './forms/LoginForm'
 import './Login.css'
