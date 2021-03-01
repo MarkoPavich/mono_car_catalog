@@ -1,9 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import ModalRegisterForm from './forms/ModalRegisterForm'
 import LoginForm from './forms/LoginForm'
 import './Login.css'
+import {useAuthStore} from '../../StoreProvider'
 
 function Login() {
+    const {getUser} = useAuthStore();
 
     return (
         <React.Fragment>
@@ -24,4 +26,4 @@ function Login() {
 }
 
 
-export default Login
+export default Login;
