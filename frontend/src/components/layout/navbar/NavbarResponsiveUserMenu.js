@@ -1,17 +1,22 @@
 import React from 'react';
 import './NavbarResponsiveUserMenu.css'
+import {useAuthStore} from '../../../StoreProvider'
 
 
 function NavbarResponsiveUserMenu(isSmallScreen){
+    const {requestLogout, authState} = useAuthStore();
+
+
     const userMenu = (
         <div className="l-navbar-user-menu">
             <ul>
                 <li>Add vehicle</li>
                 <li>My vehicles</li>
-                <li>Logout</li>
+                <li onClick={requestLogout}>Logout</li>
             </ul>
         </div>
     )
+
 
     const userMenuSmallScreen = (
         <div 
@@ -32,13 +37,14 @@ function NavbarResponsiveUserMenu(isSmallScreen){
                     <li><a href="#">My Vehicles</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#">Logout</a></li>
+                    <li onClick={requestLogout}><a href="#">Logout</a></li>
                 </ul>
             </div>
         </div>
     )
 
-    if(isSmallScreen) return userMenuSmallScreen;
+    if(!authState.isAuthenticated) return <React.Fragment />
+    else if(isSmallScreen) return userMenuSmallScreen;
     else return userMenu;
 }
 

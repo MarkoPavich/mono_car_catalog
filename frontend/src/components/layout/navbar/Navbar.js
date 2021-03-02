@@ -3,9 +3,12 @@ import './NavBar.css'
 import logoPNG from './assets/car_shape_silh.png'
 import magnifierPNG from './assets/magnifier_ico.png'
 import NavbarResponsiveUserMenu from './NavbarResponsiveUserMenu'
+import {observer} from 'mobx-react-lite'
+import {useAuthStore} from '../../../StoreProvider'
 
-function Navbar() {
+const Navbar = observer(() => {
     const [smallScreen, setSmallScreen] = useState(false);
+    const {authState} = useAuthStore();
 
     useEffect(() => {
         handleResize();
@@ -32,12 +35,14 @@ function Navbar() {
                         <span>Powered by V8</span>
                     </div>
                 </div>
-                <div onClick={focusSearchbar} className="l-navbar-searchbox-container">
-                    <div className="l-navbar-searchbar">
-                        <input placeholder="Pretraga" name="nav_search" type="text"/>
-                        <img src={magnifierPNG} alt="search_ico"/>
+                {authState.isAuthenticated &&
+                    <div onClick={focusSearchbar} className="l-navbar-searchbox-container">
+                        <div className="l-navbar-searchbar">
+                            <input placeholder="Pretraga" name="nav_search" type="text"/>
+                            <img src={magnifierPNG} alt="search_ico"/>
+                        </div>
                     </div>
-                </div>
+                }   
             </div>
             <div className="l-navbar-content-container-right">
                 {NavbarResponsiveUserMenu(smallScreen)}
@@ -50,7 +55,7 @@ function Navbar() {
             </div>
         </nav>
     )
-}
+})
 
 export default Navbar;
 

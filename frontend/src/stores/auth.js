@@ -13,32 +13,35 @@ class Auth {
         makeObservable(this, {
             authState: observable,
             requestLogin: action,
-            logOut: action,
-            validateLogIn: action
+            requestLogout: action,
         });
     }
 
 
-    validateLogIn = () => {
-        const request = new Request(`${apiBaseUrl}/auth/user`);
-        const options = {...getOptions, headers: {Authorization: `token ${this.authState.token}`}};
+    validateLogin = () => {
+        if(this.authState.token !== null){
+            const request = new Request(`${apiBaseUrl}/auth/user`);
+            const options = {...JSON.parse(getOptions), headers: {Authorization: `token ${this.authState.token}`}};
 
-        try{
-            fetch(request, options).then(response => {
-                if(response.status !== 200) this.logOut();
-            })
+            try{
+                fetch(request, options).then(response => {
+                    if(response.status !== 200) this.requestLogout();
+                })
+            }
+            catch(error){
+                console.log(error)
+                this.requestLogout();
+            }
         }
-        catch(error){
-            console.log(error)
-            this.logOut();
-        }
+        else this.requestLogout;
     }
+
 
     requestLogin = (data) => {
         this.authState.isLoading = true;
 
         const request = new Request(`${apiBaseUrl}/auth/login`);
-        const options = {...postOptions, body: JSON.stringify(data)};
+        const options = {...JSON.parse(postOptions), body: JSON.stringify(data)};
 
         try{
             fetch(request, options).then(response => {
@@ -55,47 +58,44 @@ class Auth {
                         localStorage.setItem("token", res.token)
                     })
                 })
-                else this.logOut();
+                else response.json().then(res => console.log(res))
             })
         }
         catch(error){
             console.log(error);
-            this.logOut();
+            this.requestLogout();
         }
     };
 
 
-    logOut = () => {
-        localStorage.clear("token");
+    requestLogout = () => {
+        this.authState.isLoading = true;
 
+        if(this.authState.token !== null){
+            const request = new Request(`${apiBaseUrl}/auth/logout`);
+            const options = {...JSON.parse(postOptions)};
+            options.headers["Authorization"] = `token ${localStorage.getItem("token")}`;
+
+            try{
+                fetch(request, options).then(response => {
+                    if(response.status !== 204) response.json().then(res => {
+                        console.log("Problem logging out", res);
+                    })
+                })
+            }
+            catch(error){
+                console.log("Problem logging out", error);
+            }
+        }
+        
         this.authState = {
             ...this.authState,
             isLoading: false,
             isAuthenticated: false,
             user: null,
             token: null
-        }
-
-        /* logout request */
-        
+        };
     };
-
-
-    getUser = () => {
-        const request = new Request(`${apiBaseUrl}/auth/user`);
-        const options = {...getOptions};
-        options["Authorization"] = localStorage.getItem("token")
-
-        try{
-            fetch(request, options).then(response => {
-                console.log(response);
-                console.log(this.token)
-            })
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
 };
 
 
