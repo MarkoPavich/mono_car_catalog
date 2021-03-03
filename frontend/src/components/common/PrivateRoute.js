@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react'
 import {useAuthStore} from '../../StoreProvider'
 import {observer} from 'mobx-react-lite'
-import {Redirect, Route} from 'react-router-dom' 
+import {Route} from 'react-router-dom'
+import LoadUser from './LoadUser'
 
 
 const PrivateRoute = observer(({component: Component, ...rest}) => {
@@ -9,14 +10,14 @@ const PrivateRoute = observer(({component: Component, ...rest}) => {
     const {isAuthenticated} = authState;
 
     useEffect(() => {
-        validateLogin()
+        validateLogin();
     })
 
     return <Route {...rest} render={props => {
         return (
             isAuthenticated
             ? <Component props={props} />
-            : <Redirect to="login" />
+            : <LoadUser />
         )
     }} />
 })

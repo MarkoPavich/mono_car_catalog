@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {showModalRegisterForm} from './ModalRegisterForm'
 import {useAuthStore} from '../../../StoreProvider'
 import {observer} from 'mobx-react-lite'
-import {Redirect} from 'react-router-dom'
 
 
 const LoginForm = observer(() => {
     const {requestLogin, authState} = useAuthStore();
-    const {isLoading, isAuthenticated} = authState;
+    const {isLoading} = authState;
 
     const [state, setState] = useState({
         username: "",
@@ -30,30 +29,29 @@ const LoginForm = observer(() => {
     }
 
 
-    if(isAuthenticated) return <Redirect to="/" />
-    else return(
-            <form className="a-login-form">
-                <input
-                name="username"
-                onChange={handleInput} 
-                value={state.username} 
-                className="a-login-form-input-unit" 
-                placeholder="Username" type="text"/>
-                <input
-                name="password"
-                onChange={handleInput} 
-                value={state.password} 
-                className="a-login-form-input-unit" 
-                placeholder="Password" type="password"/>
-                <div className="a-login-form-action-button-box">
-                    <button onClick={handleSubmitLogin}>{isLoading ? "Loading" : "Log in"}</button>
-                </div>
-                <div className="a-login-form-divider-line"></div>
-                <div className="a-login-form-alt-action-button-box">
-                    <button onClick={showModalRegisterForm}>Create new account</button>
-                </div>
-            </form>
-        )
+    return(
+        <form className="a-login-form">
+            <input
+            name="username"
+            onChange={handleInput} 
+            value={state.username} 
+            className="a-login-form-input-unit" 
+            placeholder="Username" type="text"/>
+            <input
+            name="password"
+            onChange={handleInput} 
+            value={state.password} 
+            className="a-login-form-input-unit" 
+            placeholder="Password" type="password"/>
+            <div className="a-login-form-action-button-box">
+                <button onClick={handleSubmitLogin}>{isLoading ? "Loading" : "Log in"}</button>
+            </div>
+            <div className="a-login-form-divider-line"></div>
+            <div className="a-login-form-alt-action-button-box">
+                <button onClick={showModalRegisterForm}>Create new account</button>
+            </div>
+        </form>
+    )
 })
 
 

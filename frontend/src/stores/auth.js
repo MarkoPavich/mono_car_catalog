@@ -14,7 +14,39 @@ class Auth {
             authState: observable,
             requestLogin: action,
             requestLogout: action,
+            getUser: action
         });
+    }
+
+
+    getUser = () => {
+        if(this.authState.token !== null){
+            this.loading = true;
+
+            const request = new Request(`${apiBaseUrl}/auth/user`);
+            const options = {...JSON.parse(getOptions), headers: {Authorization: `token ${this.authState.token}`}};
+
+            try{
+                fetch(request, options).then(response => {
+                    if(response.status !== 200) this.requestLogout();
+                    else response.json().then(res => {
+                        runInAction(() => {
+                            this.authState = {
+                                ...this.authState,
+                                isLoading: false,
+                                isAuthenticated: true,
+                                user: res.user,
+                            }
+                        })
+                    })
+                })
+            }
+            catch(error){
+                console.log(error)
+                this.requestLogout();
+            }
+        }
+        else this.requestLogout();
     }
 
 
@@ -33,7 +65,9 @@ class Auth {
                 this.requestLogout();
             }
         }
-        else this.requestLogout;
+        else {
+            this.requestLogout();
+        };
     }
 
 
@@ -79,7 +113,7 @@ class Auth {
             try{
                 fetch(request, options).then(response => {
                     if(response.status !== 204) response.json().then(res => {
-                        console.log("Problem logging out", res);
+                        console.log("Invalid token", res);
                     })
                 })
             }
@@ -88,6 +122,7 @@ class Auth {
             }
         }
         
+        localStorage.clear("token");
         this.authState = {
             ...this.authState,
             isLoading: false,
