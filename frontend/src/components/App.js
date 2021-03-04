@@ -6,11 +6,21 @@ import Dashboard from './catalog/Dashboard'
 import StoreProvider from '../StoreProvider'
 import {HashRouter as Router, Switch, Route} from 'react-router-dom'
 import PrivateRoute from './common/PrivateRoute'
+import {transitions, Provider as AlertProvider} from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+import Alert from './layout/Alert'
+
+const alertOptions = {  
+    timeout: 5000,
+    offset: '30px',
+    transition: transitions.SCALE
+}
 
 function App() {
     return(
-        <React.Fragment>
-            <StoreProvider>
+        <StoreProvider>
+            <AlertProvider template={AlertTemplate} {...alertOptions}>
+                <Alert />
                 <Navbar />
                 <Router>
                     <Switch>
@@ -19,8 +29,8 @@ function App() {
                     </Switch>
                 </Router>
                 <Footer />
-            </StoreProvider>
-        </React.Fragment>
+            </AlertProvider>
+        </StoreProvider>
     )
 }
 

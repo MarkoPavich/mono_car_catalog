@@ -2,14 +2,16 @@ import {makeObservable, observable, action, runInAction} from 'mobx'
 import {authServices} from './services/authServices'
 
 
-class Auth {
-    constructor(){
+class AuthStore {
+    constructor(messages){
         this.authState = {
             isLoading: false,
             isAuthenticated: null,
             token: localStorage.getItem("token"),
             user: null
         }
+
+        this.messages = messages;
 
         makeObservable(this, {
             authState: observable,
@@ -78,6 +80,7 @@ class Auth {
                         token: data.token
                     }
                     localStorage.setItem("token", data.token);
+                    this.messages.createSuccess(`Welcome, ${data.user.username}`)
                 })
             }
             else {
@@ -119,4 +122,4 @@ class Auth {
 };
 
 
-export const authStore = new Auth();
+export default AuthStore;
