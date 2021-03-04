@@ -1,5 +1,6 @@
 import {makeObservable, observable, action, runInAction} from 'mobx'
-import {apiBaseUrl, getOptions, postOptions} from './config'
+import {authServices} from './services/authServices'
+
 
 class Auth {
     constructor(){
@@ -19,46 +20,37 @@ class Auth {
     }
 
 
-    getUser = () => {
+    getUser = async () => {
         if(this.authState.token !== null){
             this.loading = true;
 
-            const request = new Request(`${apiBaseUrl}/auth/user`);
-            const options = {...JSON.parse(getOptions), headers: {Authorization: `token ${this.authState.token}`}};
-
             try{
-                fetch(request, options).then(response => {
-                    if(response.status !== 200) this.requestLogout();
-                    else response.json().then(res => {
-                        runInAction(() => {
-                            this.authState = {
-                                ...this.authState,
-                                isLoading: false,
-                                isAuthenticated: true,
-                                user: res.user,
-                            }
-                        })
-                    })
+                const data = await authServices.validateToken(this.authState.token);
+                if(data.status !== 200) this.requestLogout();
+                else runInAction(() => {
+                    this.authState = {
+                        ...this.authState,
+                        isLoading: false,
+                        isAuthenticated: true,
+                        user: data.user
+                    }
                 })
             }
             catch(error){
-                console.log(error)
                 this.requestLogout();
+                console.log(error)
             }
+
         }
         else this.requestLogout();
     }
 
 
-    validateLogin = () => {
+    validateLogin = async () => {
         if(this.authState.token !== null){
-            const request = new Request(`${apiBaseUrl}/auth/user`);
-            const options = {...JSON.parse(getOptions), headers: {Authorization: `token ${this.authState.token}`}};
-
             try{
-                fetch(request, options).then(response => {
-                    if(response.status !== 200) this.requestLogout();
-                })
+                const {status} = await authServices.validateToken(this.authState.token)
+                    if(status !== 200) this.requestLogout();
             }
             catch(error){
                 console.log(error)
@@ -71,29 +63,27 @@ class Auth {
     }
 
 
-    requestLogin = (data) => {
+    requestLogin = async (loginData) => {
         this.authState.isLoading = true;
 
-        const request = new Request(`${apiBaseUrl}/auth/login`);
-        const options = {...JSON.parse(postOptions), body: JSON.stringify(data)};
-
         try{
-            fetch(request, options).then(response => {
-
-                if(response.status === 200) response.json().then(res => {
-                    runInAction(() => {
-                        this.authState = {
-                            ...this.authState,
-                            isLoading: false,
-                            isAuthenticated: true,
-                            user: res.user,
-                            token: res.token
-                        }
-                        localStorage.setItem("token", res.token)
-                    })
+            const data = await authServices.login(loginData);
+            if(data.status === 200){
+                runInAction(() => {
+                    this.authState = {
+                        ...this.authState,
+                        isLoading: false,
+                        isAuthenticated: true,
+                        user: data.user,
+                        token: data.token
+                    }
+                    localStorage.setItem("token", data.token);
                 })
-                else response.json().then(res => console.log(res))
-            })
+            }
+            else {
+                console.log(data),
+                this.requestLogout();
+            }
         }
         catch(error){
             console.log(error);
@@ -102,34 +92,29 @@ class Auth {
     };
 
 
-    requestLogout = () => {
+    requestLogout = async () => {
         this.authState.isLoading = true;
 
         if(this.authState.token !== null){
-            const request = new Request(`${apiBaseUrl}/auth/logout`);
-            const options = {...JSON.parse(postOptions)};
-            options.headers["Authorization"] = `token ${localStorage.getItem("token")}`;
-
             try{
-                fetch(request, options).then(response => {
-                    if(response.status !== 204) response.json().then(res => {
-                        console.log("Invalid token", res);
-                    })
-                })
+                const response = await authServices.logout(this.authState.token);
+                if(response.status !== 204) console.log("invalid token");
             }
             catch(error){
                 console.log("Problem logging out", error);
             }
         }
         
-        localStorage.clear("token");
-        this.authState = {
-            ...this.authState,
-            isLoading: false,
-            isAuthenticated: false,
-            user: null,
-            token: null
-        };
+        runInAction(() => {
+            localStorage.clear("token");
+            this.authState = {
+                ...this.authState,
+                isLoading: false,
+                isAuthenticated: false,
+                user: null,
+                token: null
+            }
+        })
     };
 };
 
