@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import './CarsGrid.css'
-import CarCard from './CarCard'
-import {vehicles} from './vehicles'
-import {closeSidebar} from './FiltersSidebar'
+import CarCard from '../cards/CarCard'
+import {vehicles} from '../vehicles'
+import {closeSidebar} from '../sidebars/FiltersSidebar'
 import {withNamespaces} from 'react-i18next'
 import HeaderToggleOrSpan from './HeaderToggleOrSpan'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import {toggleMobileSidebar} from './FiltersSidebar'
+import {toggleMobileSidebar} from '../sidebars/FiltersSidebar'
 import {withNamespaces} from 'react-i18next'
 
 function HeaderToggleOrSpan({t, smallScreen, resCount, activeFilters}){
