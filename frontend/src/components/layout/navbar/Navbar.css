@@ -96,7 +96,7 @@
 
 .l-navbar-content-container-right{
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-items: center;
 
 	padding-right: 15px;
@@ -157,12 +157,6 @@
 	height: 18px;
 
 	fill: white;
-}
-
-@media(max-width: 1250px){
-	.l-navbar-content-container-right{
-		justify-content: flex-end;
-	}
 }
 
 @media(max-width: 1000px){
