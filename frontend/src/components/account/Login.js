@@ -4,9 +4,11 @@ import LoginForm from './forms/LoginForm'
 import {useAuthStore} from '../../StoreProvider'
 import {observer} from 'mobx-react-lite'
 import {Redirect} from 'react-router-dom'
+import {withNamespaces} from 'react-i18next'
 import './Login.css'
 
-const Login = observer(() => {
+
+const Login = observer(({t}) => {
     const {authState} = useAuthStore();
 
     if(authState.isAuthenticated) return <Redirect to="/" />
@@ -17,7 +19,7 @@ const Login = observer(() => {
                     <main className="a-login-register-main-container">
                         <header className="a-login-register-form-header">
                             <h1>Mono Car Catalog</h1>
-                            <span>A community powered database of available vehicles</span>
+                            <span>{t("login.header")}</span>
                         </header>
                         <div className="a-login-form-container">
                             <LoginForm />
@@ -29,7 +31,7 @@ const Login = observer(() => {
 })
 
 
-export default Login;
+export default withNamespaces()(Login);
 
 
 //Mono Car Catalog

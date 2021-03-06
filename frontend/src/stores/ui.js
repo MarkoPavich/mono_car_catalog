@@ -9,7 +9,7 @@ class UIStore {
             de: "de"
         }
 
-        this.lang = localStorage.getItem("i18nextLng")  || this.availableTranslations.hr;
+        this.lang = localStorage.getItem("i18nextLng") || this.availableTranslations.hr;
 
         makeObservable(this, {
             lang: observable,

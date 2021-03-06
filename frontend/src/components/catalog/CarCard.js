@@ -1,8 +1,10 @@
 import React from 'react'
+import {withNamespaces} from 'react-i18next'
 import './CarCard.css'
 
 function CarCard(car){
     const {make, model, engine_abrv, img_url, odo, desc, manufactured, price} = car;
+    const {t} = car;
     const header = `${manufactured}. ${make} ${model} ${engine_abrv}`;
 
     return (
@@ -12,20 +14,18 @@ function CarCard(car){
                 <img src={img_url} alt="car.img"/>
             </div>
             <div className="c-catalog-card-mileage-price-box">
-                <span><strong>Stanje:</strong> {odo}</span>
-                <span><strong>Cijena:</strong> {price}</span>
+                <span><strong>{t("carCard.mileage")}:</strong> {odo}</span>
+                <span><strong>{t("carCard.price")}:</strong> {price}</span>
             </div>
             <div className="c-catalog-card-desc-box">
                 <span>{formatDesc(desc)}</span>
             </div>
             <div className="c-catalog-card-CTA-box">
-                <button>Otvori</button>
+                <button>{t("carCard.open")}</button>
             </div>  
         </div>
     )
 }
-
-export default CarCard;
 
 
 /* Helper fns */
@@ -40,3 +40,6 @@ function formatDesc(desc){
     if(desc.length < 100) return desc;
     else return desc.slice(0, 96) + "...";
 }
+
+
+export default withNamespaces()(CarCard);

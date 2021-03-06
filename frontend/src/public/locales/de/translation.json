@@ -1,3 +1,43 @@
 {
-    
+    "login": {
+        "header": "Eine Community-basierte Datenbank verfügbarer Fahrzeuge",
+        "createNewAccount": "Ein neues Konto erstellen"
+    },
+
+    "common": {
+        "username": "nutzername",
+        "password": "passwort",
+        "login": "einloggen",
+        "logout": "ausloggen",
+        "loading": "Wird geladen",
+        "search": "Suche"
+    },
+
+    "dashboardFilters": {
+        "make": "Marke",
+        "fuel": "Kraftstoff",
+        "body": "Karosserieform"
+    },
+
+    "carsGrid": {
+        "sortFilter": "Sortieren",
+        "hitsCount": "Gesamtergebnisse",
+        "filtersToggle": "Filter anzeigen"
+    },
+
+    "carCard": {
+        "mileage": "Kilometerstand",
+        "price": "Preis",
+        "open": "öffnen"
+    },
+
+    "pagination": {
+        "previous": "vorher",
+        "next": "Nächster"
+    },
+
+    "navOptions": {
+        "addVehicle": "Fahrzeug hinzufügen",
+        "myVehicles": "Meine Fahrzeuge"
+    }
 }

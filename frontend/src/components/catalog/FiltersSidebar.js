@@ -1,12 +1,13 @@
 import React from 'react'
 import './FiltersSidebar.css'
+import {withNamespaces} from 'react-i18next'
 
-function SideFilters() {
+function SideFilters({t}) {
     return (
         <aside className="c-filtersSidebar-filter-params-container" id="c-filtersSidebar-filter-params-container">
             <button onClick={closeSidebar}>X</button>
             <div className="c-filtersSidebar-filters-unit-container">
-                <span>Marka</span>
+                <span>{t("dashboardFilters.make")}</span>
                 <select name="brand_filter" id="brand_filter">
                     <option value="Opel">Opel</option>
                     <option value="BMW">BMW</option>
@@ -14,7 +15,7 @@ function SideFilters() {
                 </select>
             </div>
             <div className="c-filtersSidebar-filters-unit-container">
-                <span>Motor</span>
+                <span>{t("dashboardFilters.fuel")}</span>
                 <ul>
                     <li><input value="petrol" type="checkbox"/>Benzin</li>
                     <li><input value="diesel" type="checkbox"/>Diesel</li>
@@ -23,7 +24,7 @@ function SideFilters() {
                 </ul>
             </div>
             <div className="c-filtersSidebar-filters-unit-container">
-                <span>Oblik Šasije</span>
+                <span>{t("dashboardFilters.body")}</span>
                 <ul>
                     <li><input value="petrol" type="checkbox"/>Benzin</li>
                     <li><input value="diesel" type="checkbox"/>Diesel</li>
@@ -38,7 +39,7 @@ function SideFilters() {
     )
 }
 
-export default SideFilters;
+export default withNamespaces()(SideFilters);
 
 
 /* Helper fns */

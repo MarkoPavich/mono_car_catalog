@@ -1,18 +1,19 @@
 import React from 'react';
 import './NavbarResponsiveUserMenu.css'
 import {useAuthStore} from '../../../StoreProvider'
+import {withNamespaces} from 'react-i18next'
 
 
-function NavbarResponsiveUserMenu(isSmallScreen){
+function NavbarResponsiveUserMenu({isSmallScreen, t}){
     const {requestLogout, authState} = useAuthStore();
 
 
     const userMenu = (
         <div className="l-navbar-user-menu">
             <ul>
-                <li>Add vehicle</li>
-                <li>My vehicles</li>
-                <li onClick={requestLogout}>Logout</li>
+                <li>{t("navOptions.addVehicle")}</li>
+                <li>{t("navOptions.myVehicles")}</li>
+                <li onClick={requestLogout}>{t("common.logout")}</li>
             </ul>
         </div>
     )
@@ -33,11 +34,11 @@ function NavbarResponsiveUserMenu(isSmallScreen){
             </div>
             <div className="l-navbar-user-mobile-popup-menu">
                 <ul>
-                    <li><a href="#">Add Vehicle</a></li>
-                    <li><a href="#">My Vehicles</a></li>
+                    <li><a href="#">{t("navOptions.addVehicle")}</a></li>
+                    <li><a href="#">{t("navOptions.myVehicles")}</a></li>
                 </ul>
                 <ul>
-                    <li onClick={requestLogout}><a href="#">Logout</a></li>
+                    <li onClick={requestLogout}><a href="#">{t("common.logout")}</a></li>
                 </ul>
             </div>
         </div>
@@ -58,4 +59,4 @@ function toggleMobileMenu(){
     else toggleElem.className = activeClassName;
 }
 
-export default NavbarResponsiveUserMenu;
+export default withNamespaces()(NavbarResponsiveUserMenu);

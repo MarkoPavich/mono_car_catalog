@@ -1,3 +1,43 @@
 {
-    
+    "login": {
+        "header": "A community-powered database of available vehicles",
+        "createNewAccount": "Create new account"
+    },
+
+    "common": {
+        "username": "username",
+        "password": "password",
+        "login": "log in",
+        "logout": "log out",
+        "loading": "loading",
+        "search": "Search"
+    },
+
+    "dashboardFilters": {
+        "make": "Make",
+        "fuel": "Fuel Type",
+        "body": "Body Type"
+    },
+
+    "carsGrid": {
+        "sortFilter": "Sort by",
+        "hitsCount": "Results",
+        "filtersToggle": "Show filters"
+    },
+
+    "carCard": {
+        "mileage": "Mileage",
+        "price": "Price",
+        "open": "Open"
+    },
+
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+    },
+
+    "navOptions": {
+        "addVehicle": "Add vehicle",
+        "myVehicles": "My vehicles"
+    }
 }

@@ -6,8 +6,9 @@ import NavbarResponsiveUserMenu from './NavbarResponsiveUserMenu'
 import {observer} from 'mobx-react-lite'
 import {useAuthStore, useUIStore} from '../../../StoreProvider'
 import {nanoid} from 'nanoid'
+import {withNamespaces} from 'react-i18next'
 
-const Navbar = observer(() => {
+const Navbar = observer(({t}) => {
     const [smallScreen, setSmallScreen] = useState(false);
     const {authState} = useAuthStore();
     const {lang, availableTranslations, switchLocale} = useUIStore();
@@ -45,14 +46,14 @@ const Navbar = observer(() => {
                 {authState.isAuthenticated &&
                     <div onClick={focusSearchbar} className="l-navbar-searchbox-container">
                         <div className="l-navbar-searchbar">
-                            <input placeholder="Pretraga" name="nav_search" type="text"/>
+                            <input placeholder={t("common.search")} name="nav_search" type="text"/>
                             <img src={magnifierPNG} alt="search_ico"/>
                         </div>
                     </div>
                 }   
             </div>
             <div className="l-navbar-content-container-right">
-                {NavbarResponsiveUserMenu(smallScreen)}
+                <NavbarResponsiveUserMenu isSmallScreen={smallScreen} />
                 <div className="l-navbar-locale-toggle-container">
                     <select value={lang} onChange={handleSwitchLocale} name="navbar_locale_toggle" id="navbar_locale_toggle">
                         {Object.keys(availableTranslations).map(lang => {
@@ -65,7 +66,7 @@ const Navbar = observer(() => {
     )
 })
 
-export default Navbar;
+export default withNamespaces()(Navbar);
 
 
 /* Helper fns */

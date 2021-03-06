@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react'
 import './CarsGrid.css'
 import CarCard from './CarCard'
 import {vehicles} from './vehicles'
-import {toggleMobileSidebar, closeSidebar} from './FiltersSidebar'
+import {closeSidebar} from './FiltersSidebar'
+import {withNamespaces} from 'react-i18next'
+import HeaderToggleOrSpan from './HeaderToggleOrSpan'
 
-function CarsGrid() {
+function CarsGrid({t}) {
     const [smallScreen, setSmallScreen] = useState(false);
 
 
@@ -27,9 +29,9 @@ function CarsGrid() {
     return (
         <div className="c-carsGrid-top-container">
             <header>
-                {HeaderToggleOrSpan(smallScreen, 30, 2)}
+                <HeaderToggleOrSpan smallScreen={smallScreen} resCount={30} activeFilters={2} />
                 <div className="c-carsGrid-header-sort-filter">
-                    <label htmlFor="">Sortiraj po: </label>
+                    <label htmlFor="">{t("carsGrid.sortFilter")}: </label>
                     <select name="cars_grid_sort_filter" id="">
                         <option value="manufacture_date">Nazivu - od A do Z</option>
                         <option value="manufacture_date">Godištu - manje prema više</option>
@@ -47,7 +49,7 @@ function CarsGrid() {
 
             <footer className="c-carsGrid-pagination-footer">
                 <div className="c-carsGrid-pagination-previous-box">
-                    <span><a href="#">Prethodna</a></span>
+                    <span><a href="#">{t("pagination.previous")}</a></span>
                 </div>
                 <div className="c-carsGrid-pagination-nums">
                     <span><a href="#">1</a></span>
@@ -58,36 +60,12 @@ function CarsGrid() {
                     
                 </div>
                 <div className="c-carsGrid-pagination-next-box">
-                    <span><a href="#">Iduća</a></span>
+                    <span><a href="#">{t("pagination.next")}</a></span>
                 </div>
             </footer>
-
         </div>
     )
 }
 
 
-export default CarsGrid;
-
-
-function HeaderToggleOrSpan(smallScreen, resCount, activeFilters){
-
-    const Toggle = (
-        <div onClick={toggleMobileSidebar} className="c-carsGrid-filters-mobile-toggle">
-            <div className="c-carsGrid-hamburger-ico">
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </div>
-            <span>Prikaz filtera</span>
-            <div>
-                <span>{activeFilters}</span>
-            </div>
-        </div>
-    )
-
-    if(smallScreen) return Toggle;
-    else return <span>Broj rezultata: {resCount}</span>
-}
+export default withNamespaces()(CarsGrid);
