@@ -9,7 +9,6 @@ import './Login.css'
 const Login = observer(() => {
     const {authState} = useAuthStore();
 
-
     if(authState.isAuthenticated) return <Redirect to="/" />
     else return (
             <React.Fragment>
@@ -31,3 +30,6 @@ const Login = observer(() => {
 
 
 export default Login;
+
+
+//Mono Car Catalog

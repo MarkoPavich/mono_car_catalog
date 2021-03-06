@@ -4,11 +4,13 @@ import logoPNG from './assets/car_shape_silh.png'
 import magnifierPNG from './assets/magnifier_ico.png'
 import NavbarResponsiveUserMenu from './NavbarResponsiveUserMenu'
 import {observer} from 'mobx-react-lite'
-import {useAuthStore} from '../../../StoreProvider'
+import {useAuthStore, useUIStore} from '../../../StoreProvider'
+import {nanoid} from 'nanoid'
 
 const Navbar = observer(() => {
     const [smallScreen, setSmallScreen] = useState(false);
     const {authState} = useAuthStore();
+    const {lang, availableTranslations, switchLocale} = useUIStore();
 
     useEffect(() => {
         handleResize();
@@ -23,6 +25,11 @@ const Navbar = observer(() => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+
+    function handleSwitchLocale(event){
+        switchLocale(event.target.value);
+    }
 
 
     return ( 
@@ -47,9 +54,10 @@ const Navbar = observer(() => {
             <div className="l-navbar-content-container-right">
                 {NavbarResponsiveUserMenu(smallScreen)}
                 <div className="l-navbar-locale-toggle-container">
-                    <select name="navbar_locale_toggle" id="navbar_locale_toggle">
-                        <option value="HR">HR</option>
-                        <option value="EN">EN</option>
+                    <select value={lang} onChange={handleSwitchLocale} name="navbar_locale_toggle" id="navbar_locale_toggle">
+                        {Object.keys(availableTranslations).map(lang => {
+                            return <option key={nanoid()} value={lang}>{lang}</option>
+                        })}
                     </select>
                 </div>
             </div>

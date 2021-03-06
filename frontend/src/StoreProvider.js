@@ -26,6 +26,11 @@ export const useAuthStore = () => {
 };
 
 export const useMessageStore = () => {
-    const {messageStore} = useContext(StoreContext)
+    const {messageStore} = useContext(StoreContext);
     return messageStore;
+}
+
+export const useUIStore = () => {
+    const {uiStore} = useContext(StoreContext);
+    return uiStore;
 }
