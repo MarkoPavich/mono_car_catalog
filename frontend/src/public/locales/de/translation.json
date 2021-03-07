@@ -1,7 +1,10 @@
 {
     "login": {
         "header": "Eine Community-basierte Datenbank verfügbarer Fahrzeuge",
-        "createNewAccount": "Ein neues Konto erstellen"
+        "createNewAccount": "Ein neues Konto erstellen",
+        "registerFormHeader": "Erstelle deinen Account",
+        "tou": "Nutzungsbedingungen akzeptieren",
+        "submit": "Bestätigen"
     },
 
     "common": {
@@ -10,7 +13,9 @@
         "login": "einloggen",
         "logout": "ausloggen",
         "loading": "Wird geladen",
-        "search": "Suche"
+        "search": "Suche",
+        "email": "email",
+        "confirmPass": "Kennwort Bestätigen"
     },
 
     "dashboardFilters": {
@@ -39,5 +44,23 @@
     "navOptions": {
         "addVehicle": "Fahrzeug hinzufügen",
         "myVehicles": "Meine Fahrzeuge"
+    },
+
+    "formErrors": {
+        "emptyField": "Dieses Feld ist erforderlich",
+        "paswMismatch": "Passwörter müssen übereinstimmen",
+        "invalidEmail": "Bitte geben Sie eine gültige Email-Adresse ein",
+        "termsOfUse": "Das Akzeptieren von Nutzungsbedingungen ist erforderlich"
+    },
+
+    "commonErrors": {
+        "userExists": "Benutzername existiert bereits",
+        "emailExists": "Benutzer mit dieser E-Mail existiert bereits",
+        "invalidLogin": "Benutzername oder Passwort falsch"
+    },
+
+    "commonConfirmations": {
+        "userRegistered": "Herzlich willkommen,",
+        "userLogged": "Willkommen zurück,"
     }
 }

@@ -1,7 +1,10 @@
 {
     "login": {
         "header": "A community-powered database of available vehicles",
-        "createNewAccount": "Create new account"
+        "createNewAccount": "Create new account",
+        "registerFormHeader": "Create Your account",
+        "tou": "Accept terms of use",
+        "submit": "Confirm"
     },
 
     "common": {
@@ -10,7 +13,9 @@
         "login": "log in",
         "logout": "log out",
         "loading": "loading",
-        "search": "Search"
+        "search": "Search",
+        "email": "email",
+        "confirmPass": "Confirm Password"
     },
 
     "dashboardFilters": {
@@ -39,5 +44,23 @@
     "navOptions": {
         "addVehicle": "Add vehicle",
         "myVehicles": "My vehicles"
+    },
+
+    "formErrors": {
+        "emptyField": "This field is required",
+        "paswMismatch": "Passwords must match",
+        "invalidEmail": "Please provide a valid email",
+        "termsOfUse": "Accepting terms of use is required"
+    },
+
+    "commonErrors": {
+        "userExists": "User with that username already exists",
+        "emailExists": "User with that email already exists",
+        "invalidLogin": "Username or password incorrect"
+    },
+
+    "commonConfirmations": {
+        "userRegistered": "Welcome,",
+        "userLogged": "Welcome back,"
     }
 }

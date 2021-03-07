@@ -19,7 +19,7 @@ const Login = observer(({t}) => {
                     <main className="a-login-register-main-container">
                         <header className="a-login-register-form-header">
                             <h1>Mono Car Catalog</h1>
-                            <span>{t("login.header")}</span>
+                            <span>{t("login.header")}</span> {/* Beats lorem ipsum xD */}
                         </header>
                         <div className="a-login-form-container">
                             <LoginForm />

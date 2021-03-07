@@ -24,12 +24,24 @@ class AuthServices {
         return {...data, status: response.status};
     }
 
+
     async logout(token){
         const request = new Request(`${apiBaseUrl}/auth/logout`);
         const options = {...JSON.parse(postOptions)};
         options.headers["Authorization"] = `token ${token}`;
 
         return await fetch(request, options);
+    }
+
+
+    async registerNewAccount(validated_data){
+        const request = new Request(`${apiBaseUrl}/auth/register`);
+        const options = {...JSON.parse(postOptions), body: JSON.stringify(validated_data)};
+
+        const response = await fetch(request, options);
+        const data = await response.json();
+
+        return {...data, status: response.status}
     }
 }
 

@@ -17,7 +17,8 @@ class AuthStore {
             authState: observable,
             requestLogin: action,
             requestLogout: action,
-            getUser: action
+            getUser: action,
+            requestNewAccount: action
         });
     }
 
@@ -80,11 +81,11 @@ class AuthStore {
                         token: data.token
                     }
                     localStorage.setItem("token", data.token);
-                    this.messages.createSuccess(`Welcome, ${data.user.username}`)
+                    this.messages.commonConfirmation(this.messages.commonConfirmations.userLogged, data.user.username)
                 })
             }
             else {
-                console.log(data),
+                this.messages.commonError(this.messages.commonErrors.invalidLogin)
                 this.requestLogout();
             }
         }
@@ -119,6 +120,43 @@ class AuthStore {
             }
         })
     };
+
+    requestNewAccount = async (validated_data) => {
+        this.authState.isLoading = true;
+        
+        try{
+            const data = await authServices.registerNewAccount(validated_data);
+            
+            if(data.status === 200){
+                runInAction(() => {
+                    this.authState = {
+                        ...this.authState,
+                        isLoading: false,
+                        isAuthenticated: true,
+                        user: data.user,
+                        token: data.token
+                    }
+                    this.messages.commonConfirmation(this.messages.commonConfirmations.userRegistered, data.user.username)
+                })
+            }
+            else {
+                runInAction(() => {this.isLoading = false});
+
+                if(data.username){
+                    this.messages.commonError(this.messages.commonErrors.userExists);
+                    return "username";
+                }
+                else if(data.email){
+                    this.messages.commonError(this.messages.commonErrors.emailExists);
+                    return "email";
+                }
+            }
+        }
+        catch(error){
+            console.log(error);
+            this.messages.createError("Something went wrong..");
+        }
+    }
 };
 
 
