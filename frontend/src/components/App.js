@@ -9,6 +9,7 @@ import PrivateRoute from './common/PrivateRoute'
 import {transitions, Provider as AlertProvider} from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import Alert from './layout/Alert'
+import AddVehicle from './forms/AddVehicle'
 
 const alertOptions = {  
     timeout: 5000,
@@ -26,6 +27,7 @@ function App() {
                     <Switch>
                         <Route path="/login" component={Login} />
                         <PrivateRoute exact path="/" component={Dashboard} />
+                        <PrivateRoute exact path="/add-new-vehicle" component={AddVehicle} />
                     </Switch>
                 </Router>
                 <Footer />

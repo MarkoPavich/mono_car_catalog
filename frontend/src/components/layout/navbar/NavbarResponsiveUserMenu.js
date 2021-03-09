@@ -11,7 +11,7 @@ function NavbarResponsiveUserMenu({isSmallScreen, t}){
     const userMenu = (
         <div className="l-navbar-user-menu">
             <ul>
-                <li>{t("navOptions.addVehicle")}</li>
+                <li><a href="/#/add-new-vehicle">{t("navOptions.addVehicle")}</a></li>
                 <li>{t("navOptions.myVehicles")}</li>
                 <li onClick={requestLogout}>{t("common.logout")}</li>
             </ul>
@@ -34,7 +34,7 @@ function NavbarResponsiveUserMenu({isSmallScreen, t}){
             </div>
             <div className="l-navbar-user-mobile-popup-menu">
                 <ul>
-                    <li><a href="#">{t("navOptions.addVehicle")}</a></li>
+                    <li><a href="/add-new-vehicle">{t("navOptions.addVehicle")}</a></li>
                     <li><a href="#">{t("navOptions.myVehicles")}</a></li>
                 </ul>
                 <ul>

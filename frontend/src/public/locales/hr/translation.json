@@ -62,5 +62,29 @@
     "commonConfirmations": {
         "userRegistered": "Dobrodošli,",
         "userLogged": "Dobrodošli natrag,"
+    },
+
+    "vehicleForm": {
+        "header": "Dodajte vozilo",
+        "basicInfoHeader": "Osnovni podatci",
+        "make": "Marka",
+        "model": "Model",
+        "variant": "Varijanta",
+        "manufactured": "Proizvodnja",
+        "mileage": "Prijeđeno kilometara",
+        "extraInfoSubheader": "Dodatni podatci",
+        "bodyType": "Oblik šasije",
+        "fuelType": "Vrsta pogona",
+        "img": "Link na sliku",
+        "description": "Opis",
+        "price": "Cijena",
+        "backLink": "Povratak",
+        "submit": "Dodaj" 
+    },
+
+    "vehicleFormPlaceholders": {
+        "model": "Astra h",
+        "variant": "GTI, GTC...",
+        "mileage": "80000"
     }
 }

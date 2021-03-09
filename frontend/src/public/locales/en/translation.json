@@ -62,5 +62,29 @@
     "commonConfirmations": {
         "userRegistered": "Welcome,",
         "userLogged": "Welcome back,"
+    },
+
+        "vehicleForm": {
+        "header": "Add Vehicle",
+        "basicInfoHeader": "Basic info",
+        "make": "Make",
+        "model": "Model",
+        "variant": "Variant",
+        "manufactured": "Date of manufacture",
+        "mileage": "Mileage",
+        "extraInfoSubheader": "Other info",
+        "bodyType": "Body type",
+        "fuelType": "Fuel type",
+        "img": "Image URL",
+        "description": "Description",
+        "price": "Price",
+        "backLink": "Return",
+        "submit": "Add" 
+    },
+
+    "vehicleFormPlaceholders": {
+        "model": "Astra h",
+        "variant": "GTI, GTC...",
+        "mileage": "80000"
     }
 }

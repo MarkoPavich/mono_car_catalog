@@ -141,6 +141,11 @@
 	opacity: 0.8;
 }
 
+.l-navbar-user-menu li a{
+	color: white;
+	text-decoration: none;
+}
+
 .l-navbar-user-menu li:hover{
 	cursor: pointer;
 	opacity: 1;
