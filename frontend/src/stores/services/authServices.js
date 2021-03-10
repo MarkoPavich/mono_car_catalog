@@ -1,49 +1,52 @@
-import {apiBaseUrl, postOptions, getOptions} from '../config'
+import { apiBaseUrl, postOptions, getOptions } from '../config';
 
+class authServices {
+  static async validateToken(token) {
+    const request = new Request(`${apiBaseUrl}/auth/user`);
+    const options = {
+      ...JSON.parse(getOptions),
+      headers: { Authorization: `token ${token}` },
+    };
 
-class AuthServices {
+    const response = await fetch(request, options);
+    const data = await response.json();
 
-    async validateToken(token){
-        const request = new Request(`${apiBaseUrl}/auth/user`);
-        const options = {...JSON.parse(getOptions), headers: {Authorization: `token ${token}`}};
-    
-        const response = await fetch(request, options);
-        const data = await response.json();
-    
-        return {user: data, status: response.status}
-    }
+    return { user: data, status: response.status };
+  }
 
+  static async login(loginData) {
+    const request = new Request(`${apiBaseUrl}/auth/login`);
+    const options = {
+      ...JSON.parse(postOptions),
+      body: JSON.stringify(loginData),
+    };
 
-    async login(loginData){
-        const request = new Request(`${apiBaseUrl}/auth/login`);
-        const options = {...JSON.parse(postOptions), body: JSON.stringify(loginData)};
+    const response = await fetch(request, options);
+    const data = await response.json();
 
-        const response = await fetch(request, options);
-        const data = await response.json();
+    return { ...data, status: response.status };
+  }
 
-        return {...data, status: response.status};
-    }
+  static async logout(token) {
+    const request = new Request(`${apiBaseUrl}/auth/logout`);
+    const options = { ...JSON.parse(postOptions) };
+    options.headers.Authorization = `token ${token}`;
 
+    return await fetch(request, options);
+  }
 
-    async logout(token){
-        const request = new Request(`${apiBaseUrl}/auth/logout`);
-        const options = {...JSON.parse(postOptions)};
-        options.headers["Authorization"] = `token ${token}`;
+  static async registerNewAccount(validatedData) {
+    const request = new Request(`${apiBaseUrl}/auth/register`);
+    const options = {
+      ...JSON.parse(postOptions),
+      body: JSON.stringify(validatedData),
+    };
 
-        return await fetch(request, options);
-    }
+    const response = await fetch(request, options);
+    const data = await response.json();
 
-
-    async registerNewAccount(validated_data){
-        const request = new Request(`${apiBaseUrl}/auth/register`);
-        const options = {...JSON.parse(postOptions), body: JSON.stringify(validated_data)};
-
-        const response = await fetch(request, options);
-        const data = await response.json();
-
-        return {...data, status: response.status}
-    }
+    return { ...data, status: response.status };
+  }
 }
 
-
-export const authServices = new AuthServices;
+export default authServices;
