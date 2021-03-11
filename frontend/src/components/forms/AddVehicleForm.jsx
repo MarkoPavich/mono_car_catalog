@@ -4,7 +4,7 @@ import { withNamespaces } from 'react-i18next';
 import { useFormsStore } from '../../StoreProvider';
 
 const AddVehicleForm = observer(({ t }) => {
-  const { vehicleForm, updateVehicleForm } = useFormsStore();
+  const { vehicleForm, setVehicleForm } = useFormsStore();
 
   return (
     <form className="f-addVehicle-form">
@@ -16,7 +16,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="make">{t('vehicleForm.make')}</label>
             <select
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.make}
               name="make"
             >
@@ -27,7 +27,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="model">{t('vehicleForm.model')}</label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.model}
               placeholder={t('vehicleFormPlaceholders.model')}
               name="model"
@@ -37,7 +37,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="variant">{t('vehicleForm.variant')}</label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.variant}
               placeholder={t('vehicleFormPlaceholders.variant')}
               name="variant"
@@ -49,7 +49,7 @@ const AddVehicleForm = observer(({ t }) => {
               {t('vehicleForm.manufactured')}
             </label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.manufactureDate}
               name="manufactureDate"
               type="month"
@@ -58,7 +58,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="mileage">{t('vehicleForm.mileage')}</label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.mileage}
               placeholder={t('vehicleFormPlaceholders.mileage')}
               name="mileage"
@@ -75,7 +75,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="bodyType">{t('vehicleForm.bodyType')}</label>
             <select
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.bodyType}
               name="bodyType"
             >
@@ -86,7 +86,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-input-unit">
             <label htmlFor="fuelType">{t('vehicleForm.fuelType')}</label>
             <select
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.fuelType}
               name="fuelType"
             >
@@ -99,7 +99,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-longInput-unit">
             <label htmlFor="img">{t('vehicleForm.img')}</label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.img}
               name="img"
               placeholder="http://www..."
@@ -109,7 +109,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-longInput-textarea-unit">
             <label htmlFor="description">{t('vehicleForm.description')}</label>
             <textarea
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.description}
               name="description"
               id="vehicleDesc"
@@ -124,7 +124,7 @@ const AddVehicleForm = observer(({ t }) => {
               <strong>{t('vehicleForm.price')}:</strong>
             </label>
             <input
-              onChange={updateVehicleForm}
+              onChange={setVehicleForm}
               value={vehicleForm.price}
               name="price"
               type="number"

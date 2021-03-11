@@ -1,24 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
 import { showModalRegisterForm } from './ModalRegisterForm';
-import { useAuthStore } from '../../../StoreProvider';
+import { useAuthStore, useFormsStore } from '../../../StoreProvider';
 import { validateInputs } from './validation';
 
 const LoginForm = observer(({ t }) => {
   const { requestLogin, authState } = useAuthStore();
+  const { loginForm, setLoginForm } = useFormsStore();
   const { isLoading } = authState;
 
-  const [state, setState] = useState({
-    username: '',
-    password: '',
-  });
-
-  function handleInput(event) {
-    setState({ ...state, [event.target.name]: event.target.value });
-  }
-
-  function handleSubmitLogin(event) {
+  function handleSubmit(event) {
     event.preventDefault();
 
     const inputs = {
@@ -32,8 +24,8 @@ const LoginForm = observer(({ t }) => {
 
     if (validateInputs(inputs, t)) {
       requestLogin({
-        username: state.username,
-        password: state.password,
+        username: loginForm.username,
+        password: loginForm.password,
       });
     }
   }
@@ -43,8 +35,8 @@ const LoginForm = observer(({ t }) => {
       <div className="a-login-form-input-container">
         <input
           name="username"
-          onChange={handleInput}
-          value={state.username}
+          onChange={setLoginForm}
+          value={loginForm.username}
           className="a-login-form-input-unit"
           placeholder={
             t('common.username')[0].toUpperCase() +
@@ -56,8 +48,8 @@ const LoginForm = observer(({ t }) => {
       <div className="a-login-form-input-container">
         <input
           name="password"
-          onChange={handleInput}
-          value={state.password}
+          onChange={setLoginForm}
+          value={loginForm.password}
           className="a-login-form-input-unit"
           placeholder={
             t('common.password')[0].toUpperCase() +
@@ -67,7 +59,7 @@ const LoginForm = observer(({ t }) => {
         />
       </div>
       <div className="a-login-form-action-button-box">
-        <button type="button" onClick={handleSubmitLogin}>
+        <button type="button" onClick={handleSubmit}>
           {isLoading
             ? t('common.loading').toUpperCase()
             : t('common.login')[0].toUpperCase() + t('common.login').slice(1)}

@@ -1,20 +1,46 @@
 import { makeObservable, observable, action } from 'mobx';
-import { vehicleForm } from './templates/forms';
+import { vehicleForm, loginForm, registerForm } from './templates/forms';
 
 export default class FormsStore {
   constructor() {
     this.vehicleForm = vehicleForm;
+    this.loginForm = loginForm;
+    this.registerForm = registerForm;
 
     makeObservable(this, {
       vehicleForm: observable,
-      updateVehicleForm: action,
+      loginForm: observable,
+      registerForm: observable,
+      setVehicleForm: action,
+      setLoginForm: action,
+      setRegisterForm: action,
     });
   }
 
-  updateVehicleForm = (event) => {
+  setVehicleForm = (event) => {
     this.vehicleForm = {
       ...this.vehicleForm,
       [event.target.name]: event.target.value,
     };
+  };
+
+  setLoginForm = (event) => {
+    this.loginForm = {
+      ...this.loginForm,
+      [event.target.name]: event.target.value,
+    };
+  };
+
+  setRegisterForm = (event) => {
+    if (event.target.type !== 'checkbox')
+      this.registerForm = {
+        ...this.registerForm,
+        [event.target.name]: event.target.value,
+      };
+    else
+      this.registerForm = {
+        ...this.registerForm,
+        [event.target.name]: event.target.checked,
+      };
   };
 }

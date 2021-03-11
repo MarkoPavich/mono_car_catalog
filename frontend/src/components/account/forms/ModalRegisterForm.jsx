@@ -1,25 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
-import { useAuthStore } from '../../../StoreProvider';
+import { useAuthStore, useFormsStore } from '../../../StoreProvider';
 import { validateInputs, clearInputs } from './validation';
 
 const ModalRegisterForm = observer(({ t }) => {
   const { authState, requestNewAccount } = useAuthStore();
-
-  const [form, setForm] = useState({
-    username: '',
-    email: '',
-    password: '',
-    password2: '',
-    ToU_check: false,
-  });
-
-  function handleInput(event) {
-    if (event.target.type !== 'checkbox')
-      setForm({ ...form, [event.target.name]: event.target.value });
-    else setForm({ ...form, [event.target.name]: event.target.checked });
-  }
+  const { registerForm, setRegisterForm } = useFormsStore();
 
   async function handleSubmit() {
     const inputs = {
@@ -42,9 +29,9 @@ const ModalRegisterForm = observer(({ t }) => {
 
     if (validateInputs(inputs, t)) {
       const errors = await requestNewAccount({
-        username: form.username,
-        email: form.email,
-        password: form.password,
+        username: registerForm.username,
+        email: registerForm.email,
+        password: registerForm.password,
       });
 
       if (errors) {
@@ -69,8 +56,8 @@ const ModalRegisterForm = observer(({ t }) => {
         <form className="a-login-register-form">
           <div className="a-login-form-input-container">
             <input
-              onChange={handleInput}
-              value={form.username}
+              onChange={setRegisterForm}
+              value={registerForm.username}
               name="username"
               placeholder={
                 t('common.username')[0].toUpperCase() +
@@ -83,8 +70,8 @@ const ModalRegisterForm = observer(({ t }) => {
           </div>
           <div className="a-login-form-input-container">
             <input
-              onChange={handleInput}
-              value={form.email}
+              onChange={setRegisterForm}
+              value={registerForm.email}
               name="email"
               placeholder={
                 t('common.email')[0].toUpperCase() + t('common.email').slice(1)
@@ -95,8 +82,8 @@ const ModalRegisterForm = observer(({ t }) => {
           </div>
           <div className="a-login-form-input-container">
             <input
-              onChange={handleInput}
-              value={form.password}
+              onChange={setRegisterForm}
+              value={registerForm.password}
               name="password"
               placeholder={
                 t('common.password')[0].toUpperCase() +
@@ -108,8 +95,8 @@ const ModalRegisterForm = observer(({ t }) => {
           </div>
           <div className="a-login-form-input-container">
             <input
-              onChange={handleInput}
-              value={form.password2}
+              onChange={setRegisterForm}
+              value={registerForm.password2}
               name="password2"
               placeholder={
                 t('common.confirmPass')[0].toUpperCase() +
@@ -123,8 +110,8 @@ const ModalRegisterForm = observer(({ t }) => {
         <div className="a-login-register-form-ToU-notif-box">
           <div className="a-login-form-tou-input-container">
             <input
-              checked={form.ToU_check}
-              onChange={handleInput}
+              checked={registerForm.ToU_check}
+              onChange={setRegisterForm}
               name="ToU_check"
               type="checkbox"
             />

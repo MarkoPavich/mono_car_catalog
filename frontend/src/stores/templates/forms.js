@@ -10,3 +10,16 @@ export const vehicleForm = {
   description: '',
   price: '',
 };
+
+export const loginForm = {
+  username: '',
+  password: '',
+};
+
+export const registerForm = {
+  username: '',
+  email: '',
+  password: '',
+  password2: '',
+  ToU_check: false,
+};
