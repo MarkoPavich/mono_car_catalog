@@ -86,5 +86,23 @@
         "model": "Astra h",
         "variant": "GTI, GTC...",
         "mileage": "80000"
+    },
+
+    "vehicleParams":{
+        "other": "ostalo",
+        "compact": "Kompakt",
+        "convertible": "Kabrio",
+        "coupe": "Kupe",
+        "sedan": "Sedan",
+        "stationWagon": "Karavan",
+        "pickup": "Kamionet",
+        "suv": "SUV",
+        "petrol": "Benzin",
+        "diesel": "Dizel",
+        "CNG": "CNG",
+        "LPG": "LPG",
+        "BEV": "Elektro",
+        "HEV": "Vodik-Elektro",
+        "hybrid": "Hibrid"
     }
 }

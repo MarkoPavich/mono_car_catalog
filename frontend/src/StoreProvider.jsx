@@ -35,3 +35,8 @@ export const useFormsStore = () => {
   const { formsStore } = useContext(StoreContext);
   return formsStore;
 };
+
+export const useVehiclesStore = () => {
+  const { vehiclesStore } = useContext(StoreContext);
+  return vehiclesStore;
+};

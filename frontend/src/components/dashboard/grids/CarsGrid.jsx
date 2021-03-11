@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 import { withNamespaces } from 'react-i18next';
-import './CarsGrid.css';
 import CarCard from '../cards/CarCard';
-import { vehicles } from '../vehicles';
+import vehicles from '../../../stores/mockup/vehicles';
 import { closeSidebar } from '../sidebars/FiltersSidebar';
 import HeaderToggleOrSpan from './HeaderToggleOrSpan';
+import './CarsGrid.css';
 
 function CarsGrid({ t }) {
   const [smallScreen, setSmallScreen] = useState(false);
+
+  function checkScreenSize() {
+    closeSidebar();
+    setSmallScreen(window.innerWidth < 950);
+  }
 
   // Manage 'on screen resize' layout adapting
   useEffect(() => {
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-
-    function checkScreenSize() {
-      closeSidebar();
-      setSmallScreen(window.innerWidth < 950);
-    }
 
     return function listenerCleanup() {
       window.removeEventListener('resize', checkScreenSize);
@@ -46,9 +47,9 @@ function CarsGrid({ t }) {
         </div>
       </header>
       <div className="c-carsGrid-card-container">
-        {vehicles.map((car) => (
+        {vehicles.map((vehicle) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <CarCard key={car.id} {...car} />
+          <CarCard key={nanoid()} vehicle={vehicle} t={t} />
         ))}
       </div>
 

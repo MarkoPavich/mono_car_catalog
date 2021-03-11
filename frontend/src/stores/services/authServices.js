@@ -1,4 +1,4 @@
-import { apiBaseUrl, postOptions, getOptions } from '../config';
+import { apiBaseUrl, postOptions, getOptions } from './config';
 
 class authServices {
   static async validateToken(token) {
