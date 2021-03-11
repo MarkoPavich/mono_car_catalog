@@ -1,8 +1,11 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
+import { useFormsStore } from '../../StoreProvider';
 
 const AddVehicleForm = observer(({ t }) => {
+  const { vehicleForm, updateVehicleForm } = useFormsStore();
+
   return (
     <form className="f-addVehicle-form">
       <section>
@@ -11,39 +14,54 @@ const AddVehicleForm = observer(({ t }) => {
         </header>
         <div className="f-addVehicle-form-input-grid-container">
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleMake">{t('vehicleForm.make')}</label>
-            <select name="vehicleMake">
+            <label htmlFor="make">{t('vehicleForm.make')}</label>
+            <select
+              onChange={updateVehicleForm}
+              value={vehicleForm.make}
+              name="make"
+            >
               <option value="BMW">BMW</option>
               <option value="Opel">Opel</option>
             </select>
           </div>
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleModel">{t('vehicleForm.model')}</label>
+            <label htmlFor="model">{t('vehicleForm.model')}</label>
             <input
+              onChange={updateVehicleForm}
+              value={vehicleForm.model}
               placeholder={t('vehicleFormPlaceholders.model')}
-              name="vehicleModel"
+              name="model"
               type="text"
             />
           </div>
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleVariant">{t('vehicleForm.variant')}</label>
+            <label htmlFor="variant">{t('vehicleForm.variant')}</label>
             <input
+              onChange={updateVehicleForm}
+              value={vehicleForm.variant}
               placeholder={t('vehicleFormPlaceholders.variant')}
-              name="vehicleVariant"
+              name="variant"
               type="text"
             />
           </div>
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleManufactured">
+            <label htmlFor="manufactureDate">
               {t('vehicleForm.manufactured')}
             </label>
-            <input name="vehicleManufactured" type="month" />
+            <input
+              onChange={updateVehicleForm}
+              value={vehicleForm.manufactureDate}
+              name="manufactureDate"
+              type="month"
+            />
           </div>
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleMileage">{t('vehicleForm.mileage')}</label>
+            <label htmlFor="mileage">{t('vehicleForm.mileage')}</label>
             <input
+              onChange={updateVehicleForm}
+              value={vehicleForm.mileage}
               placeholder={t('vehicleFormPlaceholders.mileage')}
-              name="vehicleMileage"
+              name="mileage"
               type="number"
             />
           </div>
@@ -55,15 +73,23 @@ const AddVehicleForm = observer(({ t }) => {
         </header>
         <div className="f-addVehicle-form-input-grid-container">
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleBodyType">{t('vehicleForm.bodyType')}</label>
-            <select name="vehicleBodyType">
+            <label htmlFor="bodyType">{t('vehicleForm.bodyType')}</label>
+            <select
+              onChange={updateVehicleForm}
+              value={vehicleForm.bodyType}
+              name="bodyType"
+            >
               <option value="BMW">BMW</option>
               <option value="Opel">Opel</option>
             </select>
           </div>
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehicleFuelType">{t('vehicleForm.fuelType')}</label>
-            <select name="vehicleFuelType">
+            <label htmlFor="fuelType">{t('vehicleForm.fuelType')}</label>
+            <select
+              onChange={updateVehicleForm}
+              value={vehicleForm.fuelType}
+              name="fuelType"
+            >
               <option value="BMW">Benzin</option>
               <option value="Opel">Elektro</option>
             </select>
@@ -71,24 +97,38 @@ const AddVehicleForm = observer(({ t }) => {
         </div>
         <div className="f-addVehicle-form-longInput-container">
           <div className="f-addVehicle-form-longInput-unit">
-            <label htmlFor="vehicleImage">{t('vehicleForm.img')}</label>
+            <label htmlFor="img">{t('vehicleForm.img')}</label>
             <input
-              name="vehicleImage"
+              onChange={updateVehicleForm}
+              value={vehicleForm.img}
+              name="img"
               placeholder="http://www..."
               type="text"
             />
           </div>
           <div className="f-addVehicle-form-longInput-textarea-unit">
-            <label htmlFor="vehicleDesc">{t('vehicleForm.description')}</label>
-            <textarea name="vehicleDesc" id="vehicleDesc" cols="30" rows="10" />
+            <label htmlFor="description">{t('vehicleForm.description')}</label>
+            <textarea
+              onChange={updateVehicleForm}
+              value={vehicleForm.description}
+              name="description"
+              id="vehicleDesc"
+              cols="30"
+              rows="10"
+            />
           </div>
         </div>
         <div className="f-addVehicle-form-input-grid-container">
           <div className="f-addVehicle-form-input-unit">
-            <label htmlFor="vehiclePrice">
+            <label htmlFor="price">
               <strong>{t('vehicleForm.price')}:</strong>
             </label>
-            <input name="vehiclePrice" type="number" />
+            <input
+              onChange={updateVehicleForm}
+              value={vehicleForm.price}
+              name="price"
+              type="number"
+            />
           </div>
           <div className="f-addVehicle-spacer" />
           <div className="f-addVehicle-form-actions-container">

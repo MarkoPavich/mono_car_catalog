@@ -30,3 +30,8 @@ export const useUIStore = () => {
   const { uiStore } = useContext(StoreContext);
   return uiStore;
 };
+
+export const useFormsStore = () => {
+  const { formsStore } = useContext(StoreContext);
+  return formsStore;
+};
