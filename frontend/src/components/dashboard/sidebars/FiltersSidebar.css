@@ -113,6 +113,11 @@
   }
 }
 
+.c-filtersSidebar-filters-unit-container ul li input:hover,
+.c-filtersSidebar-filters-unit-container ul li label:hover{
+  cursor: pointer;
+}
+
 @media (max-width: 950px) {
   .c-filtersSidebar-filter-params-container {
     position: fixed;

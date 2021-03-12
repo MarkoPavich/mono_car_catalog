@@ -48,6 +48,7 @@ const SideFilters = observer(({ t }) => {
           {Object.keys(fuelTypes).map((fuelKey) => (
             <li key={nanoid()}>
               <input
+                id={fuelTypes[fuelKey]}
                 name={fuelTypes[fuelKey]}
                 value={fuelTypes[fuelKey]}
                 type="checkbox"
@@ -65,6 +66,7 @@ const SideFilters = observer(({ t }) => {
           {Object.keys(carBodies).map((bodyKey) => (
             <li key={nanoid()}>
               <input
+                id={carBodies[bodyKey]}
                 name={carBodies[bodyKey]}
                 value={carBodies[bodyKey]}
                 type="checkbox"
