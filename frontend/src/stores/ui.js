@@ -1,4 +1,4 @@
-import { makeObservable, observable, action } from 'mobx';
+import { makeObservable, observable, action, computed } from 'mobx';
 import i18n from '../i18n';
 
 class UIStore {
@@ -12,9 +12,17 @@ class UIStore {
     this.lang =
       localStorage.getItem('i18nextLng') || this.availableTranslations.hr;
 
+    this.screenWidth = window.innerWidth;
+
     makeObservable(this, {
       lang: observable,
+      screenWidth: observable,
+
       switchLocale: action,
+      setScreenWidth: action,
+
+      carsGridSmallScreen: computed,
+      navbarSmallScreen: computed,
     });
   }
 
@@ -25,6 +33,18 @@ class UIStore {
     i18n.changeLanguage(locale);
     localStorage.setItem('i18nextLng', locale);
   };
+
+  setScreenWidth = (width) => {
+    this.screenWidth = width;
+  };
+
+  get carsGridSmallScreen() {
+    return this.screenWidth < 950;
+  }
+
+  get navbarSmallScreen() {
+    return this.screenWidth < 1500;
+  }
 }
 
 export default UIStore;

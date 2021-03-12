@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { nanoid } from 'nanoid';
 import { withNamespaces } from 'react-i18next';
@@ -11,26 +11,20 @@ import NavbarResponsiveUserMenu from './NavbarResponsiveUserMenu';
 import { useAuthStore, useUIStore } from '../../../StoreProvider';
 
 const Navbar = observer(({ t }) => {
-  const [smallScreen, setSmallScreen] = useState(false);
   const { authState } = useAuthStore();
-  const { lang, availableTranslations, switchLocale } = useUIStore();
-
-  useEffect(() => {
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    function handleResize() {
-      setSmallScreen(window.innerWidth < 1250);
-    }
-
-    return function listenerCleanup() {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const {
+    lang,
+    availableTranslations,
+    switchLocale,
+    navbarSmallScreen,
+  } = useUIStore();
 
   function handleSwitchLocale(event) {
     switchLocale(event.target.value);
+  }
+
+  function focusSearchbar() {
+    document.getElementsByName('nav_search')[0].focus();
   }
 
   return (
@@ -61,7 +55,7 @@ const Navbar = observer(({ t }) => {
         )}
       </div>
       <div className="l-navbar-content-container-right">
-        <NavbarResponsiveUserMenu isSmallScreen={smallScreen} />
+        <NavbarResponsiveUserMenu isSmallScreen={navbarSmallScreen} />
         <div className="l-navbar-locale-toggle-container">
           <select
             value={lang}
@@ -82,9 +76,3 @@ const Navbar = observer(({ t }) => {
 });
 
 export default withNamespaces()(Navbar);
-
-/* Helper fns */
-
-function focusSearchbar() {
-  document.getElementsByName('nav_search')[0].focus();
-}

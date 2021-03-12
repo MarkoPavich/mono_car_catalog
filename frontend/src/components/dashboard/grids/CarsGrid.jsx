@@ -1,37 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { nanoid } from 'nanoid';
 import { withNamespaces } from 'react-i18next';
-import { useVehiclesStore } from '../../../StoreProvider';
+import { useVehiclesStore, useUIStore } from '../../../StoreProvider';
 import CarCard from '../cards/CarCard';
-import { closeSidebar } from '../sidebars/FiltersSidebar';
 import HeaderToggleOrSpan from './HeaderToggleOrSpan';
 import './CarsGrid.css';
 
 const CarsGrid = observer(({ t }) => {
   const { vehicles } = useVehiclesStore();
-  const [smallScreen, setSmallScreen] = useState(false);
-
-  function checkScreenSize() {
-    closeSidebar();
-    setSmallScreen(window.innerWidth < 950);
-  }
-
-  // Manage 'on screen resize' layout adapting
-  useEffect(() => {
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-
-    return function listenerCleanup() {
-      window.removeEventListener('resize', checkScreenSize);
-    };
-  }, []);
+  const { carsGridSmallScreen } = useUIStore();
 
   return (
     <div className="c-carsGrid-top-container">
       <header>
         <HeaderToggleOrSpan
-          smallScreen={smallScreen}
+          smallScreen={carsGridSmallScreen}
           resCount={30}
           activeFilters={2}
         />
