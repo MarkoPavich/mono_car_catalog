@@ -11,6 +11,7 @@ export default class FormsStore {
       vehicleForm: observable,
       loginForm: observable,
       registerForm: observable,
+
       setVehicleForm: action,
       setLoginForm: action,
       setRegisterForm: action,
@@ -18,7 +19,6 @@ export default class FormsStore {
   }
 
   setVehicleForm = (event) => {
-    console.log(event.target.value)
     this.vehicleForm = {
       ...this.vehicleForm,
       [event.target.name]: event.target.value,

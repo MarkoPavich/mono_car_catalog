@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { nanoid } from 'nanoid';
 import { withNamespaces } from 'react-i18next';
+import { useVehiclesStore } from '../../../StoreProvider';
 import CarCard from '../cards/CarCard';
-import vehicles from '../../../stores/mockup/vehicles';
 import { closeSidebar } from '../sidebars/FiltersSidebar';
 import HeaderToggleOrSpan from './HeaderToggleOrSpan';
 import './CarsGrid.css';
 
-function CarsGrid({ t }) {
+const CarsGrid = observer(({ t }) => {
+  const { vehicles } = useVehiclesStore();
   const [smallScreen, setSmallScreen] = useState(false);
 
   function checkScreenSize() {
@@ -84,6 +86,6 @@ function CarsGrid({ t }) {
       </footer>
     </div>
   );
-}
+});
 
 export default withNamespaces()(CarsGrid);

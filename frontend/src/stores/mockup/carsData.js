@@ -1,5 +1,5 @@
 // This is a temporary dataset used to complete the project with an emphasis on JavaScript
-// Future versions will have this imported from backend as JSON from backend
+// Future versions will have this imported from backend as JSON
 
 export const carMakes = {
   opel: 'Opel',
