@@ -113,8 +113,7 @@
   }
 }
 
-.c-filtersSidebar-filters-unit-container ul li input:hover,
-.c-filtersSidebar-filters-unit-container ul li label:hover{
+.c-filtersSidebar-filters-unit-container ul li input:hover{
   cursor: pointer;
 }
 

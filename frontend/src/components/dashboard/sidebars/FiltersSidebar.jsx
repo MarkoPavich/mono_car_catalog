@@ -22,7 +22,15 @@ export function closeSidebar() {
 }
 
 const SideFilters = observer(({ t }) => {
-  const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
+  const {
+    carMakes,
+    carBodies,
+    fuelTypes,
+    filters,
+    setBodyParams,
+    setFuelParams,
+    setMakeParam,
+  } = useVehiclesStore();
 
   return (
     <aside
@@ -34,7 +42,13 @@ const SideFilters = observer(({ t }) => {
       </button>
       <div className="c-filtersSidebar-filters-unit-container">
         <span>{t('dashboardFilters.make')}</span>
-        <select name="brand_filter" id="brand_filter">
+        <select
+          value={filters.makeParam}
+          onChange={setMakeParam}
+          name="brand_filter"
+          id="brand_filter"
+        >
+          <option value="">--</option>
           {Object.keys(carMakes).map((key) => (
             <option key={nanoid()} value={carMakes[key]}>
               {carMakes[key]}
@@ -50,8 +64,9 @@ const SideFilters = observer(({ t }) => {
               <input
                 id={fuelTypes[fuelKey]}
                 name={fuelTypes[fuelKey]}
-                value={fuelTypes[fuelKey]}
                 type="checkbox"
+                checked={filters.fuelParams[fuelKey]}
+                onChange={setFuelParams}
               />
               <label htmlFor={fuelTypes[fuelKey]}>
                 {t(`vehicleParams.${fuelTypes[fuelKey]}`)}
@@ -68,8 +83,9 @@ const SideFilters = observer(({ t }) => {
               <input
                 id={carBodies[bodyKey]}
                 name={carBodies[bodyKey]}
-                value={carBodies[bodyKey]}
+                checked={filters.fuelParams[bodyKey]}
                 type="checkbox"
+                onChange={setBodyParams}
               />
               <label htmlFor={carBodies[bodyKey]}>
                 {t(`vehicleParams.${carBodies[bodyKey]}`)}

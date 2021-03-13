@@ -8,7 +8,7 @@ import HeaderToggleOrSpan from './HeaderToggleOrSpan';
 import './CarsGrid.css';
 
 const CarsGrid = observer(({ t }) => {
-  const { vehicles } = useVehiclesStore();
+  const { filteredVehicles } = useVehiclesStore();
   const { carsGridSmallScreen } = useUIStore();
 
   return (
@@ -33,8 +33,7 @@ const CarsGrid = observer(({ t }) => {
         </div>
       </header>
       <div className="c-carsGrid-card-container">
-        {vehicles.map((vehicle) => (
-          // eslint-disable-next-line react/jsx-props-no-spreading
+        {filteredVehicles.map((vehicle) => (
           <CarCard key={nanoid()} vehicle={vehicle} t={t} />
         ))}
       </div>
