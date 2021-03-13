@@ -16,7 +16,7 @@ const CarsGrid = observer(({ t }) => {
       <header>
         <HeaderToggleOrSpan
           smallScreen={carsGridSmallScreen}
-          resCount={30}
+          resCount={filteredVehicles.length}
           activeFilters={2}
         />
         <div className="c-carsGrid-header-sort-filter">

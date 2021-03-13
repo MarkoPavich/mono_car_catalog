@@ -56,32 +56,21 @@ class VehiclesStore {
   }
 
   get filteredVehicles() {
-    let filtersActive = false;
-    let filtered = [];
+    let filtered =
+      this.activeFilters.make !== ''
+        ? this.vehicles.filter(
+            (vehicle) => vehicle.make === this.activeFilters.make
+          )
+        : this.vehicles;
 
-    if (this.activeFilters.body.length !== 0) {
-      filtered = filtered.concat(
-        this.vehicles.filter((vehicle) =>
-          this.activeFilters.body.includes(vehicle.bodyType)
-        )
+    if (this.activeFilters.body.length !== 0)
+      filtered = filtered.filter((vehicle) =>
+        this.activeFilters.body.includes(vehicle.bodyType)
       );
-      filtersActive = true;
-    }
 
-    if (this.activeFilters.fuel.length !== 0) {
-      filtered = filtered.concat(
-        this.vehicles.filter((vehicle) =>
-          this.activeFilters.fuel.includes(vehicle.fuelType)
-        )
-      );
-      filtersActive = true;
-    }
-
-    if (filtersActive === false) filtered = this.vehicles.slice();
-
-    if (this.activeFilters.make !== '')
-      filtered = filtered.filter(
-        (vehicle) => vehicle.make === this.filters.makeParam
+    if (this.activeFilters.fuel.length !== 0)
+      filtered = filtered.filter((vehicle) =>
+        this.activeFilters.fuel.includes(vehicle.fuelType)
       );
 
     return filtered;

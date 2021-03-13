@@ -38,7 +38,7 @@ function NavbarResponsiveUserMenu({ isSmallScreen, t }) {
       <div className="l-navbar-user-mobile-popup-menu">
         <ul>
           <li>
-            <a href="/add-new-vehicle">{t('navOptions.addVehicle')}</a>
+            <a href="/#/add-new-vehicle">{t('navOptions.addVehicle')}</a>
           </li>
           <li>
             <a href="#">{t('navOptions.myVehicles')}</a>

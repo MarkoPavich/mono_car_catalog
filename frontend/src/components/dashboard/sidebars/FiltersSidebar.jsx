@@ -83,7 +83,7 @@ const SideFilters = observer(({ t }) => {
               <input
                 id={carBodies[bodyKey]}
                 name={carBodies[bodyKey]}
-                checked={filters.fuelParams[bodyKey]}
+                checked={filters.bodyParams[bodyKey]}
                 type="checkbox"
                 onChange={setBodyParams}
               />

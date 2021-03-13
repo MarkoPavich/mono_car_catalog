@@ -2,7 +2,7 @@ import AuthStore from './auth';
 import MessageStore from './message';
 import UIStore from './ui';
 import FormsStore from './forms';
-import VehiclesStore from './vehhicles';
+import VehiclesStore from './vehicles';
 
 export default function createRootStore() {
   const messageStore = new MessageStore();
