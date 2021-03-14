@@ -104,5 +104,14 @@
         "BEV": "Battery Electric",
         "HEV": "Hydrogen Electric",
         "hybrid": "Hybrid"
+    },
+
+    "sortParams": {
+        "manufDateAsc": "Date of manufacture - ascending",
+        "manufDateDesc": "Date of manufacture - descending",
+        "modelNameAsc": "Model name - ascending",
+        "modelNameDesc": "Model name - descending",
+        "priceAsc": "Price - ascending",
+        "priceDesc": "Price - descending"
     }
 }

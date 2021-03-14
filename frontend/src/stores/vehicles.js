@@ -1,6 +1,7 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 import vehicles from './mockup/vehicles';
 import { carMakes, carBodies, fuelTypes } from './mockup/carsData';
+import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
 class VehiclesStore {
@@ -9,6 +10,7 @@ class VehiclesStore {
     this.carMakes = carMakes;
     this.carBodies = carBodies;
     this.fuelTypes = fuelTypes;
+    this.sortOptions = sortOptions;
 
     this.filters = filtersForms();
 
@@ -18,6 +20,7 @@ class VehiclesStore {
       setBodyParams: action,
       setFuelParams: action,
       setMakeParam: action,
+      setSortFilter: action,
 
       activeFilters: computed,
       filteredVehicles: computed,
@@ -34,6 +37,11 @@ class VehiclesStore {
 
   setMakeParam = (event) => {
     this.filters.makeParam = event.target.value;
+  };
+
+  setSortFilter = (event) => {
+    this.filters.sortFilter =
+      sortOptions[event.target.value] || sortOptions.manufDateAsc;
   };
 
   get activeFilters() {
@@ -73,8 +81,41 @@ class VehiclesStore {
         this.activeFilters.fuel.includes(vehicle.fuelType)
       );
 
-    return filtered;
+    return this.sortVehicles(filtered);
   }
+
+  sortVehicles = (filteredVehicles) => {
+    switch (this.filters.sortFilter) {
+      case this.sortOptions.modelNameAsc:
+        return filteredVehicles.sort((a, b) =>
+          a.make.toLowerCase() > b.make.toLowerCase() ? 1 : -1
+        );
+
+      case this.sortOptions.modelNameDesc:
+        return filteredVehicles.sort((a, b) =>
+          a.make.toLowerCase() > b.make.toLowerCase() ? -1 : 1
+        );
+
+      case this.sortOptions.manufDateAsc:
+        return filteredVehicles.sort((a, b) =>
+          a.manufactureDate > b.manufactureDate ? 1 : -1
+        );
+
+      case this.sortOptions.manufDateDesc:
+        return filteredVehicles.sort((a, b) =>
+          a.manufactureDate > b.manufactureDate ? -1 : 1
+        );
+
+      case this.sortOptions.priceAsc:
+        return filteredVehicles.sort((a, b) => (a.price > b.price ? 1 : -1));
+
+      case this.sortOptions.priceDesc:
+        return filteredVehicles.sort((a, b) => (a.price > b.price ? -1 : 1));
+
+      default:
+        return filteredVehicles;
+    }
+  };
 }
 
 export default VehiclesStore;

@@ -104,5 +104,14 @@
         "BEV": "Batterie elektrisch",
         "HEV": "Wasserstoff elektrisch",
         "hybrid": "Hybrid"
+    },
+
+    "sortParams": {
+        "manufDateAsc": "Herstellungsdatum - aufsteigend",
+        "manufDateDesc": "Herstellungsdatum - absteigend",
+        "modelNameAsc": "Modellname - aufsteigend",
+        "modelNameDesc": "Modellname - absteigend",
+        "priceAsc": "Preis - aufsteigend",
+        "priceDesc": "Preis - absteigend"
     }
 }

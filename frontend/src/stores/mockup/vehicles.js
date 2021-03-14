@@ -17,7 +17,7 @@ const vehicles = [
     mileage: '80,000 km',
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium ducimus blanditiis et iusto',
-    price: '12000,00 €',
+    price: 6000,
   },
   {
     make: astonMartin,
@@ -31,7 +31,7 @@ const vehicles = [
     mileage: '80,000 km',
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium',
-    price: '12000,00 €',
+    price: 50000,
   },
   {
     make: hyundai,
@@ -44,7 +44,7 @@ const vehicles = [
       'https://upload.wikimedia.org/wikipedia/commons/f/fe/2011_Hyundai_Elantra_GLS_--_06-02-2011_1.jpg',
     mileage: '80,000 km',
     description: 'At vero eos.',
-    price: '12000,00 €',
+    price: 9000,
   },
   {
     make: audi,
@@ -58,7 +58,7 @@ const vehicles = [
     mileage: '80,000 km',
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium ducimus blanditiis et iusto',
-    price: '12000,00 €',
+    price: 12000,
   },
   {
     make: astonMartin,
@@ -72,7 +72,7 @@ const vehicles = [
     mileage: '80,000 km',
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium',
-    price: '12000,00 €',
+    price: 89000,
   },
   {
     make: hyundai,
@@ -85,7 +85,7 @@ const vehicles = [
       'https://upload.wikimedia.org/wikipedia/commons/f/fe/2011_Hyundai_Elantra_GLS_--_06-02-2011_1.jpg',
     mileage: '80,000 km',
     description: 'At vero eos.',
-    price: '12000,00 €',
+    price: 7450,
   },
 ];
 

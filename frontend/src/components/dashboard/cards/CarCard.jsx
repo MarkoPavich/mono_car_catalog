@@ -37,7 +37,7 @@ function CarCard({ vehicle, t }) {
           <strong>{t('carCard.mileage')}:</strong> {mileage}
         </span>
         <span>
-          <strong>{t('carCard.price')}:</strong> {price}
+          <strong>{t('carCard.price')}:</strong> {`${price} €`}
         </span>
       </div>
       <div className="c-catalog-card-desc-box">

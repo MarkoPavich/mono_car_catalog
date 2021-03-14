@@ -104,5 +104,14 @@
         "BEV": "Elektro",
         "HEV": "Vodik-Elektro",
         "hybrid": "Hibrid"
+    },
+
+    "sortParams": {
+        "manufDateAsc": "Godištu - starije prema mlađe",
+        "manufDateDesc": "Godištu - mlađe prema starije",
+        "modelNameAsc": "Modelu - od A do Z",
+        "modelNameDesc": "Modelu - od Z do A",
+        "priceAsc": "Cijeni - jeftinije prema skuplje",
+        "priceDesc": "Cijeni - skuplje prema jeftinije"
     }
 }

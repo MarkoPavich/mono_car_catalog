@@ -8,7 +8,12 @@ import HeaderToggleOrSpan from './HeaderToggleOrSpan';
 import './CarsGrid.css';
 
 const CarsGrid = observer(({ t }) => {
-  const { filteredVehicles } = useVehiclesStore();
+  const {
+    filteredVehicles,
+    filters,
+    sortOptions,
+    setSortFilter,
+  } = useVehiclesStore();
   const { carsGridSmallScreen } = useUIStore();
 
   return (
@@ -21,14 +26,18 @@ const CarsGrid = observer(({ t }) => {
         />
         <div className="c-carsGrid-header-sort-filter">
           <label htmlFor="cars_grid_sort_filter">
-            {t('carsGrid.sortFilter')}:{' '}
+            {`${t('carsGrid.sortFilter')}: `}
           </label>
-          <select name="cars_grid_sort_filter" id="">
-            <option value="manufacture_date">Nazivu - od A do Z</option>
-            <option value="manufacture_date">Godištu - manje prema više</option>
-            <option value="manufacture_date">Godištu - više prema manje</option>
-            <option value="manufacture_date">Cijeni - manje prema više</option>
-            <option value="manufacture_date">Cijeni - više prema manje</option>
+          <select
+            onChange={setSortFilter}
+            value={filters.sortFilter}
+            name="cars_grid_sort_filter"
+          >
+            {Object.keys(sortOptions).map((sortFilter) => (
+              <option key={nanoid()} value={sortFilter}>
+                {t(`sortParams.${sortFilter}`)}
+              </option>
+            ))}
           </select>
         </div>
       </header>
