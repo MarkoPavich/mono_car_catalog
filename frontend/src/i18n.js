@@ -6,6 +6,7 @@ import translationEN from './public/locales/en/translation.json';
 import translationDE from './public/locales/de/translation.json';
 import translationHR from './public/locales/hr/translation.json';
 
+// Define available translations
 const resources = {
   en: {
     translation: translationEN,
@@ -18,6 +19,7 @@ const resources = {
   },
 };
 
+// Init translation service
 i18n
   .use(detector)
   .use(reactI18nextModule)

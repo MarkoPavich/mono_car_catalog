@@ -1,8 +1,11 @@
 import { makeObservable, observable, action, runInAction } from 'mobx';
 import authServices from './services/authServices';
 
+// TODO - Replace console.logs with proper error handling, maybe something with returning values and messaging
+
 class AuthStore {
   constructor(messages) {
+    // Authentication state
     this.authState = {
       isLoading: false,
       isAuthenticated: null,
@@ -10,10 +13,12 @@ class AuthStore {
       user: null,
     };
 
-    this.messages = messages;
+    this.messages = messages; // messageStore
 
+    // mobx decorators
     makeObservable(this, {
       authState: observable,
+
       requestLogin: action,
       requestLogout: action,
       getUser: action,
@@ -21,6 +26,7 @@ class AuthStore {
     });
   }
 
+  // Exchanges auth token with backend for auth credentials
   getUser = async () => {
     if (this.authState.token !== null) {
       this.loading = true;
@@ -44,6 +50,7 @@ class AuthStore {
     } else this.requestLogout();
   };
 
+  // Ensures token is valid, else clears auth state
   validateLogin = async () => {
     if (this.authState.token !== null) {
       try {
@@ -102,6 +109,7 @@ class AuthStore {
       }
     }
 
+    // Remove clientside credentials regardless of fetch outcome
     runInAction(() => {
       localStorage.clear('token');
       this.authState = {

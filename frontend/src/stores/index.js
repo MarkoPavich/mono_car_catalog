@@ -4,6 +4,7 @@ import UIStore from './ui';
 import FormsStore from './forms';
 import VehiclesStore from './vehicles';
 
+// init all stores and return as rootStore
 export default function createRootStore() {
   const messageStore = new MessageStore();
   const authStore = new AuthStore(messageStore);

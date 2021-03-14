@@ -11,12 +11,14 @@ import {
 
 export default class FormsStore {
   constructor(authStore) {
+    // Instance form templates
     this.vehicleForm = vehicleForm;
     this.loginForm = loginForm;
     this.registerForm = registerForm;
 
-    this.authStore = authStore;
+    this.authStore = authStore; // Used here for handling auth submissions
 
+    // MOBX decorators
     makeObservable(this, {
       vehicleForm: observable,
       loginForm: observable,
@@ -31,6 +33,7 @@ export default class FormsStore {
     });
   }
 
+  // set* functions control inputs
   setVehicleForm = (event) => {
     this.vehicleForm = {
       ...this.vehicleForm,
@@ -57,23 +60,30 @@ export default class FormsStore {
   };
 
   submitLogin = () => {
+    // Generate data container to reduce dot notaitions a bit..
     const data = {
       username: this.loginForm.username.value,
       password: this.loginForm.password.value,
     };
 
-    const status = validateForm(data);
+    // Submit to form validator
+    const status = validateForm(data); // Will return an object with isValid and error tooltips
+    // Pass form and tooltips to input marking function
     this.markFields(this.loginForm, status.tooltips);
 
+    // If valid, call login method from authStore and clear password input
     if (status.isValid) {
       this.authStore.requestLogin(data);
       this.loginForm.password.value = '';
     }
   };
 
+  // Similar to the above
   submitRegister = (event) => {
     event.preventDefault();
     const data = {};
+
+    // Longer form so generate data container programmatically
     Object.keys(this.registerForm).forEach((key) => {
       data[key] = this.registerForm[key].value;
     });
@@ -86,11 +96,14 @@ export default class FormsStore {
   };
 
   markFields = (form, tooltips) => {
+    // Loop over every field in form
     Object.keys(tooltips).forEach((key) => {
       if (tooltips[key]) {
-        form[key].class = inputStatus.error;
+        // truthy tooltip means error
+        form[key].class = inputStatus.error; // Apply error CSS classname to field and provide tooltip
         form[key].tooltip = tooltips[key];
       } else {
+        // falsy tooltip - revert field classname and clear tooltip
         form[key].class = inputStatus.normal;
         form[key].tooltip = '';
       }

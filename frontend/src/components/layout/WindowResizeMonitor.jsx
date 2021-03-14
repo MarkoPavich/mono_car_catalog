@@ -1,6 +1,8 @@
 import React, { useLayoutEffect } from 'react';
 import { useUIStore } from '../../StoreProvider';
 
+/* Simple resize monitor feeding the UI store */
+
 function WindowResizeMonitor() {
   const { setScreenWidth } = useUIStore();
 

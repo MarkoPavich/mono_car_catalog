@@ -1,18 +1,25 @@
 import { makeObservable, action, observable } from 'mobx';
 
+// Handle user alert notifications, success, error, etc..
+
+// TODO - simplify message generation, currently has baggage of multiple differing ideas..
+
 class MessageStore {
   constructor() {
+    // Default message object
     this.message = {
       txt: '',
       type: null,
     };
 
+    // Allowed generic message types
     this.types = {
       success: 'success',
       error: 'error',
       info: 'info',
     };
 
+    // Common error and confirmation types implemented with translation system
     this.commonErrors = {
       userExists: 'userExists',
       emailExists: 'emailExists',
@@ -24,8 +31,10 @@ class MessageStore {
       userLogged: 'userLogged',
     };
 
+    // MOBX decorators
     makeObservable(this, {
       message: observable,
+
       createSuccess: action,
       createInfo: action,
       createError: action,
@@ -41,6 +50,7 @@ class MessageStore {
     };
   };
 
+  // Baggage
   createError = (txt) => {
     this.message = {
       txt,

@@ -33,7 +33,7 @@ export default function validateForm(data) {
       }
     }
   });
-
+  // Return if form valid and tooltips if any
   return {
     isValid,
     tooltips,

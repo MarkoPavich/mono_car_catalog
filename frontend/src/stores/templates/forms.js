@@ -1,3 +1,6 @@
+/* Form templates with defalted values */
+
+// CSS classNames for input containers
 export const inputStatus = {
   normal: 'a-login-form-input-container',
   error: 'a-login-form-input-container input-error',

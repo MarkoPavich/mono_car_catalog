@@ -5,15 +5,16 @@ import { withNamespaces } from 'react-i18next';
 import { useMessageStore } from '../../StoreProvider';
 
 const Alert = observer(({ t }) => {
-  const alert = useAlert();
+  const alert = useAlert(); // Alert library hook
   const {
     message,
     commonErrors,
     commonConfirmations,
     types,
   } = useMessageStore();
-  const oldMessage = useRef({});
+  const oldMessage = useRef({}); // init useRef
 
+  // Define common responses and prep with translations
   const commonErrorResponses = {
     userExists: t('commonErrors.userExists'),
     emailExists: t('commonErrors.emailExists'),
@@ -26,7 +27,9 @@ const Alert = observer(({ t }) => {
   };
 
   useEffect(() => {
+    // Check if message already fired
     if (oldMessage.current !== message) {
+      // If not, check type for appropriate response and fire notification
       if (message.type in commonErrors) {
         alert[types.error](commonErrorResponses[message.type]);
       } else if (message.type in commonConfirmations) {
@@ -37,6 +40,7 @@ const Alert = observer(({ t }) => {
         alert[message.type](message.txt);
       }
 
+      // Avoid firing on rerenders by storing fired msg object for comparison
       oldMessage.current = message;
     }
   });
