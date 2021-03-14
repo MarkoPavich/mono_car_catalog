@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { carMakes, carBodies, fuelTypes } from './carsData';
 
 const { audi, astonMartin, hyundai } = carMakes;
@@ -6,6 +7,7 @@ const { petrol, diesel, LPG, hybrid, BEV } = fuelTypes;
 
 const vehicles = [
   {
+    id: nanoid(),
     make: audi,
     model: 'A4',
     variant: '2.0d',
@@ -20,6 +22,7 @@ const vehicles = [
     price: 6000,
   },
   {
+    id: nanoid(),
     make: astonMartin,
     model: 'DB5',
     bodyType: compact,
@@ -34,6 +37,7 @@ const vehicles = [
     price: 50000,
   },
   {
+    id: nanoid(),
     make: hyundai,
     model: 'Elantra',
     fuelType: LPG,
@@ -47,6 +51,7 @@ const vehicles = [
     price: 9000,
   },
   {
+    id: nanoid(),
     make: audi,
     model: 'A4',
     bodyType: coupe,
@@ -61,6 +66,7 @@ const vehicles = [
     price: 12000,
   },
   {
+    id: nanoid(),
     make: astonMartin,
     model: 'DB5',
     fuelType: BEV,
@@ -75,6 +81,7 @@ const vehicles = [
     price: 89000,
   },
   {
+    id: nanoid(),
     make: hyundai,
     model: 'Elantra',
     fuelType: petrol,

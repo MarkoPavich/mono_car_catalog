@@ -1,3 +1,8 @@
+export const inputStatus = {
+  normal: 'a-login-form-input-container',
+  error: 'a-login-form-input-container input-error',
+};
+
 export const vehicleForm = {
   make: '',
   model: '',
@@ -12,14 +17,42 @@ export const vehicleForm = {
 };
 
 export const loginForm = {
-  username: '',
-  password: '',
+  username: {
+    value: '',
+    class: inputStatus.normal,
+    toolTip: '',
+  },
+  password: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
 };
 
 export const registerForm = {
-  username: '',
-  email: '',
-  password: '',
-  password2: '',
-  ToU_check: false,
+  username: {
+    value: '',
+    class: inputStatus.normal,
+    toolTip: '',
+  },
+  email: {
+    value: '',
+    class: inputStatus.normal,
+    toolTip: '',
+  },
+  password: {
+    value: '',
+    class: inputStatus.normal,
+    toolTip: '',
+  },
+  password2: {
+    value: '',
+    class: inputStatus.normal,
+    toolTip: '',
+  },
+  touCheck: {
+    value: false,
+    class: inputStatus.normal,
+    toolTip: '',
+  },
 };

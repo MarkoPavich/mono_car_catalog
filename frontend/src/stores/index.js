@@ -8,8 +8,8 @@ export default function createRootStore() {
   const messageStore = new MessageStore();
   const authStore = new AuthStore(messageStore);
   const uiStore = new UIStore();
-  const formsStore = new FormsStore();
   const vehiclesStore = new VehiclesStore();
+  const formsStore = new FormsStore(authStore);
 
   return {
     authStore,

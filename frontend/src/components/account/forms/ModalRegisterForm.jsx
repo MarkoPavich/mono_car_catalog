@@ -1,51 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
 import { useAuthStore, useFormsStore } from '../../../StoreProvider';
-import { validateInputs, clearInputs } from './validation';
+
+function hideModalRegisterForm() {
+  const modal = document.querySelector('#a-login-modal-container');
+  modal.className = 'a-login-modal-container';
+}
 
 const ModalRegisterForm = observer(({ t }) => {
-  const { authState, requestNewAccount } = useAuthStore();
-  const { registerForm, setRegisterForm } = useFormsStore();
+  const { authState } = useAuthStore();
+  const {
+    registerForm,
+    setRegisterForm,
+    submitRegister,
+    clearRegisterForm,
+  } = useFormsStore();
+  const { username, email, password, password2, touCheck } = registerForm;
 
-  async function handleSubmit() {
-    const inputs = {
-      username: document.querySelector(
-        '#a-login-modal-container > div > form > div:nth-child(1) > input'
-      ),
-      email: document.querySelector(
-        '#a-login-modal-container > div > form > div:nth-child(2) > input'
-      ),
-      password: document.querySelector(
-        '#a-login-modal-container > div > form > div:nth-child(3) > input'
-      ),
-      password2: document.querySelector(
-        '#a-login-modal-container > div > form > div:nth-child(4) > input'
-      ),
-      touCheck: document.querySelector(
-        '#a-login-modal-container > div > div.a-login-register-form-ToU-notif-box > div > input[type=checkbox]'
-      ),
-    };
-
-    if (validateInputs(inputs, t)) {
-      const errors = await requestNewAccount({
-        username: registerForm.username,
-        email: registerForm.email,
-        password: registerForm.password,
-      });
-
-      if (errors) {
-        console.log(errors);
-      }
-    }
-  }
+  useEffect(() => {
+    clearRegisterForm();
+  }, []);
 
   return (
     <div className="a-login-modal-container" id="a-login-modal-container">
       <div className="a-login-form-container a-register-modal-container">
         <button
           type="button"
-          onClick={hideModalRegisterForm}
+          onClick={() => {
+            clearRegisterForm();
+            hideModalRegisterForm();
+          }}
           className="a-login-modal-close-btn"
         >
           X
@@ -54,10 +39,10 @@ const ModalRegisterForm = observer(({ t }) => {
           <span>{t('login.registerFormHeader')}:</span>
         </header>
         <form className="a-login-register-form">
-          <div className="a-login-form-input-container">
+          <div data-tooltip={username.tooltip} className={username.class}>
             <input
               onChange={setRegisterForm}
-              value={registerForm.username}
+              value={username.value}
               name="username"
               placeholder={
                 t('common.username')[0].toUpperCase() +
@@ -68,10 +53,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="text"
             />
           </div>
-          <div className="a-login-form-input-container">
+          <div data-tooltip={email.tooltip} className={email.class}>
             <input
               onChange={setRegisterForm}
-              value={registerForm.email}
+              value={email.value}
               name="email"
               placeholder={
                 t('common.email')[0].toUpperCase() + t('common.email').slice(1)
@@ -80,10 +65,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="email"
             />
           </div>
-          <div className="a-login-form-input-container">
+          <div data-tooltip={password.tooltip} className={password.class}>
             <input
               onChange={setRegisterForm}
-              value={registerForm.password}
+              value={password.value}
               name="password"
               placeholder={
                 t('common.password')[0].toUpperCase() +
@@ -93,10 +78,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="password"
             />
           </div>
-          <div className="a-login-form-input-container">
+          <div data-tooltip={password2.tooltip} className={password2.class}>
             <input
               onChange={setRegisterForm}
-              value={registerForm.password2}
+              value={password2.value}
               name="password2"
               placeholder={
                 t('common.confirmPass')[0].toUpperCase() +
@@ -108,20 +93,23 @@ const ModalRegisterForm = observer(({ t }) => {
           </div>
         </form>
         <div className="a-login-register-form-ToU-notif-box">
-          <div className="a-login-form-tou-input-container">
+          <div
+            data-tooltip={touCheck.tooltip}
+            className={`tou-box-${touCheck.class}`}
+          >
             <input
-              checked={registerForm.ToU_check}
+              checked={touCheck.value}
               onChange={setRegisterForm}
-              name="ToU_check"
+              name="touCheck"
               type="checkbox"
             />
-            <label htmlFor="ToU_check">
+            <label htmlFor="touCheck">
               <a href="#">{t('login.tou')}</a>
             </label>
           </div>
         </div>
         <div className="a-login-register-form-actions">
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={submitRegister}>
             {authState.isLoading ? t('common.loading') : t('login.submit')}
           </button>
         </div>
@@ -135,31 +123,6 @@ export function showModalRegisterForm(event) {
 
   const modal = document.querySelector('#a-login-modal-container');
   modal.className = 'a-login-modal-container modal-form-active';
-}
-
-function hideModalRegisterForm() {
-  const inputs = {
-    username: document.querySelector(
-      '#a-login-modal-container > div > form > div:nth-child(1) > input'
-    ),
-    email: document.querySelector(
-      '#a-login-modal-container > div > form > div:nth-child(2) > input'
-    ),
-    password: document.querySelector(
-      '#a-login-modal-container > div > form > div:nth-child(3) > input'
-    ),
-    password2: document.querySelector(
-      '#a-login-modal-container > div > form > div:nth-child(4) > input'
-    ),
-    touCheck: document.querySelector(
-      '#a-login-modal-container > div > div.a-login-register-form-ToU-notif-box > div > input[type=checkbox]'
-    ),
-  };
-
-  clearInputs(inputs);
-
-  const modal = document.querySelector('#a-login-modal-container');
-  modal.className = 'a-login-modal-container';
 }
 
 export default withNamespaces()(ModalRegisterForm);

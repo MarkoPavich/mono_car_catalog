@@ -3,7 +3,7 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { transitions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import WindowResizeMonitor from './layout/WindowResizeMonitor'
+import WindowResizeMonitor from './layout/WindowResizeMonitor';
 import Navbar from './layout/navbar/Navbar';
 import Footer from './layout/footer/Footer';
 import Login from './account/Login';

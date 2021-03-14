@@ -60,7 +60,7 @@
   margin-bottom: 40px;
 }
 
-.a-login-form-tou-input-container {
+.tou-box-a-login-form-input-container {
   position: relative;
 
   margin-top: 10px;
@@ -83,7 +83,7 @@
   color: red;
 }
 
-.a-login-form-tou-input-container.input-error::after {
+.tou-box-a-login-form-input-container.input-error::after {
   position: static;
 }
 
