@@ -98,7 +98,8 @@ export default class FormsStore {
 
   submitAddVehicle = () => {
     this.vehicleStore.addVehicle(this.vehicleForm);
-  }
+    return true;
+  };
 
   markFields = (form, tooltips) => {
     // Loop over every field in form

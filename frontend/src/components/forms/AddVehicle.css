@@ -186,6 +186,10 @@
   transform: translate(0, -1px);
 }
 
+.f-addVehicle-form-actions-container button:focus {
+  outline: none;
+}
+
 @media (max-width: 860px) and (min-width: 500px) {
   .f-addVehicle-form-input-grid-container {
     grid-template-columns: 1fr 1fr;

@@ -11,6 +11,7 @@ const AddVehicleForm = observer(({ t }) => {
   function handleSubmit(event) {
     event.preventDefault();
     const dataStored = submitAddVehicle();
+    if (dataStored) window.location.href = '#/';
   }
 
   return (

@@ -8,9 +8,10 @@ import filtersForms from './templates/filtersForms';
 class VehiclesStore {
   constructor() {
     // Imported datasets
-    this.vehicles = vehicles;
+    this.vehicles = JSON.parse(localStorage.getItem('vehicles')) || vehicles;
     this.carMakes = carMakes;
-    this.carModels = carModels;
+    this.carModels =
+      JSON.parse(localStorage.getItem('vehicleModels')) || carModels;
     this.carBodies = carBodies;
     this.fuelTypes = fuelTypes;
     this.sortOptions = sortOptions;
@@ -161,13 +162,19 @@ class VehiclesStore {
         model = this.carModels[carMakeID][modelID];
       }
     }
+    // Create new object with required parameters
     const newVehicle = {
       ...validatedData,
       id: nanoid(),
       make: this.carMakes[validatedData.make],
       model,
     };
+
+    // Save new vehicle
     this.vehicles.push(newVehicle);
+    // Make persistent
+    localStorage.setItem('vehicles', JSON.stringify(this.vehicles));
+    localStorage.setItem('vehicleModels', JSON.stringify(this.carModels));
   };
 }
 
