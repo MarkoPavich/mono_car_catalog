@@ -56,6 +56,7 @@ export const carMakes = {
   },
 };
 
+// First key is carMake ID, second model ID
 export const carModels = {
   9: { 0: { name: 'A4' } },
   6: { 0: { name: 'Elantra' } },

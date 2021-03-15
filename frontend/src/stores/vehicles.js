@@ -131,9 +131,8 @@ class VehiclesStore {
     }
   };
 
-  addVehicle = (validatedData) => {
+  addVehicle = (validatedData, editID) => {
     // Block below is somewhat a mess, this sort of relational handling is better suited for DB languages
-
     const carMakeID = this.carMakes[validatedData.make].id;
     let model;
     // Check if carMake has any carModels, if no, create one
@@ -170,11 +169,26 @@ class VehiclesStore {
       model,
     };
 
-    // Save new vehicle
-    this.vehicles.push(newVehicle);
+    // Save new vehicle or overwrite existing
+    if (editID) {
+      const index = this.vehicles.findIndex((vehicle) => vehicle.id === editID);
+      this.vehicles[index] = {
+        ...newVehicle,
+        id: editID,
+      };
+    } else this.vehicles.push(newVehicle);
     // Make persistent
     localStorage.setItem('vehicles', JSON.stringify(this.vehicles));
     localStorage.setItem('vehicleModels', JSON.stringify(this.carModels));
+  };
+
+  getVehicle = (vehicleID) => {
+    // Find vehicle index by Ivehicle ID
+    const index = this.vehicles.findIndex(
+      (vehicle) => vehicle.id === vehicleID
+    );
+    // Return vehicle object
+    return this.vehicles[index];
   };
 }
 

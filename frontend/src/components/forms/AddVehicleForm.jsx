@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
 import { useFormsStore, useVehiclesStore } from '../../StoreProvider';
 
-const AddVehicleForm = observer(({ t }) => {
-  const { vehicleForm, setVehicleForm, submitAddVehicle } = useFormsStore();
+const AddVehicleForm = observer(({ t, vehicleID }) => {
+  const {
+    vehicleForm,
+    setVehicleForm,
+    clearVehicleForm,
+    setEditMode,
+    submitAddEditvehicle,
+  } = useFormsStore();
   const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
 
   function handleSubmit(event) {
     event.preventDefault();
-    const dataStored = submitAddVehicle();
+    const dataStored = submitAddEditvehicle(vehicleID);
     if (dataStored) window.location.href = '#/';
   }
+
+  useEffect(() => {
+    if (vehicleID) setEditMode(vehicleID);
+    else clearVehicleForm();
+  }, []);
 
   return (
     <form className="f-addVehicle-form">
@@ -157,7 +168,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-form-actions-container">
             <a href="/">{t('vehicleForm.backLink')}</a>
             <button onClick={handleSubmit} type="submit">
-              {t('vehicleForm.submit')}
+              {vehicleID ? t('vehicleForm.edit') : t('vehicleForm.submit')}
             </button>
           </div>
         </div>

@@ -16,7 +16,7 @@ const vehicles = [
     manufactureDate: '2014-06',
     img:
       'https://images.dealer.com/ddc/vehicles/2020/Audi/A4/Sedan/perspective/front-left/2020_24.png',
-    mileage: '80,000 km',
+    mileage: 260000,
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium ducimus blanditiis et iusto',
     price: 6000,
@@ -31,7 +31,7 @@ const vehicles = [
     manufactureDate: '1963-03',
     img:
       'https://static.wikia.nocookie.net/forzamotorsport/images/1/12/HOR_XB1_JBE_AM_DB5.png/revision/latest?cb=20191125215511',
-    mileage: '80,000 km',
+    mileage: 30000,
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium',
     price: 50000,
@@ -46,7 +46,7 @@ const vehicles = [
     manufactureDate: '2011-05',
     img:
       'https://upload.wikimedia.org/wikipedia/commons/f/fe/2011_Hyundai_Elantra_GLS_--_06-02-2011_1.jpg',
-    mileage: '80,000 km',
+    mileage: '12000',
     description: 'At vero eos.',
     price: 9000,
   },
@@ -60,7 +60,7 @@ const vehicles = [
     manufactureDate: '2014-06',
     img:
       'https://images.dealer.com/ddc/vehicles/2020/Audi/A4/Sedan/perspective/front-left/2020_24.png',
-    mileage: '80,000 km',
+    mileage: 328000,
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium ducimus blanditiis et iusto',
     price: 12000,
@@ -75,7 +75,7 @@ const vehicles = [
     manufactureDate: '1963-03',
     img:
       'https://static.wikia.nocookie.net/forzamotorsport/images/1/12/HOR_XB1_JBE_AM_DB5.png/revision/latest?cb=20191125215511',
-    mileage: '80,000 km',
+    mileage: 80000,
     description:
       'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium',
     price: 89000,
@@ -90,7 +90,7 @@ const vehicles = [
     manufactureDate: '2011-05',
     img:
       'https://upload.wikimedia.org/wikipedia/commons/f/fe/2011_Hyundai_Elantra_GLS_--_06-02-2011_1.jpg',
-    mileage: '80,000 km',
+    mileage: 12323,
     description: 'At vero eos.',
     price: 7450,
   },

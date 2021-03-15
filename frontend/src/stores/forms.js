@@ -10,14 +10,14 @@ import {
 } from './templates/forms';
 
 export default class FormsStore {
-  constructor(authStore, vehicleStore) {
+  constructor(authStore, vehiclesStore) {
     // Instance form templates
     this.vehicleForm = vehicleForm;
     this.loginForm = loginForm;
     this.registerForm = registerForm;
 
     this.authStore = authStore; // Used here for handling auth submissions
-    this.vehicleStore = vehicleStore; // used to submit new vehicles
+    this.vehiclesStore = vehiclesStore; // used to submit new vehicles
 
     // MOBX decorators
     makeObservable(this, {
@@ -31,6 +31,8 @@ export default class FormsStore {
       submitLogin: action,
       markFields: action,
       clearRegisterForm: action,
+      setEditMode: action,
+      clearVehicleForm: action,
     });
   }
 
@@ -59,6 +61,10 @@ export default class FormsStore {
       this.registerForm[key].tooltip = '';
     });
   };
+
+  clearVehicleForm = () => {
+    this.vehicleForm = vehicleForm;
+  }
 
   submitLogin = () => {
     // Generate data container to reduce dot notaitions a bit..
@@ -96,9 +102,10 @@ export default class FormsStore {
     }
   };
 
-  submitAddVehicle = () => {
-    this.vehicleStore.addVehicle(this.vehicleForm);
-    return true;
+  submitAddEditvehicle = (vehicleID) => {
+    this.vehiclesStore.addVehicle(this.vehicleForm, vehicleID);
+    this.vehicleForm = vehicleForm; // Clear form
+    return true; // TODO - confirmation and validation
   };
 
   markFields = (form, tooltips) => {
@@ -114,5 +121,21 @@ export default class FormsStore {
         form[key].tooltip = '';
       }
     });
+  };
+
+  setEditMode = (vehicleID) => {
+    // Get vehicle object
+    const vehicle = this.vehiclesStore.getVehicle(vehicleID);
+    // get make object
+    let make;
+    Object.keys(this.vehiclesStore.carMakes).forEach((key) => {
+      if (this.vehiclesStore.carMakes[key].id === vehicle.make.id) make = key;
+    });
+    // Set form
+    this.vehicleForm = {
+      ...vehicle,
+      model: vehicle.model.name,
+      make,
+    };
   };
 }

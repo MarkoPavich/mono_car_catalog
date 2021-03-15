@@ -1,10 +1,10 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import { useVehiclesStore } from '../../../StoreProvider';
 import './CarCard.css';
 
 function CarCard({ vehicle, t }) {
   const {
+    id,
     make,
     model,
     variant,
@@ -15,7 +15,13 @@ function CarCard({ vehicle, t }) {
     price,
   } = vehicle;
 
-  const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${model.name} ${variant}`;
+  const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${
+    model.name
+  } ${variant}`;
+
+  function openEditmode() {
+    window.location.href = `/#/edit-vehicle?id=${id}`;
+  }
 
   function formatHeader(span) {
     if (span.length < 29) return span;
@@ -35,7 +41,7 @@ function CarCard({ vehicle, t }) {
       </div>
       <div className="c-catalog-card-mileage-price-box">
         <span>
-          <strong>{t('carCard.mileage')}:</strong> {mileage}
+          <strong>{t('carCard.mileage')}:</strong> {`${mileage} km`}
         </span>
         <span>
           <strong>{t('carCard.price')}:</strong> {`${price} €`}
@@ -45,7 +51,9 @@ function CarCard({ vehicle, t }) {
         <span>{formatDesc(description)}</span>
       </div>
       <div className="c-catalog-card-CTA-box">
-        <button type="button">{t('carCard.open')}</button>
+        <button onClick={openEditmode} type="button">
+          {t('carCard.open')}
+        </button>
       </div>
     </div>
   );

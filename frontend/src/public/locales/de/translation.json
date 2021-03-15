@@ -33,7 +33,7 @@
     "carCard": {
         "mileage": "Kilometerstand",
         "price": "Preis",
-        "open": "öffnen"
+        "open": "bearbeiten"
     },
 
     "pagination": {
@@ -64,7 +64,7 @@
         "userLogged": "Willkommen zurück,"
     },
 
-        "vehicleForm": {
+    "vehicleForm": {
         "header": "Fahrzeug hinzufügen",
         "basicInfoHeader": "Basisinformation",
         "make": "Automarke",
@@ -79,7 +79,8 @@
         "description": "Beschreibung",
         "price": "Preis",
         "backLink": "Rückkehr",
-        "submit": "Hinzufügen" 
+        "submit": "Hinzufügen",
+        "edit": "Veränderung" 
     },
 
     "vehicleFormPlaceholders": {
