@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { carMakes, carBodies, fuelTypes } from './carsData';
+import { carMakes, carModels, carBodies, fuelTypes } from './carsData';
 
 const { audi, astonMartin, hyundai } = carMakes;
 const { sedan, compact, convertible, coupe, pickup } = carBodies;
@@ -9,7 +9,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: audi,
-    model: 'A4',
+    model: carModels[audi.id][0].name,
     variant: '2.0d',
     bodyType: sedan,
     fuelType: diesel,
@@ -24,7 +24,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: astonMartin,
-    model: 'DB5',
+    model: carModels[astonMartin.id][0].name,
     bodyType: compact,
     fuelType: petrol,
     variant: 'James Bond Edition',
@@ -39,7 +39,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: hyundai,
-    model: 'Elantra',
+    model: carModels[hyundai.id][0].name,
     fuelType: LPG,
     bodyType: convertible,
     variant: '1.6l',
@@ -53,7 +53,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: audi,
-    model: 'A4',
+    model: carModels[audi.id][0].name,
     bodyType: coupe,
     variant: '2.0d',
     fuelType: hybrid,
@@ -68,7 +68,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: astonMartin,
-    model: 'DB5',
+    model: carModels[astonMartin.id][0].name,
     fuelType: BEV,
     bodyType: convertible,
     variant: 'James Bond Edition',
@@ -83,7 +83,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: hyundai,
-    model: 'Elantra',
+    model: carModels[hyundai.id][0].name,
     fuelType: petrol,
     bodyType: pickup,
     variant: '1.6l',

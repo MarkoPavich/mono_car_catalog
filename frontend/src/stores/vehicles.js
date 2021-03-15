@@ -1,6 +1,6 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 import vehicles from './mockup/vehicles';
-import { carMakes, carBodies, fuelTypes } from './mockup/carsData';
+import { carMakes, carModels, carBodies, fuelTypes } from './mockup/carsData';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
@@ -9,6 +9,7 @@ class VehiclesStore {
     // Imported datasets
     this.vehicles = vehicles;
     this.carMakes = carMakes;
+    this.carModels = carModels;
     this.carBodies = carBodies;
     this.fuelTypes = fuelTypes;
     this.sortOptions = sortOptions;
@@ -73,7 +74,7 @@ class VehiclesStore {
     let filtered =
       this.activeFilters.make !== '' // If active, filter by make
         ? this.vehicles.filter(
-            (vehicle) => vehicle.make === this.activeFilters.make
+            (vehicle) => vehicle.make.name === this.activeFilters.make
           )
         : this.vehicles;
 
@@ -97,12 +98,12 @@ class VehiclesStore {
     switch (this.filters.sortFilter) {
       case this.sortOptions.modelNameAsc:
         return filteredVehicles.sort((a, b) =>
-          a.make.toLowerCase() > b.make.toLowerCase() ? 1 : -1
+          a.make.name.toLowerCase() > b.make.name.toLowerCase() ? 1 : -1
         );
 
       case this.sortOptions.modelNameDesc:
         return filteredVehicles.sort((a, b) =>
-          a.make.toLowerCase() > b.make.toLowerCase() ? -1 : 1
+          a.make.name.toLowerCase() > b.make.toLowerCase() ? -1 : 1
         );
 
       case this.sortOptions.manufDateAsc:

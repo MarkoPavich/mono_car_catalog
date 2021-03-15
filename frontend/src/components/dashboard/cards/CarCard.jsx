@@ -1,5 +1,6 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
+import { useVehiclesStore } from '../../../StoreProvider';
 import './CarCard.css';
 
 function CarCard({ vehicle, t }) {
@@ -14,7 +15,7 @@ function CarCard({ vehicle, t }) {
     price,
   } = vehicle;
 
-  const header = `${manufactureDate.slice(0, 4)}. ${make} ${model} ${variant}`;
+  const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${model} ${variant}`;
 
   function formatHeader(span) {
     if (span.length < 29) return span;
