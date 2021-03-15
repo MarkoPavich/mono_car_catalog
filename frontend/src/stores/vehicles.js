@@ -1,4 +1,5 @@
 import { makeObservable, observable, computed, action } from 'mobx';
+import { nanoid } from 'nanoid';
 import vehicles from './mockup/vehicles';
 import { carMakes, carModels, carBodies, fuelTypes } from './mockup/carsData';
 import sortOptions from './mockup/sortOptions';
@@ -19,11 +20,13 @@ class VehiclesStore {
     // MOBX
     makeObservable(this, {
       filters: observable,
+      vehicles: observable,
 
       setBodyParams: action,
       setFuelParams: action,
       setMakeParam: action,
       setSortFilter: action,
+      addVehicle: action,
 
       activeFilters: computed,
       filteredVehicles: computed,
@@ -76,7 +79,7 @@ class VehiclesStore {
         ? this.vehicles.filter(
             (vehicle) => vehicle.make.name === this.activeFilters.make
           )
-        : this.vehicles;
+        : this.vehicles.slice();
 
     // if any selected, further filter by matching vehicle bodyType in bodyType filters array
     if (this.activeFilters.body.length !== 0)
@@ -103,7 +106,7 @@ class VehiclesStore {
 
       case this.sortOptions.modelNameDesc:
         return filteredVehicles.sort((a, b) =>
-          a.make.name.toLowerCase() > b.make.toLowerCase() ? -1 : 1
+          a.make.name.toLowerCase() > b.make.name.toLowerCase() ? -1 : 1
         );
 
       case this.sortOptions.manufDateAsc:
@@ -125,6 +128,46 @@ class VehiclesStore {
       default:
         return filteredVehicles;
     }
+  };
+
+  addVehicle = (validatedData) => {
+    // Block below is somewhat a mess, this sort of relational handling is better suited for DB languages
+
+    const carMakeID = this.carMakes[validatedData.make].id;
+    let model;
+    // Check if carMake has any carModels, if no, create one
+    if (!this.carModels[carMakeID]) {
+      const modelID = nanoid();
+      this.carModels[carMakeID] = {};
+      this.carModels[carMakeID][modelID] = { name: validatedData.model };
+      model = this.carModels[carMakeID][modelID];
+    } else {
+      // If some carModels exist, check if this particular model exists
+      let found = false;
+      Object.keys(this.carModels[carMakeID]).forEach((key) => {
+        // If so, assign it to new vehicle
+        if (
+          this.carModels[carMakeID][key].name === validatedData.model &&
+          !found
+        ) {
+          found = true;
+          model = this.carModels[carMakeID][key];
+        }
+      });
+      // Else, create our new carModel
+      if (!found) {
+        const modelID = nanoid();
+        this.carModels[carMakeID][modelID] = { name: validatedData.model };
+        model = this.carModels[carMakeID][modelID];
+      }
+    }
+    const newVehicle = {
+      ...validatedData,
+      id: nanoid(),
+      make: this.carMakes[validatedData.make],
+      model,
+    };
+    this.vehicles.push(newVehicle);
   };
 }
 

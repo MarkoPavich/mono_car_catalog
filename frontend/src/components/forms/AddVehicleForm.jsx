@@ -5,8 +5,13 @@ import { withNamespaces } from 'react-i18next';
 import { useFormsStore, useVehiclesStore } from '../../StoreProvider';
 
 const AddVehicleForm = observer(({ t }) => {
-  const { vehicleForm, setVehicleForm } = useFormsStore();
+  const { vehicleForm, setVehicleForm, submitAddVehicle } = useFormsStore();
   const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const dataStored = submitAddVehicle();
+  }
 
   return (
     <form className="f-addVehicle-form">
@@ -24,9 +29,10 @@ const AddVehicleForm = observer(({ t }) => {
             >
               <option value="">--</option>
               {Object.keys(carMakes)
+                .slice()
                 .sort((a, b) => (carMakes[a].name > carMakes[b].name ? 1 : -1))
                 .map((key) => (
-                  <option key={nanoid()} value={carMakes[key].id}>
+                  <option key={nanoid()} value={key}>
                     {carMakes[key].name}
                   </option>
                 ))}
@@ -149,7 +155,7 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-spacer" />
           <div className="f-addVehicle-form-actions-container">
             <a href="/">{t('vehicleForm.backLink')}</a>
-            <button onSubmit={() => 'hello world'} type="submit">
+            <button onClick={handleSubmit} type="submit">
               {t('vehicleForm.submit')}
             </button>
           </div>

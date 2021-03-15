@@ -10,13 +10,14 @@ import {
 } from './templates/forms';
 
 export default class FormsStore {
-  constructor(authStore) {
+  constructor(authStore, vehicleStore) {
     // Instance form templates
     this.vehicleForm = vehicleForm;
     this.loginForm = loginForm;
     this.registerForm = registerForm;
 
     this.authStore = authStore; // Used here for handling auth submissions
+    this.vehicleStore = vehicleStore; // used to submit new vehicles
 
     // MOBX decorators
     makeObservable(this, {
@@ -94,6 +95,10 @@ export default class FormsStore {
       this.authStore.requestNewAccount(data);
     }
   };
+
+  submitAddVehicle = () => {
+    this.vehicleStore.addVehicle(this.vehicleForm);
+  }
 
   markFields = (form, tooltips) => {
     // Loop over every field in form
