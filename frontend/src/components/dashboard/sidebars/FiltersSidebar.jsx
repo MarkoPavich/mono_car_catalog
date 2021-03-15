@@ -2,26 +2,11 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
 import { nanoid } from 'nanoid';
-import { useVehiclesStore } from '../../../StoreProvider';
+import { useVehiclesStore, useUIStore } from '../../../StoreProvider';
 import './FiltersSidebar.css';
 
-export function toggleMobileSidebar() {
-  const sidebarClassName = 'c-filtersSidebar-filter-params-container';
-  const activeClassName = `${sidebarClassName} c-filtersSidebar-modal-active`;
-
-  document.querySelector(
-    '.c-filtersSidebar-filter-params-container'
-  ).className = activeClassName;
-}
-
-export function closeSidebar() {
-  const sidebarClassName = 'c-filtersSidebar-filter-params-container';
-  document.querySelector(
-    '.c-filtersSidebar-filter-params-container'
-  ).className = sidebarClassName;
-}
-
 const SideFilters = observer(({ t }) => {
+  const { sidebarFiltersMenu, closeSidebarMenu } = useUIStore();
   const {
     carMakes,
     carBodies,
@@ -34,10 +19,10 @@ const SideFilters = observer(({ t }) => {
 
   return (
     <aside
-      className="c-filtersSidebar-filter-params-container"
+      className={sidebarFiltersMenu}
       id="c-filtersSidebar-filter-params-container"
     >
-      <button type="button" onClick={closeSidebar}>
+      <button type="button" onClick={closeSidebarMenu}>
         X
       </button>
       <div className="c-filtersSidebar-filters-unit-container">
@@ -95,7 +80,7 @@ const SideFilters = observer(({ t }) => {
         </ul>
       </div>
       <div className="c-filtersSidebar-mobile-confirm-button-box">
-        <button type="submit" onClick={closeSidebar}>
+        <button type="submit" onClick={closeSidebarMenu}>
           Potvrdi
         </button>
       </div>

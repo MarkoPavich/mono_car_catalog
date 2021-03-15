@@ -18,18 +18,55 @@ class UIStore {
     // init screenWidth, used for some layout triggers
     this.screenWidth = window.innerWidth;
 
+    // toggleables
+    this.navbarMobileMenuClasses = {
+      active: 'l-navbar-user-menu-mobile mobile-menu-active',
+      inactive: 'l-navbar-user-menu-mobile',
+    };
+
+    this.sidebarmenuClasses = {
+      active:
+        'c-filtersSidebar-filter-params-container c-filtersSidebar-modal-active',
+      inactive: 'c-filtersSidebar-filter-params-container',
+    };
+
+    // Navbar toggleable
+    this.navbarMobileMenu = this.navbarMobileMenuClasses.inactive;
+    // sidebar filters menu
+    this.sidebarFiltersMenu = this.sidebarmenuClasses.inactive;
+
     // MOBX decorators
     makeObservable(this, {
       lang: observable,
       screenWidth: observable,
+      navbarMobileMenu: observable,
+      sidebarFiltersMenu: observable,
 
       switchLocale: action,
       setScreenWidth: action,
+      toggleNavbarMenu: action,
+      toggleSidebarMenu: action,
+      closeSidebarMenu: action,
 
       carsGridSmallScreen: computed,
       navbarSmallScreen: computed,
     });
   }
+
+  toggleSidebarMenu = () => {
+    this.sidebarFiltersMenu = this.sidebarmenuClasses.active;
+  };
+
+  closeSidebarMenu = () => {
+    this.sidebarFiltersMenu = this.sidebarmenuClasses.inactive;
+  };
+
+  toggleNavbarMenu = () => {
+    this.navbarMobileMenu =
+      this.navbarMobileMenu === this.navbarMobileMenuClasses.inactive
+        ? this.navbarMobileMenuClasses.active
+        : this.navbarMobileMenuClasses.inactive;
+  };
 
   // Handle language switching, fallback to hr just in case..
   switchLocale = (lang) => {

@@ -1,14 +1,16 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
-import { toggleMobileSidebar } from '../sidebars/FiltersSidebar';
+import { useUIStore } from '../../../StoreProvider';
 
 function HeaderToggleOrSpan({ t, smallScreen, resCount, activeFilters }) {
+  const { toggleSidebarMenu } = useUIStore();
+
   const Toggle = (
     <div
       role="button"
       tabIndex={0}
-      onKeyDown={toggleMobileSidebar}
-      onClick={toggleMobileSidebar}
+      onKeyDown={toggleSidebarMenu}
+      onClick={toggleSidebarMenu}
       className="c-carsGrid-filters-mobile-toggle"
     >
       <div className="c-carsGrid-hamburger-ico">
