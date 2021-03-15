@@ -9,7 +9,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: audi,
-    model: carModels[audi.id][0].name,
+    model: carModels[audi.id][0],
     variant: '2.0d',
     bodyType: sedan,
     fuelType: diesel,
@@ -24,7 +24,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: astonMartin,
-    model: carModels[astonMartin.id][0].name,
+    model: carModels[astonMartin.id][0],
     bodyType: compact,
     fuelType: petrol,
     variant: 'James Bond Edition',
@@ -39,7 +39,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: hyundai,
-    model: carModels[hyundai.id][0].name,
+    model: carModels[hyundai.id][0],
     fuelType: LPG,
     bodyType: convertible,
     variant: '1.6l',
@@ -53,7 +53,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: audi,
-    model: carModels[audi.id][0].name,
+    model: carModels[audi.id][0],
     bodyType: coupe,
     variant: '2.0d',
     fuelType: hybrid,
@@ -68,7 +68,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: astonMartin,
-    model: carModels[astonMartin.id][0].name,
+    model: carModels[astonMartin.id][0],
     fuelType: BEV,
     bodyType: convertible,
     variant: 'James Bond Edition',
@@ -83,7 +83,7 @@ const vehicles = [
   {
     id: nanoid(),
     make: hyundai,
-    model: carModels[hyundai.id][0].name,
+    model: carModels[hyundai.id][0],
     fuelType: petrol,
     bodyType: pickup,
     variant: '1.6l',

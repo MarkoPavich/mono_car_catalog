@@ -50,7 +50,7 @@ const SideFilters = observer(({ t }) => {
         >
           <option value="">--</option>
           {Object.keys(carMakes).map((key) => (
-            <option key={nanoid()} value={carMakes[key]}>
+            <option key={nanoid()} value={carMakes[key].name}>
               {carMakes[key].name}
             </option>
           ))}

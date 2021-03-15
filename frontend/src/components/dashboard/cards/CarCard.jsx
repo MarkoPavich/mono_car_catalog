@@ -15,7 +15,7 @@ function CarCard({ vehicle, t }) {
     price,
   } = vehicle;
 
-  const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${model} ${variant}`;
+  const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${model.name} ${variant}`;
 
   function formatHeader(span) {
     if (span.length < 29) return span;

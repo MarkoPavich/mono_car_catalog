@@ -64,7 +64,7 @@
         "userLogged": "Welcome back,"
     },
 
-        "vehicleForm": {
+    "vehicleForm": {
         "header": "Add Vehicle",
         "basicInfoHeader": "Basic info",
         "make": "Make",

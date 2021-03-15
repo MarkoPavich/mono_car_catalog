@@ -1,10 +1,12 @@
 import React from 'react';
+import { nanoid } from 'nanoid';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
-import { useFormsStore } from '../../StoreProvider';
+import { useFormsStore, useVehiclesStore } from '../../StoreProvider';
 
 const AddVehicleForm = observer(({ t }) => {
   const { vehicleForm, setVehicleForm } = useFormsStore();
+  const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
 
   return (
     <form className="f-addVehicle-form">
@@ -20,8 +22,14 @@ const AddVehicleForm = observer(({ t }) => {
               value={vehicleForm.make}
               name="make"
             >
-              <option value="BMW">BMW</option>
-              <option value="Opel">Opel</option>
+              <option value="">--</option>
+              {Object.keys(carMakes)
+                .sort((a, b) => (carMakes[a].name > carMakes[b].name ? 1 : -1))
+                .map((key) => (
+                  <option key={nanoid()} value={carMakes[key].id}>
+                    {carMakes[key].name}
+                  </option>
+                ))}
             </select>
           </div>
           <div className="f-addVehicle-form-input-unit">
@@ -79,8 +87,12 @@ const AddVehicleForm = observer(({ t }) => {
               value={vehicleForm.bodyType}
               name="bodyType"
             >
-              <option value="BMW">BMW</option>
-              <option value="Opel">Opel</option>
+              <option value="">--</option>
+              {Object.keys(carBodies).map((key) => (
+                <option key={nanoid()} value={carBodies[key]}>
+                  {t(`vehicleParams.${carBodies[key]}`)}
+                </option>
+              ))}
             </select>
           </div>
           <div className="f-addVehicle-form-input-unit">
@@ -90,8 +102,12 @@ const AddVehicleForm = observer(({ t }) => {
               value={vehicleForm.fuelType}
               name="fuelType"
             >
-              <option value="BMW">Benzin</option>
-              <option value="Opel">Elektro</option>
+              <option value="">--</option>
+              {Object.keys(fuelTypes).map((key) => (
+                <option key={nanoid()} value={fuelTypes[key]}>
+                  {t(`vehicleParams.${fuelTypes[key]}`)}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -133,7 +149,9 @@ const AddVehicleForm = observer(({ t }) => {
           <div className="f-addVehicle-spacer" />
           <div className="f-addVehicle-form-actions-container">
             <a href="/">{t('vehicleForm.backLink')}</a>
-            <button type="submit">{t('vehicleForm.submit')}</button>
+            <button onSubmit={() => 'hello world'} type="submit">
+              {t('vehicleForm.submit')}
+            </button>
           </div>
         </div>
       </section>
