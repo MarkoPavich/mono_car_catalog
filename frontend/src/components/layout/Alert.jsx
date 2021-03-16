@@ -24,6 +24,8 @@ const Alert = observer(({ t }) => {
   const commonConfirmationResponses = {
     userRegistered: t('commonConfirmations.userRegistered'),
     userLogged: t('commonConfirmations.userLogged'),
+    vehicleAdded: t('commonConfirmations.vehicleAdded'),
+    vehicleEdited: t('commonConfirmations.vehicleEdited'),
   };
 
   useEffect(() => {

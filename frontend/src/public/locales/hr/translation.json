@@ -61,7 +61,9 @@
 
     "commonConfirmations": {
         "userRegistered": "Dobrodošli,",
-        "userLogged": "Dobrodošli natrag,"
+        "userLogged": "Dobrodošli natrag,",
+        "vehicleAdded": "Vozilo je dodano",
+        "vehicleEdited": "Podatci su izmijenjeni"
     },
 
     "vehicleForm": {

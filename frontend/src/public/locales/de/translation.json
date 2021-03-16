@@ -61,7 +61,9 @@
 
     "commonConfirmations": {
         "userRegistered": "Herzlich willkommen,",
-        "userLogged": "Willkommen zurück,"
+        "userLogged": "Willkommen zurück,",
+        "vehicleAdded": "Neues Fahrzeug hinzugefügt",
+        "vehicleEdited": "Fahrzeug bearbeitet"
     },
 
     "vehicleForm": {

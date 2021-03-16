@@ -29,6 +29,8 @@ class MessageStore {
     this.commonConfirmations = {
       userRegistered: 'userRegistered',
       userLogged: 'userLogged',
+      vehicleAdded: 'vehicleAdded',
+      vehicleEdited: 'vehicleEdited',
     };
 
     // MOBX decorators

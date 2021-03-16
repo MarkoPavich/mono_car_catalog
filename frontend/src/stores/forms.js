@@ -10,7 +10,7 @@ import {
 } from './templates/forms';
 
 export default class FormsStore {
-  constructor(authStore, vehiclesStore) {
+  constructor(authStore, vehiclesStore, messages) {
     // Instance form templates
     this.vehicleForm = vehicleForm;
     this.loginForm = loginForm;
@@ -18,6 +18,7 @@ export default class FormsStore {
 
     this.authStore = authStore; // Used here for handling auth submissions
     this.vehiclesStore = vehiclesStore; // used to submit new vehicles
+    this.messages = messages; // Notifications on submissions
 
     // MOBX decorators
     makeObservable(this, {
@@ -106,6 +107,18 @@ export default class FormsStore {
   submitAddEditvehicle = (vehicleID) => {
     this.vehiclesStore.addVehicle(this.vehicleForm, vehicleID);
     this.vehicleForm = vehicleForm; // Clear form
+
+    if (vehicleID)
+      // Notify edit success
+      this.messages.commonConfirmation(
+        this.messages.commonConfirmations.vehicleEdited
+      );
+    // Notify add success
+    else
+      this.messages.commonConfirmation(
+        this.messages.commonConfirmations.vehicleAdded
+      );
+
     return true; // TODO - confirmation and validation
   };
 
