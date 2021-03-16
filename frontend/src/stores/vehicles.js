@@ -21,7 +21,8 @@ class VehiclesStore {
     // Pagination config
     this.resultsPerPage = 6;
     this.maxPageNumLinks = 4;
-    this.currentPage = 2;
+    // Editable observable
+    this.currentPage = 1;
 
     // MOBX
     makeObservable(this, {
@@ -34,6 +35,7 @@ class VehiclesStore {
       setMakeParam: action,
       setSortFilter: action,
       addVehicle: action,
+      selectPage: action,
 
       activeFilters: computed,
       vehiclesList: computed,
@@ -43,19 +45,27 @@ class VehiclesStore {
   // set* functions control inputs
   setBodyParams = (event) => {
     this.filters.bodyParams[event.target.name] = event.target.checked;
+    this.currentPage = 1; // Reset pagination selection
   };
 
   setFuelParams = (event) => {
     this.filters.fuelParams[event.target.name] = event.target.checked;
+    this.currentPage = 1;
   };
 
   setMakeParam = (event) => {
     this.filters.makeParam = event.target.value;
+    this.currentPage = 1;
   };
 
   setSortFilter = (event) => {
     this.filters.sortFilter =
       sortOptions[event.target.value] || sortOptions.manufDateAsc;
+    this.currentPage = 1;
+  };
+
+  selectPage = (page) => {
+    this.currentPage = page;
   };
 
   get activeFilters() {
@@ -100,15 +110,18 @@ class VehiclesStore {
         this.activeFilters.fuel.includes(vehicle.fuelType)
       );
 
-    const sorted = this.sortVehicles(filtered);
+    const sorted = this.sortVehicles(filtered); // Sort vehicles
 
-    return this.paginateVehicles(sorted); // Apply sorting to filtered vehicles, and return
+    return this.paginateVehicles(sorted); // Paginate, append pagination context, and return
   }
 
   paginateVehicles = (filteredVehicles) => {
     const results = filteredVehicles.length;
     const pages = Math.ceil(results / this.resultsPerPage);
-    const currentRange = Math.ceil(this.currentPage / this.maxPageNumLinks);
+    const firstIndexInRange =
+      (Math.ceil(this.currentPage / this.maxPageNumLinks) - 1) *
+        this.maxPageNumLinks +
+      1;
 
     const startIndex =
       this.currentPage * this.resultsPerPage - this.resultsPerPage;
@@ -118,7 +131,7 @@ class VehiclesStore {
       paginatedVehicles: filteredVehicles.slice(startIndex, endIndex),
       pages,
       results,
-      currentRange,
+      firstIndexInRange,
     };
   };
 

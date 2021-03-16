@@ -33,6 +33,7 @@ export default class FormsStore {
       clearRegisterForm: action,
       setEditMode: action,
       clearVehicleForm: action,
+      submitAddEditvehicle: action,
     });
   }
 
@@ -64,7 +65,7 @@ export default class FormsStore {
 
   clearVehicleForm = () => {
     this.vehicleForm = vehicleForm;
-  }
+  };
 
   submitLogin = () => {
     // Generate data container to reduce dot notaitions a bit..

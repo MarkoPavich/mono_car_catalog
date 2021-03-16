@@ -15,8 +15,8 @@ const CarsGrid = observer(({ t }) => {
     sortOptions,
     setSortFilter,
   } = useVehiclesStore();
-  const { carsGridSmallScreen } = useUIStore();
 
+  const { carsGridSmallScreen } = useUIStore();
   const { paginatedVehicles, results } = vehiclesList;
 
   return (
