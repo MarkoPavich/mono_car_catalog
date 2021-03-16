@@ -11,17 +11,23 @@ class VehiclesStore {
     this.vehicles = JSON.parse(localStorage.getItem('vehicles')) || vehicles;
     this.carMakes = carMakes;
     this.carModels =
-      JSON.parse(localStorage.getItem('vehicleModels')) || carModels;
+      JSON.parse(localStorage.getItem('vehicleModels')) || carModels; // Pull from localStorage or defaut to mockups file
     this.carBodies = carBodies;
     this.fuelTypes = fuelTypes;
     this.sortOptions = sortOptions;
 
     this.filters = filtersForms(); // Get filtering params forms
 
+    // Pagination config
+    this.resultsPerPage = 6;
+    this.maxPageNumLinks = 4;
+    this.currentPage = 2;
+
     // MOBX
     makeObservable(this, {
       filters: observable,
       vehicles: observable,
+      currentPage: observable,
 
       setBodyParams: action,
       setFuelParams: action,
@@ -30,7 +36,7 @@ class VehiclesStore {
       addVehicle: action,
 
       activeFilters: computed,
-      filteredVehicles: computed,
+      vehiclesList: computed,
     });
   }
 
@@ -73,7 +79,7 @@ class VehiclesStore {
     };
   }
 
-  get filteredVehicles() {
+  get vehiclesList() {
     // Get vehicles array
     let filtered =
       this.activeFilters.make !== '' // If active, filter by make
@@ -94,8 +100,27 @@ class VehiclesStore {
         this.activeFilters.fuel.includes(vehicle.fuelType)
       );
 
-    return this.sortVehicles(filtered); // Apply sorting to filtered vehicles, and return
+    const sorted = this.sortVehicles(filtered);
+
+    return this.paginateVehicles(sorted); // Apply sorting to filtered vehicles, and return
   }
+
+  paginateVehicles = (filteredVehicles) => {
+    const results = filteredVehicles.length;
+    const pages = Math.ceil(results / this.resultsPerPage);
+    const currentRange = Math.ceil(this.currentPage / this.maxPageNumLinks);
+
+    const startIndex =
+      this.currentPage * this.resultsPerPage - this.resultsPerPage;
+    const endIndex = startIndex + this.resultsPerPage;
+
+    return {
+      paginatedVehicles: filteredVehicles.slice(startIndex, endIndex),
+      pages,
+      results,
+      currentRange,
+    };
+  };
 
   sortVehicles = (filteredVehicles) => {
     // simple sort filteredVehicles array by object properties

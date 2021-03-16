@@ -5,23 +5,26 @@ import { withNamespaces } from 'react-i18next';
 import { useVehiclesStore, useUIStore } from '../../../StoreProvider';
 import CarCard from '../cards/CarCard';
 import HeaderToggleOrSpan from './HeaderToggleOrSpan';
+import GridPagination from './GridPagination';
 import './CarsGrid.css';
 
 const CarsGrid = observer(({ t }) => {
   const {
-    filteredVehicles,
+    vehiclesList,
     filters,
     sortOptions,
     setSortFilter,
   } = useVehiclesStore();
   const { carsGridSmallScreen } = useUIStore();
 
+  const { paginatedVehicles, results } = vehiclesList;
+
   return (
     <div className="c-carsGrid-top-container">
       <header>
         <HeaderToggleOrSpan
           smallScreen={carsGridSmallScreen}
-          resCount={filteredVehicles.length}
+          resCount={results}
           activeFilters={2}
         />
         <div className="c-carsGrid-header-sort-filter">
@@ -42,40 +45,11 @@ const CarsGrid = observer(({ t }) => {
         </div>
       </header>
       <div className="c-carsGrid-card-container">
-        {filteredVehicles.map((vehicle) => (
+        {paginatedVehicles.map((vehicle) => (
           <CarCard key={nanoid()} vehicle={vehicle} t={t} />
         ))}
       </div>
-
-      <footer className="c-carsGrid-pagination-footer">
-        <div className="c-carsGrid-pagination-previous-box">
-          <span>
-            <a href="#">{t('pagination.previous')}</a>
-          </span>
-        </div>
-        <div className="c-carsGrid-pagination-nums">
-          <span>
-            <a href="#">1</a>
-          </span>
-          <span>
-            <a href="#">2</a>
-          </span>
-          <span className="pagination-page-link-current">
-            <a href="#">3</a>
-          </span>
-          <span>
-            <a href="#">4</a>
-          </span>
-          <span>
-            <a href="#">...</a>
-          </span>
-        </div>
-        <div className="c-carsGrid-pagination-next-box">
-          <span>
-            <a href="#">{t('pagination.next')}</a>
-          </span>
-        </div>
-      </footer>
+      <GridPagination />
     </div>
   );
 });
