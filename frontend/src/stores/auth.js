@@ -137,6 +137,7 @@ class AuthStore {
             user: data.user,
             token: data.token,
           };
+          localStorage.setItem('token', data.token);
           this.messages.commonConfirmation(
             this.messages.commonConfirmations.userRegistered,
             data.user.username
