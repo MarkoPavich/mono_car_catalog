@@ -1,6 +1,6 @@
-import i18n from '../../i18n';
+import i18n from '../../i18n'; // Translations library
 
-export default function validateForm(data) {
+export function validateAuthForm(data) {
   let isValid = true;
   const tooltips = {};
 
@@ -34,6 +34,47 @@ export default function validateForm(data) {
     }
   });
   // Return if form valid and tooltips if any
+  return {
+    isValid,
+    tooltips,
+  };
+}
+
+export function validateVehicleForm(data) {
+  let isValid = true;
+  const tooltips = {};
+  const requiredFields = [
+    'make',
+    'model',
+    'manufactureDate',
+    'mileage',
+    'bodyType',
+    'fuelType',
+    'img',
+    'price',
+  ];
+
+  Object.keys(data).forEach((key) => {
+    tooltips[key] = null;
+
+    // Check for empty field
+    if (!data[key] && requiredFields.includes(key)) {
+      isValid = false;
+      tooltips[key] = i18n.t('formErrors.emptyField');
+    }
+
+    // Check for valid image URL (protocol not required)
+    if (
+      key === 'img' &&
+      !/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(
+        data[key]
+      )
+    ) {
+      isValid = false;
+      tooltips[key] = i18n.t('formErrors.invalidURL');
+    }
+  });
+
   return {
     isValid,
     tooltips,

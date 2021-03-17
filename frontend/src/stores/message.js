@@ -24,6 +24,7 @@ class MessageStore {
       userExists: 'userExists',
       emailExists: 'emailExists',
       invalidLogin: 'invalidLogin',
+      invalidVehicleForm: 'invalidVehicleForm',
     };
 
     this.commonConfirmations = {

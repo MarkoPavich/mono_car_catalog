@@ -16,7 +16,10 @@ const LoginForm = observer(({ t }) => {
 
   return (
     <form className="a-login-form">
-      <div data-tooltip={username.tooltip} className={username.class}>
+      <div
+        data-tooltip={username.tooltip}
+        className={`a-login-form-input-container ${username.class}`}
+      >
         <input
           name="username"
           onChange={setLoginForm}
@@ -29,7 +32,10 @@ const LoginForm = observer(({ t }) => {
           type="text"
         />
       </div>
-      <div data-tooltip={password.tooltip} className={password.class}>
+      <div
+        data-tooltip={password.tooltip}
+        className={`a-login-form-input-container ${password.class}`}
+      >
         <input
           name="password"
           onChange={setLoginForm}

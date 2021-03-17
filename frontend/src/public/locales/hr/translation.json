@@ -49,6 +49,7 @@
     "formErrors": {
         "emptyField": "Ovo polje je obavezno",
         "paswMismatch": "Lozinke se moraju poklapati",
+        "invalidURL": "Molimo unesite ispravnu poveznicu",
         "invalidEmail": "Molimo unesite ispravan email",
         "termsOfUse": "Molimo prihvatiti uvjete korištenja"
     },
@@ -56,7 +57,8 @@
     "commonErrors": {
         "userExists": "Korisničko ime već postoji",
         "emailExists": "Email već postoji",
-        "invalidLogin": "Neipsravno korisničko ime ili lozinka"
+        "invalidLogin": "Neipsravno korisničko ime ili lozinka",
+        "invalidVehicleForm": "Molimo ispraviti polja označena crveno"
     },
 
     "commonConfirmations": {
@@ -113,8 +115,8 @@
     "sortParams": {
         "manufDateAsc": "Godištu - starije prema mlađe",
         "manufDateDesc": "Godištu - mlađe prema starije",
-        "modelNameAsc": "Modelu - od A do Z",
-        "modelNameDesc": "Modelu - od Z do A",
+        "modelNameAsc": "Marci - od A do Z",
+        "modelNameDesc": "Marci - od Z do A",
         "priceAsc": "Cijeni - jeftinije prema skuplje",
         "priceDesc": "Cijeni - skuplje prema jeftinije"
     }

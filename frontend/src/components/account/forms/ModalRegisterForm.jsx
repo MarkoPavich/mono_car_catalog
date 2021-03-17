@@ -39,7 +39,10 @@ const ModalRegisterForm = observer(({ t }) => {
           <span>{t('login.registerFormHeader')}:</span>
         </header>
         <form className="a-login-register-form">
-          <div data-tooltip={username.tooltip} className={username.class}>
+          <div
+            data-tooltip={username.tooltip}
+            className={`a-login-form-input-container ${username.class}`}
+          >
             <input
               onChange={setRegisterForm}
               value={username.value}
@@ -53,7 +56,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="text"
             />
           </div>
-          <div data-tooltip={email.tooltip} className={email.class}>
+          <div
+            data-tooltip={email.tooltip}
+            className={`a-login-form-input-container ${email.class}`}
+          >
             <input
               onChange={setRegisterForm}
               value={email.value}
@@ -65,7 +71,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="email"
             />
           </div>
-          <div data-tooltip={password.tooltip} className={password.class}>
+          <div
+            data-tooltip={password.tooltip}
+            className={`a-login-form-input-container ${password.class}`}
+          >
             <input
               onChange={setRegisterForm}
               value={password.value}
@@ -78,7 +87,10 @@ const ModalRegisterForm = observer(({ t }) => {
               type="password"
             />
           </div>
-          <div data-tooltip={password2.tooltip} className={password2.class}>
+          <div
+            data-tooltip={password2.tooltip}
+            className={`a-login-form-input-container ${password2.class}`}
+          >
             <input
               onChange={setRegisterForm}
               value={password2.value}
@@ -95,7 +107,7 @@ const ModalRegisterForm = observer(({ t }) => {
         <div className="a-login-register-form-ToU-notif-box">
           <div
             data-tooltip={touCheck.tooltip}
-            className={`tou-box-${touCheck.class}`}
+            className={`tou-box-a-login-form-input-container ${touCheck.class}`}
           >
             <input
               checked={touCheck.value}

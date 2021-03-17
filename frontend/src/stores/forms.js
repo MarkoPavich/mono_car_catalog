@@ -1,6 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { makeObservable, observable, action } from 'mobx';
-import validateForm from './services/validateForm';
+import {
+  validateAuthForm,
+  validateVehicleForm,
+} from './services/formsValidators';
 
 import {
   vehicleForm,
@@ -40,10 +43,7 @@ export default class FormsStore {
 
   // set* functions control inputs
   setVehicleForm = (event) => {
-    this.vehicleForm = {
-      ...this.vehicleForm,
-      [event.target.name]: event.target.value,
-    };
+    this.vehicleForm[event.target.name].value = event.target.value;
   };
 
   setLoginForm = (event) => {
@@ -57,11 +57,7 @@ export default class FormsStore {
   };
 
   clearRegisterForm = () => {
-    Object.keys(this.registerForm).forEach((key) => {
-      this.registerForm[key].value = '';
-      this.registerForm[key].class = inputStatus.normal;
-      this.registerForm[key].tooltip = '';
-    });
+    this.registerForm = registerForm;
   };
 
   clearVehicleForm = () => {
@@ -76,7 +72,7 @@ export default class FormsStore {
     };
 
     // Submit to form validator
-    const status = validateForm(data); // Will return an object with isValid and error tooltips
+    const status = validateAuthForm(data); // Will return an object with isValid and error tooltips
     // Pass form and tooltips to input marking function
     this.markFields(this.loginForm, status.tooltips);
 
@@ -97,7 +93,7 @@ export default class FormsStore {
       data[key] = this.registerForm[key].value;
     });
 
-    const status = validateForm(data);
+    const status = validateAuthForm(data);
     this.markFields(this.registerForm, status.tooltips);
     if (status.isValid) {
       this.authStore.requestNewAccount(data);
@@ -105,21 +101,30 @@ export default class FormsStore {
   };
 
   submitAddEditvehicle = (vehicleID) => {
-    this.vehiclesStore.addVehicle(this.vehicleForm, vehicleID);
-    this.vehicleForm = vehicleForm; // Clear form
+    const data = {};
 
-    if (vehicleID)
-      // Notify edit success
-      this.messages.commonConfirmation(
-        this.messages.commonConfirmations.vehicleEdited
-      );
-    // Notify add success
-    else
-      this.messages.commonConfirmation(
-        this.messages.commonConfirmations.vehicleAdded
-      );
+    Object.keys(this.vehicleForm).forEach((key) => {
+      data[key] = this.vehicleForm[key].value;
+    });
 
-    return true; // TODO - confirmation and validation
+    const status = validateVehicleForm(data);
+    this.markFields(this.vehicleForm, status.tooltips);
+
+    if (status.isValid) {
+      this.vehiclesStore.addVehicle(data, vehicleID);
+      this.vehicleForm = vehicleForm; // Clear form
+      // Notify add or edit success
+      this.messages.commonConfirmation(
+        vehicleID
+          ? this.messages.commonConfirmations.vehicleEdited
+          : this.messages.commonConfirmations.vehicleAdded
+      );
+      return status.isValid;
+    }
+
+    this.messages.commonError(this.messages.commonErrors.invalidVehicleForm);
+
+    return status.isValid; // TODO - confirmation and validation
   };
 
   markFields = (form, tooltips) => {
@@ -145,11 +150,15 @@ export default class FormsStore {
     Object.keys(this.vehiclesStore.carMakes).forEach((key) => {
       if (this.vehiclesStore.carMakes[key].id === vehicle.make.id) make = key;
     });
-    // Set form
-    this.vehicleForm = {
+    // Adapt data
+    const vehicleData = {
       ...vehicle,
       model: vehicle.model.name,
       make,
     };
+    // Apply data to form
+    Object.keys(this.vehicleForm).forEach((key) => {
+      this.vehicleForm[key].value = vehicleData[key];
+    });
   };
 }

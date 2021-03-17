@@ -19,6 +19,7 @@ const Alert = observer(({ t }) => {
     userExists: t('commonErrors.userExists'),
     emailExists: t('commonErrors.emailExists'),
     invalidLogin: t('commonErrors.invalidLogin'),
+    invalidVehicleForm: t('commonErrors.invalidVehicleForm'),
   };
 
   const commonConfirmationResponses = {

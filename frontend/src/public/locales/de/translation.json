@@ -49,6 +49,7 @@
     "formErrors": {
         "emptyField": "Dieses Feld ist erforderlich",
         "paswMismatch": "Passwörter müssen übereinstimmen",
+        "invalidURL": "Bitte geben Sie eine gültige URL ein",
         "invalidEmail": "Bitte geben Sie eine gültige Email-Adresse ein",
         "termsOfUse": "Das Akzeptieren von Nutzungsbedingungen ist erforderlich"
     },
@@ -56,7 +57,8 @@
     "commonErrors": {
         "userExists": "Benutzername existiert bereits",
         "emailExists": "Benutzer mit dieser E-Mail existiert bereits",
-        "invalidLogin": "Benutzername oder Passwort falsch"
+        "invalidLogin": "Benutzername oder Passwort falsch",
+        "invalidVehicleForm": "Bitte korrigieren Sie rot markierte Felder"
     },
 
     "commonConfirmations": {
@@ -112,8 +114,8 @@
     "sortParams": {
         "manufDateAsc": "Herstellungsdatum - aufsteigend",
         "manufDateDesc": "Herstellungsdatum - absteigend",
-        "modelNameAsc": "Modellname - aufsteigend",
-        "modelNameDesc": "Modellname - absteigend",
+        "modelNameAsc": "Machen - aufsteigend",
+        "modelNameDesc": "Machen - absteigend",
         "priceAsc": "Preis - aufsteigend",
         "priceDesc": "Preis - absteigend"
     }

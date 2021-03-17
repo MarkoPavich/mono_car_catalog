@@ -49,6 +49,7 @@
     "formErrors": {
         "emptyField": "This field is required",
         "paswMismatch": "Passwords must match",
+        "invalidURL": "Please enter a valid URL",
         "invalidEmail": "Please provide a valid email",
         "termsOfUse": "Accepting terms of use is required"
     },
@@ -56,7 +57,8 @@
     "commonErrors": {
         "userExists": "User with that username already exists",
         "emailExists": "User with that email already exists",
-        "invalidLogin": "Username or password incorrect"
+        "invalidLogin": "Username or password incorrect",
+        "invalidVehicleForm": "Please correct fields marked in red"
     },
 
     "commonConfirmations": {
@@ -113,8 +115,8 @@
     "sortParams": {
         "manufDateAsc": "Date of manufacture - ascending",
         "manufDateDesc": "Date of manufacture - descending",
-        "modelNameAsc": "Model name - ascending",
-        "modelNameDesc": "Model name - descending",
+        "modelNameAsc": "Make name - ascending",
+        "modelNameDesc": "Make name - descending",
         "priceAsc": "Price - ascending",
         "priceDesc": "Price - descending"
     }

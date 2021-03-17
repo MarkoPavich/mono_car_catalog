@@ -12,6 +12,19 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
     setEditMode,
     submitAddEditvehicle,
   } = useFormsStore();
+  const {
+    make,
+    model,
+    variant,
+    manufactureDate,
+    mileage,
+    bodyType,
+    fuelType,
+    img,
+    description,
+    price,
+  } = vehicleForm;
+
   const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
 
   function handleSubmit(event) {
@@ -32,13 +45,12 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
           <span>{t('vehicleForm.basicInfoHeader')}</span>
         </header>
         <div className="f-addVehicle-form-input-grid-container">
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={make.tooltip}
+            className={`f-addVehicle-form-input-unit ${make.class}`}
+          >
             <label htmlFor="make">{t('vehicleForm.make')}</label>
-            <select
-              onChange={setVehicleForm}
-              value={vehicleForm.make}
-              name="make"
-            >
+            <select onChange={setVehicleForm} value={make.value} name="make">
               <option value="">--</option>
               {Object.keys(carMakes)
                 .slice()
@@ -50,42 +62,54 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
                 ))}
             </select>
           </div>
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={model.tooltip}
+            className={`f-addVehicle-form-input-unit ${model.class}`}
+          >
             <label htmlFor="model">{t('vehicleForm.model')}</label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.model}
+              value={model.value}
               placeholder={t('vehicleFormPlaceholders.model')}
               name="model"
               type="text"
             />
           </div>
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={variant.tooltip}
+            className={`f-addVehicle-form-input-unit ${variant.class}`}
+          >
             <label htmlFor="variant">{t('vehicleForm.variant')}</label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.variant}
+              value={variant.value}
               placeholder={t('vehicleFormPlaceholders.variant')}
               name="variant"
               type="text"
             />
           </div>
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={manufactureDate.tooltip}
+            className={`f-addVehicle-form-input-unit ${manufactureDate.class}`}
+          >
             <label htmlFor="manufactureDate">
               {t('vehicleForm.manufactured')}
             </label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.manufactureDate}
+              value={manufactureDate.value}
               name="manufactureDate"
               type="month"
             />
           </div>
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={mileage.tooltip}
+            className={`f-addVehicle-form-input-unit ${mileage.class}`}
+          >
             <label htmlFor="mileage">{t('vehicleForm.mileage')}</label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.mileage}
+              value={mileage.value}
               placeholder={t('vehicleFormPlaceholders.mileage')}
               name="mileage"
               type="number"
@@ -98,11 +122,14 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
           <span>{t('vehicleForm.extraInfoSubheader')}</span>
         </header>
         <div className="f-addVehicle-form-input-grid-container">
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={bodyType.tooltip}
+            className={`f-addVehicle-form-input-unit ${bodyType.class}`}
+          >
             <label htmlFor="bodyType">{t('vehicleForm.bodyType')}</label>
             <select
               onChange={setVehicleForm}
-              value={vehicleForm.bodyType}
+              value={bodyType.value}
               name="bodyType"
             >
               <option value="">--</option>
@@ -113,11 +140,14 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
               ))}
             </select>
           </div>
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={fuelType.tooltip}
+            className={`f-addVehicle-form-input-unit ${fuelType.class}`}
+          >
             <label htmlFor="fuelType">{t('vehicleForm.fuelType')}</label>
             <select
               onChange={setVehicleForm}
-              value={vehicleForm.fuelType}
+              value={fuelType.value}
               name="fuelType"
             >
               <option value="">--</option>
@@ -130,21 +160,27 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
           </div>
         </div>
         <div className="f-addVehicle-form-longInput-container">
-          <div className="f-addVehicle-form-longInput-unit">
+          <div
+            data-tooltip={img.tooltip}
+            className={`f-addVehicle-form-longInput-unit ${img.class}`}
+          >
             <label htmlFor="img">{t('vehicleForm.img')}</label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.img}
+              value={img.value}
               name="img"
               placeholder="http://www..."
               type="text"
             />
           </div>
-          <div className="f-addVehicle-form-longInput-textarea-unit">
+          <div
+            data-tooltip={description.tooltip}
+            className={`f-addVehicle-form-longInput-textarea-unit ${description.class}`}
+          >
             <label htmlFor="description">{t('vehicleForm.description')}</label>
             <textarea
               onChange={setVehicleForm}
-              value={vehicleForm.description}
+              value={description.value}
               name="description"
               id="vehicleDesc"
               cols="30"
@@ -153,13 +189,16 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
           </div>
         </div>
         <div className="f-addVehicle-form-input-grid-container">
-          <div className="f-addVehicle-form-input-unit">
+          <div
+            data-tooltip={price.tooltip}
+            className={`f-addVehicle-form-input-unit ${price.class}`}
+          >
             <label htmlFor="price">
               <strong>{t('vehicleForm.price')}:</strong>
             </label>
             <input
               onChange={setVehicleForm}
-              value={vehicleForm.price}
+              value={price.value}
               name="price"
               type="number"
             />

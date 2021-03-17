@@ -2,21 +2,61 @@
 
 // CSS classNames for input containers
 export const inputStatus = {
-  normal: 'a-login-form-input-container',
-  error: 'a-login-form-input-container input-error',
+  normal: '',
+  error: 'input-error',
 };
 
 export const vehicleForm = {
-  make: '',
-  model: '',
-  variant: '',
-  manufactureDate: '',
-  mileage: '',
-  bodyType: '',
-  fuelType: '',
-  img: '',
-  description: '',
-  price: '',
+  make: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  model: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  variant: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  manufactureDate: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  mileage: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  bodyType: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  fuelType: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  img: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  description: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
+  price: {
+    value: '',
+    class: inputStatus.normal,
+    tooltip: '',
+  },
 };
 
 export const loginForm = {
