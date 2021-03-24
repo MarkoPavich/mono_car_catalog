@@ -17,5 +17,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('frontend.urls')),
-    path('', include('users.urls'))
+    path('', include('users.urls')),
+    path('api/data', include('vehicles.urls')),
 ]
