@@ -34,27 +34,30 @@ const SideFilters = observer(({ t }) => {
           id="brand_filter"
         >
           <option value="">--</option>
-          {Object.keys(carMakes).map((key) => (
-            <option key={nanoid()} value={carMakes[key].name}>
-              {carMakes[key].name}
-            </option>
-          ))}
+          {carMakes
+            .slice()
+            .sort((a, b) => (a.name > b.name ? -1 : 1))
+            .map((carMake) => (
+              <option key={nanoid()} value={carMake.id}>
+                {carMake.name}
+              </option>
+            ))}
         </select>
       </div>
       <div className="c-filtersSidebar-filters-unit-container">
         <span>{t('dashboardFilters.fuel')}</span>
         <ul>
-          {Object.keys(fuelTypes).map((fuelKey) => (
+          {fuelTypes.map((fuelType) => (
             <li key={nanoid()}>
               <input
-                id={fuelTypes[fuelKey]}
-                name={fuelTypes[fuelKey]}
+                id={fuelType.id}
+                name={fuelType.fuel_type}
                 type="checkbox"
-                checked={filters.fuelParams[fuelKey]}
+                checked={filters.fuelParams[fuelType.id]}
                 onChange={setFuelParams}
               />
-              <label htmlFor={fuelTypes[fuelKey]}>
-                {t(`vehicleParams.${fuelTypes[fuelKey]}`)}
+              <label htmlFor={fuelType.id}>
+                {t(`vehicleParams.${fuelType.fuel_type}`)}
               </label>
             </li>
           ))}
@@ -63,17 +66,17 @@ const SideFilters = observer(({ t }) => {
       <div className="c-filtersSidebar-filters-unit-container">
         <span>{t('dashboardFilters.body')}</span>
         <ul>
-          {Object.keys(carBodies).map((bodyKey) => (
+          {carBodies.map((carBody) => (
             <li key={nanoid()}>
               <input
-                id={carBodies[bodyKey]}
-                name={carBodies[bodyKey]}
-                checked={filters.bodyParams[bodyKey]}
+                id={carBody.id}
+                name={carBody.body_type}
+                checked={filters.bodyParams[carBody.id]}
                 type="checkbox"
                 onChange={setBodyParams}
               />
-              <label htmlFor={carBodies[bodyKey]}>
-                {t(`vehicleParams.${carBodies[bodyKey]}`)}
+              <label htmlFor={carBody.id}>
+                {t(`vehicleParams.${carBody.body_type}`)}
               </label>
             </li>
           ))}

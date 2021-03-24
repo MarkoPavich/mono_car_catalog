@@ -1,6 +1,7 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 import { nanoid } from 'nanoid';
 import vehicles from './mockup/vehicles';
+import vehiclesServices from './services/vehiclesServices';
 import { carMakes, carModels, carBodies, fuelTypes } from './mockup/carsData';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
@@ -9,14 +10,15 @@ class VehiclesStore {
   constructor() {
     // Imported datasets
     this.vehicles = JSON.parse(localStorage.getItem('vehicles')) || vehicles;
-    this.carMakes = carMakes;
+    this.carMakes = [];
     this.carModels =
       JSON.parse(localStorage.getItem('vehicleModels')) || carModels; // Pull from localStorage or defaut to mockups file
-    this.carBodies = carBodies;
-    this.fuelTypes = fuelTypes;
+    this.carBodies = [];
+    this.fuelTypes = [];
     this.sortOptions = sortOptions;
 
     this.filters = filtersForms(); // Get filtering params forms
+    this.getVehicleData();
 
     // Pagination config
     this.resultsPerPage = 6;
@@ -29,6 +31,9 @@ class VehiclesStore {
       filters: observable,
       vehicles: observable,
       currentPage: observable,
+      carBodies: observable,
+      fuelTypes: observable,
+      carMakes: observable,
 
       setBodyParams: action,
       setFuelParams: action,
@@ -36,6 +41,7 @@ class VehiclesStore {
       setSortFilter: action,
       addVehicle: action,
       selectPage: action,
+      getVehicleData: action,
 
       activeFilters: computed,
       vehiclesList: computed,
@@ -67,6 +73,16 @@ class VehiclesStore {
   selectPage = (page) => {
     this.currentPage = page;
   };
+
+  async getVehicleData() {
+    const carMakesList = await vehiclesServices.getCarMakes();
+    const bodyTypesList = await vehiclesServices.getBodyTypes();
+    const fuelTypesList = await vehiclesServices.getFuelTypes();
+
+    this.carMakes = carMakesList;
+    this.carBodies = bodyTypesList;
+    this.fuelTypes = fuelTypesList;
+  }
 
   get activeFilters() {
     const make = this.filters.makeParam; // Set filter by make state
