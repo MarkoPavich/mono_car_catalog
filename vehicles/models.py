@@ -1,10 +1,12 @@
 from django.db import models
+import uuid
 from users.models import User
 
 # Create your models here.
 
 
 class Make(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
     abrv = models.CharField(max_length=4, unique=True)
 
@@ -13,6 +15,7 @@ class Make(models.Model):
 
 
 class Model(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     make = models.ForeignKey(Make, on_delete=models.CASCADE, related_name='models')
     name = models.CharField(max_length=100)
 
@@ -21,6 +24,7 @@ class Model(models.Model):
 
 
 class BodyType(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     body_type = models.CharField(max_length=100)
 
     def __str__(self):
@@ -28,6 +32,7 @@ class BodyType(models.Model):
 
 
 class FuelType(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     fuel_type = models.CharField(max_length=100)
 
     def __str__(self):
@@ -35,6 +40,7 @@ class FuelType(models.Model):
 
 
 class Vehicle(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='vehicles')
     make = models.ForeignKey(Make, on_delete=models.CASCADE, related_name='vehicles')
     model = models.ForeignKey(Model, on_delete=models.CASCADE, related_name='vehicles')

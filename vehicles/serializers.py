@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Vehicle, FuelType, BodyType, Make
+from .models import Vehicle, FuelType, BodyType, Make, Model
 
 
 class VehicleSerializer(ModelSerializer):
@@ -23,4 +23,10 @@ class BodyTypeSerializer(ModelSerializer):
 class MakeSerializer(ModelSerializer):
     class Meta:
         model = Make
+        fields = '__all__'
+
+
+class ModelsSerializer(ModelSerializer):
+    class Meta:
+        model = Model
         fields = '__all__'
