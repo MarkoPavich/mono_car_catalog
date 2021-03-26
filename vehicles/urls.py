@@ -11,6 +11,6 @@ router.register('carmodels', ModelsViewSet, basename='manageCarModels')
 
 urlpatterns = [
     path('/', include(router.urls)),
-    path('/vehicles/', VehiclesAPI.as_view()),
-    path('/vehicles/<slug:id_slug>/', VehiclesAPI.as_view()),
+    path('vehicles/', VehiclesAPI.as_view()),
+    path('vehicles/<slug:id_slug>/', VehiclesAPI.as_view()),
 ]

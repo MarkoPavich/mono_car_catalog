@@ -1,13 +1,19 @@
-import { makeObservable, observable, computed, action } from 'mobx';
+import {
+  makeObservable,
+  observable,
+  computed,
+  action,
+  runInAction,
+} from 'mobx';
 import { nanoid } from 'nanoid';
 import vehicles from './mockup/vehicles';
 import vehiclesServices from './services/vehiclesServices';
-import { carMakes, carModels, carBodies, fuelTypes } from './mockup/carsData';
+import { carModels } from './mockup/carsData';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
 class VehiclesStore {
-  constructor() {
+  constructor(messages) {
     // Imported datasets
     this.vehicles = JSON.parse(localStorage.getItem('vehicles')) || vehicles;
     this.carMakes = [];
@@ -18,7 +24,10 @@ class VehiclesStore {
     this.sortOptions = sortOptions;
 
     this.filters = filtersForms(); // Get filtering params forms
-    this.getVehicleData();
+    this.getVehiclesData(); // Fetch data
+
+    // MessageStore
+    this.messages = messages;
 
     // Pagination config
     this.resultsPerPage = 6;
@@ -41,7 +50,7 @@ class VehiclesStore {
       setSortFilter: action,
       addVehicle: action,
       selectPage: action,
-      getVehicleData: action,
+      getVehiclesData: action,
 
       activeFilters: computed,
       vehiclesList: computed,
@@ -74,14 +83,18 @@ class VehiclesStore {
     this.currentPage = page;
   };
 
-  async getVehicleData() {
-    const carMakesList = await vehiclesServices.getCarMakes();
-    const bodyTypesList = await vehiclesServices.getBodyTypes();
-    const fuelTypesList = await vehiclesServices.getFuelTypes();
+  async getVehiclesData() {
+    try {
+      const vehiclesData = await vehiclesServices.getVehiclesData();
 
-    this.carMakes = carMakesList;
-    this.carBodies = bodyTypesList;
-    this.fuelTypes = fuelTypesList;
+      runInAction(() => {
+        this.carMakes = vehiclesData.carMakes;
+        this.carBodies = vehiclesData.bodyTypes;
+        this.fuelTypes = vehiclesData.fuelTypes;
+      });
+    } catch (error) {
+      this.messages.createError('Network error! Please try again later'); // TODO - Make translations
+    }
   }
 
   get activeFilters() {
@@ -192,7 +205,7 @@ class VehiclesStore {
     // Check if carMake has any carModels, if no, create one
     if (!this.carModels[carMakeID]) {
       const modelID = nanoid();
-      this.carModels[carMakeID] = {};
+      this.carModels[carMakeID] = {}; // This here and below hurts my brain..
       this.carModels[carMakeID][modelID] = { name: validatedData.model };
       model = this.carModels[carMakeID][modelID];
     } else {

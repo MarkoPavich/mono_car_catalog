@@ -1,4 +1,4 @@
-import { apiBaseUrl, postOptions, getOptions } from './config';
+import { apiBaseUrl, getOptions } from './config';
 
 class VehiclesServices {
   static async getVehiclesList() {
@@ -7,31 +7,31 @@ class VehiclesServices {
     return response.json();
   }
 
-  static async getCarMakes() {
-    const request = new Request(`${apiBaseUrl}/data/carmakes/`);
+  static async getVehiclesData() {
+    const requests = {
+      carMakes: new Request(`${apiBaseUrl}/data/carmakes/`),
+      fuelTypes: new Request(`${apiBaseUrl}/data/fueltypes/`),
+      bodyTypes: new Request(`${apiBaseUrl}/data/bodytypes/`),
+    };
 
-    const response = await fetch(request, JSON.parse(getOptions));
-    const carMakes = await response.json();
+    const makesResponse = await fetch(
+      requests.carMakes,
+      JSON.parse(getOptions)
+    );
+    const fuelTypesResponse = await fetch(
+      requests.fuelTypes,
+      JSON.parse(getOptions)
+    );
+    const bodyTypesResponse = await fetch(
+      requests.bodyTypes,
+      JSON.parse(getOptions)
+    );
 
-    return carMakes;
-  }
+    const carMakes = await makesResponse.json();
+    const fuelTypes = await fuelTypesResponse.json();
+    const bodyTypes = await bodyTypesResponse.json();
 
-  static async getFuelTypes() {
-    const request = new Request(`${apiBaseUrl}/data/fueltypes/`);
-
-    const response = await fetch(request, JSON.parse(getOptions));
-    const fuelTypes = await response.json();
-
-    return fuelTypes;
-  }
-
-  static async getBodyTypes() {
-    const request = new Request(`${apiBaseUrl}/data/bodytypes/`);
-
-    const response = await fetch(request, JSON.parse(getOptions));
-    const bodyTypes = await response.json();
-
-    return bodyTypes;
+    return { carMakes, fuelTypes, bodyTypes };
   }
 }
 
