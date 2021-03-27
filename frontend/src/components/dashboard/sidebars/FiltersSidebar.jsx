@@ -36,7 +36,7 @@ const SideFilters = observer(({ t }) => {
           <option value="">--</option>
           {carMakes
             .slice()
-            .sort((a, b) => (a.name > b.name ? -1 : 1))
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
             .map((carMake) => (
               <option key={nanoid()} value={carMake.id}>
                 {carMake.name}

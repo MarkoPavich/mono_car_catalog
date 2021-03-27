@@ -123,7 +123,7 @@ class VehiclesStore {
     let filtered =
       this.activeFilters.make !== '' // If active, filter by make
         ? this.vehicles.filter(
-            (vehicle) => vehicle.make.name === this.activeFilters.make
+            (vehicle) => vehicle.make.id === this.activeFilters.make
           )
         : this.vehicles.slice();
 
@@ -205,7 +205,7 @@ class VehiclesStore {
     // Check if carMake has any carModels, if no, create one
     if (!this.carModels[carMakeID]) {
       const modelID = nanoid();
-      this.carModels[carMakeID] = {}; // This here and below hurts my brain..
+      this.carModels[carMakeID] = {};
       this.carModels[carMakeID][modelID] = { name: validatedData.model };
       model = this.carModels[carMakeID][modelID];
     } else {
