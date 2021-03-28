@@ -64,17 +64,47 @@ export const carModels = {
 };
 
 export const carBodies = {
-  compact: 'compact',
-  coupe: 'coupe',
-  sedan: 'sedan',
-  stationWagon: 'stationWagon',
-  suv: 'suv',
+  compact: {
+    id: '2f50b0ed-c947-4dee-ab80-cec27165b5d1',
+    name: 'compact',
+  },
+  coupe: {
+    id: '957dee08-13f0-4b95-bb0c-def23cf75905',
+    name: 'coupe',
+  },
+  sedan: {
+    id: '8a5649e9-6e2e-44c0-9edc-c59184ea47de',
+    name: 'sedan',
+  },
+  stationWagon: {
+    id: '09c2ef93-6b65-4a7f-91f8-efccd90fa0eb',
+    name: 'stationWagon',
+  },
+  suv: {
+    id: '8dc9317a-c02c-48f0-b739-cff315ab44c2',
+    name: 'suv',
+  },
 };
 
 export const fuelTypes = {
-  petrol: 'petrol',
-  diesel: 'diesel',
-  LPG: 'LPG',
-  BEV: 'BEV',
-  hybrid: 'hybrid',
+  petrol: {
+    id: '3f51ff6f-9262-40f5-bf0c-575697e107ca',
+    name: 'petrol',
+  },
+  diesel: {
+    id: 'b4ff0874-3365-4f65-8a30-4c7ba37b804a',
+    name: 'diesel',
+  },
+  LPG: {
+    id: '515e20b0-efb0-48fc-93a7-02688f23a831',
+    name: 'LPG',
+  },
+  BEV: {
+    id: '2612d6cf-5a2a-44bb-8b3e-857835c8c1f8',
+    name: 'BEV',
+  },
+  hybrid: {
+    id: '8ab25500-8c42-4b45-b032-126f5abe4a39',
+    name: 'hybrid',
+  },
 };

@@ -36,12 +36,7 @@ function App() {
               path="/add-new-vehicle"
               component={AddVehicle}
             />
-            <PrivateRoute
-              exact
-              path="/edit-vehicle"
-              mode="edit"
-              component={AddVehicle}
-            />
+            <PrivateRoute exact path="/edit-vehicle" component={AddVehicle} />
           </Switch>
         </Router>
         <Footer />

@@ -70,7 +70,7 @@
 
     "vehicleForm": {
         "header": "Add Vehicle",
-        "editHeader": "Fahrzeugdaten bearbeiten",
+        "editHeader": "Edit vehicle",
         "basicInfoHeader": "Basic info",
         "make": "Make",
         "model": "Model",

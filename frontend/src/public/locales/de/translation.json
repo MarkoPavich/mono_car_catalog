@@ -70,6 +70,7 @@
 
     "vehicleForm": {
         "header": "Fahrzeug hinzufügen",
+        "editHeader": "Fahrzeugdaten bearbeiten",
         "basicInfoHeader": "Basisinformation",
         "make": "Automarke",
         "model": "Model",

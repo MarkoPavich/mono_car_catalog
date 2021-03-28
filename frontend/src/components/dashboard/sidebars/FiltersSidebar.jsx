@@ -8,14 +8,14 @@ import './FiltersSidebar.css';
 const SideFilters = observer(({ t }) => {
   const { sidebarFiltersMenu, closeSidebarMenu } = useUIStore();
   const {
-    carMakes,
-    carBodies,
-    fuelTypes,
+    carsData,
     filters,
     setBodyParams,
     setFuelParams,
     setMakeParam,
   } = useVehiclesStore();
+
+  const { carMakes, carBodies, fuelTypes } = carsData;
 
   return (
     <aside
@@ -34,12 +34,11 @@ const SideFilters = observer(({ t }) => {
           id="brand_filter"
         >
           <option value="">--</option>
-          {carMakes
-            .slice()
-            .sort((a, b) => (a.name > b.name ? 1 : -1))
-            .map((carMake) => (
-              <option key={nanoid()} value={carMake.id}>
-                {carMake.name}
+          {Object.keys(carMakes)
+            .sort((a, b) => (carMakes[a].name > carMakes[b].name ? 1 : -1))
+            .map((key) => (
+              <option key={nanoid()} value={carMakes[key].id}>
+                {carMakes[key].name}
               </option>
             ))}
         </select>
@@ -47,17 +46,17 @@ const SideFilters = observer(({ t }) => {
       <div className="c-filtersSidebar-filters-unit-container">
         <span>{t('dashboardFilters.fuel')}</span>
         <ul>
-          {fuelTypes.map((fuelType) => (
+          {Object.keys(fuelTypes).map((key) => (
             <li key={nanoid()}>
               <input
-                id={fuelType.id}
-                name={fuelType.fuel_type}
+                id={fuelTypes[key].id}
+                name={fuelTypes[key].name}
                 type="checkbox"
-                checked={filters.fuelParams[fuelType.id]}
+                checked={filters.fuelParams[fuelTypes[key].name]}
                 onChange={setFuelParams}
               />
-              <label htmlFor={fuelType.id}>
-                {t(`vehicleParams.${fuelType.fuel_type}`)}
+              <label htmlFor={fuelTypes[key].id}>
+                {t(`vehicleParams.${fuelTypes[key].name}`)}
               </label>
             </li>
           ))}
@@ -66,17 +65,17 @@ const SideFilters = observer(({ t }) => {
       <div className="c-filtersSidebar-filters-unit-container">
         <span>{t('dashboardFilters.body')}</span>
         <ul>
-          {carBodies.map((carBody) => (
+          {Object.keys(carBodies).map((key) => (
             <li key={nanoid()}>
               <input
-                id={carBody.id}
-                name={carBody.body_type}
-                checked={filters.bodyParams[carBody.id]}
+                id={carBodies[key].id}
+                name={carBodies[key].name}
+                checked={filters.bodyParams[carBodies[key].name]}
                 type="checkbox"
                 onChange={setBodyParams}
               />
-              <label htmlFor={carBody.id}>
-                {t(`vehicleParams.${carBody.body_type}`)}
+              <label htmlFor={carBodies[key].id}>
+                {t(`vehicleParams.${carBodies[key].name}`)}
               </label>
             </li>
           ))}

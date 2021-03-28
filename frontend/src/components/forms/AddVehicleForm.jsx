@@ -25,11 +25,12 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
     price,
   } = vehicleForm;
 
-  const { carMakes, carBodies, fuelTypes } = useVehiclesStore();
+  const { carsData } = useVehiclesStore();
+  const { carMakes, carBodies, fuelTypes } = carsData;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    const dataStored = submitAddEditvehicle(vehicleID);
+    const dataStored = await submitAddEditvehicle(vehicleID);
     if (dataStored) window.location.href = '#/';
   }
 
@@ -134,8 +135,8 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
             >
               <option value="">--</option>
               {Object.keys(carBodies).map((key) => (
-                <option key={nanoid()} value={carBodies[key]}>
-                  {t(`vehicleParams.${carBodies[key]}`)}
+                <option key={nanoid()} value={carBodies[key].id}>
+                  {t(`vehicleParams.${carBodies[key].name}`)}
                 </option>
               ))}
             </select>
@@ -152,8 +153,8 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
             >
               <option value="">--</option>
               {Object.keys(fuelTypes).map((key) => (
-                <option key={nanoid()} value={fuelTypes[key]}>
-                  {t(`vehicleParams.${fuelTypes[key]}`)}
+                <option key={nanoid()} value={fuelTypes[key].id}>
+                  {t(`vehicleParams.${fuelTypes[key].name}`)}
                 </option>
               ))}
             </select>

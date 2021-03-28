@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { carMakes, carModels, carBodies, fuelTypes } from './carsData';
 
 const { audi, astonMartin, hyundai } = carMakes;
-const { sedan, compact, convertible, coupe, pickup } = carBodies;
+const { sedan, compact, stationWagon, coupe, suv } = carBodies;
 const { petrol, diesel, LPG, hybrid, BEV } = fuelTypes;
 
 const vehicles = [
@@ -41,7 +41,7 @@ const vehicles = [
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: LPG,
-    bodyType: convertible,
+    bodyType: stationWagon,
     variant: '1.6l',
     manufactureDate: '2011-05',
     img:
@@ -70,7 +70,7 @@ const vehicles = [
     make: astonMartin,
     model: carModels[astonMartin.id][0],
     fuelType: BEV,
-    bodyType: convertible,
+    bodyType: suv,
     variant: 'James Bond Edition',
     manufactureDate: '1963-03',
     img:
@@ -85,7 +85,7 @@ const vehicles = [
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: petrol,
-    bodyType: pickup,
+    bodyType: stationWagon,
     variant: '1.6l',
     manufactureDate: '2011-05',
     img:
@@ -114,7 +114,7 @@ const vehicles = [
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: LPG,
-    bodyType: convertible,
+    bodyType: sedan,
     variant: '1.6l',
     manufactureDate: '2011-05',
     img:
@@ -143,7 +143,7 @@ const vehicles = [
     make: astonMartin,
     model: carModels[astonMartin.id][0],
     fuelType: BEV,
-    bodyType: convertible,
+    bodyType: suv,
     variant: 'James Bond Edition',
     manufactureDate: '1963-03',
     img:
@@ -158,7 +158,7 @@ const vehicles = [
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: petrol,
-    bodyType: pickup,
+    bodyType: compact,
     variant: '1.6l',
     manufactureDate: '2011-05',
     img:

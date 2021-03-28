@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { makeObservable, observable, action } from 'mobx';
+import { makeObservable, observable, action, runInAction } from 'mobx';
 import {
   validateAuthForm,
   validateVehicleForm,
@@ -100,7 +100,7 @@ export default class FormsStore {
     }
   };
 
-  submitAddEditvehicle = (vehicleID) => {
+  submitAddEditvehicle = async (vehicleID) => {
     const data = {};
 
     Object.keys(this.vehicleForm).forEach((key) => {
@@ -111,20 +111,28 @@ export default class FormsStore {
     this.markFields(this.vehicleForm, status.tooltips);
 
     if (status.isValid) {
-      this.vehiclesStore.addVehicle(data, vehicleID);
-      this.vehicleForm = vehicleForm; // Clear form
-      // Notify add or edit success
-      this.messages.commonConfirmation(
-        vehicleID
-          ? this.messages.commonConfirmations.vehicleEdited
-          : this.messages.commonConfirmations.vehicleAdded
-      );
-      return status.isValid;
+      const isStored = await this.vehiclesStore.addVehicle(data, vehicleID);
+      if (isStored) {
+        runInAction(() => {
+          this.vehicleForm = vehicleForm; // Clear form
+        });
+
+        // Notify add or edit success
+        this.messages.commonConfirmation(
+          vehicleID
+            ? this.messages.commonConfirmations.vehicleEdited
+            : this.messages.commonConfirmations.vehicleAdded
+        );
+        // Always true at this point
+        return isStored; // Everything OK, proceed to navigate away from form
+      }
+      // Always false at this point
+      return isStored; // Something wrong, but handled in vehiclesStore
     }
 
     this.messages.commonError(this.messages.commonErrors.invalidVehicleForm);
 
-    return status.isValid; // TODO - confirmation and validation
+    return status.isValid;
   };
 
   markFields = (form, tooltips) => {
@@ -147,13 +155,16 @@ export default class FormsStore {
     const vehicle = this.vehiclesStore.getVehicle(vehicleID);
     // get make object
     let make;
-    Object.keys(this.vehiclesStore.carMakes).forEach((key) => {
-      if (this.vehiclesStore.carMakes[key].id === vehicle.make.id) make = key;
+    Object.keys(this.vehiclesStore.carsData.carMakes).forEach((key) => {
+      if (this.vehiclesStore.carsData.carMakes[key].id === vehicle.make.id)
+        make = key;
     });
     // Adapt data
     const vehicleData = {
       ...vehicle,
       model: vehicle.model.name,
+      bodyType: vehicle.bodyType.id,
+      fuelType: vehicle.fuelType.id,
       make,
     };
     // Apply data to form

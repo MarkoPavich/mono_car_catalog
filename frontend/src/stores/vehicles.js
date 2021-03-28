@@ -6,24 +6,25 @@ import {
   runInAction,
 } from 'mobx';
 import { nanoid } from 'nanoid';
-import vehicles from './mockup/vehicles';
 import vehiclesServices from './services/vehiclesServices';
-import { carModels } from './mockup/carsData';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
 class VehiclesStore {
   constructor(messages) {
-    // Imported datasets
-    this.vehicles = JSON.parse(localStorage.getItem('vehicles')) || vehicles;
-    this.carMakes = [];
-    this.carModels =
-      JSON.parse(localStorage.getItem('vehicleModels')) || carModels; // Pull from localStorage or defaut to mockups file
-    this.carBodies = [];
-    this.fuelTypes = [];
+    // Cars dataSets
+    this.carsData = {
+      vehicles: [],
+      carMakes: {},
+      carModels: {},
+      carBodies: {},
+      fuelTypes: {},
+    };
+
     this.sortOptions = sortOptions;
 
-    this.filters = filtersForms(); // Get filtering params forms
+    this.filters = filtersForms();
+
     this.getVehiclesData(); // Fetch data
 
     // MessageStore
@@ -37,12 +38,9 @@ class VehiclesStore {
 
     // MOBX
     makeObservable(this, {
+      carsData: observable,
       filters: observable,
-      vehicles: observable,
       currentPage: observable,
-      carBodies: observable,
-      fuelTypes: observable,
-      carMakes: observable,
 
       setBodyParams: action,
       setFuelParams: action,
@@ -86,11 +84,17 @@ class VehiclesStore {
   async getVehiclesData() {
     try {
       const vehiclesData = await vehiclesServices.getVehiclesData();
+      const vehicles = await vehiclesServices.getVehiclesList();
 
       runInAction(() => {
-        this.carMakes = vehiclesData.carMakes;
-        this.carBodies = vehiclesData.bodyTypes;
-        this.fuelTypes = vehiclesData.fuelTypes;
+        this.carsData = {
+          ...this.carsData,
+          carMakes: vehiclesData.carMakes,
+          carBodies: vehiclesData.bodyTypes,
+          fuelTypes: vehiclesData.fuelTypes,
+          carModels: vehiclesData.models,
+          vehicles,
+        };
       });
     } catch (error) {
       this.messages.createError('Network error! Please try again later'); // TODO - Make translations
@@ -122,21 +126,21 @@ class VehiclesStore {
     // Get vehicles array
     let filtered =
       this.activeFilters.make !== '' // If active, filter by make
-        ? this.vehicles.filter(
+        ? this.carsData.vehicles.filter(
             (vehicle) => vehicle.make.id === this.activeFilters.make
           )
-        : this.vehicles.slice();
+        : this.carsData.vehicles.slice();
 
     // if any selected, further filter by matching vehicle bodyType in bodyType filters array
     if (this.activeFilters.body.length !== 0)
       filtered = filtered.filter((vehicle) =>
-        this.activeFilters.body.includes(vehicle.bodyType)
+        this.activeFilters.body.includes(vehicle.bodyType.name)
       );
 
     // if any selected, further filter by matching vehicle fuelType in fuelType filters array
     if (this.activeFilters.fuel.length !== 0)
       filtered = filtered.filter((vehicle) =>
-        this.activeFilters.fuel.includes(vehicle.fuelType)
+        this.activeFilters.fuel.includes(vehicle.fuelType.name)
       );
 
     const sorted = this.sortVehicles(filtered); // Sort vehicles
@@ -198,64 +202,57 @@ class VehiclesStore {
     }
   };
 
-  addVehicle = (validatedData, editID) => {
-    // Block below is somewhat a mess, this sort of relational handling is better suited for DB languages
-    const carMakeID = this.carMakes[validatedData.make].id;
-    let model;
-    // Check if carMake has any carModels, if no, create one
-    if (!this.carModels[carMakeID]) {
-      const modelID = nanoid();
-      this.carModels[carMakeID] = {};
-      this.carModels[carMakeID][modelID] = { name: validatedData.model };
-      model = this.carModels[carMakeID][modelID];
-    } else {
-      // If some carModels exist, check if this particular model exists
-      let found = false;
-      Object.keys(this.carModels[carMakeID]).forEach((key) => {
-        // If so, assign it to new vehicle
-        if (
-          this.carModels[carMakeID][key].name === validatedData.model &&
-          !found
-        ) {
-          found = true;
-          model = this.carModels[carMakeID][key];
-        }
-      });
-      // Else, create our new carModel
-      if (!found) {
-        const modelID = nanoid();
-        this.carModels[carMakeID][modelID] = { name: validatedData.model };
-        model = this.carModels[carMakeID][modelID];
-      }
-    }
-    // Create new object with required parameters
+  addVehicle = async (validatedData, editID) => {
+    const make = this.carsData.carMakes[validatedData.make]; // Adapt vehicle make
+
+    // Adapt bodyType and FuelType data for vehicle object model
+    const bodyKey = Object.keys(this.carsData.carBodies).find(
+      (key) => this.carsData.carBodies[key].id === validatedData.bodyType
+    );
+    const fuelKey = Object.keys(this.carsData.fuelTypes).find(
+      (key) => this.carsData.fuelTypes[key].id === validatedData.fuelType
+    );
+
+    // Create new vehicle object with formated params
     const newVehicle = {
       ...validatedData,
-      id: nanoid(),
-      make: this.carMakes[validatedData.make],
-      model,
+      make,
+      bodyType: this.carsData.carBodies[bodyKey],
+      fuelType: this.carsData.fuelTypes[fuelKey],
     };
 
     // Save new vehicle or overwrite existing
-    if (editID) {
-      const index = this.vehicles.findIndex((vehicle) => vehicle.id === editID);
-      this.vehicles[index] = {
-        ...newVehicle,
-        id: editID,
-      };
-    } else this.vehicles.push(newVehicle);
-    // Make persistent
-    localStorage.setItem('vehicles', JSON.stringify(this.vehicles));
-    localStorage.setItem('vehicleModels', JSON.stringify(this.carModels));
+    try {
+      const { updatedVehicles, updatedModels } = editID
+        ? await vehiclesServices.updateVehicle(
+            newVehicle,
+            editID,
+            this.carsData.vehicles,
+            this.carsData.carModels
+          )
+        : await vehiclesServices.addNewVehicle(
+            newVehicle,
+            this.carsData.vehicles,
+            this.carsData.carModels
+          );
+      runInAction(() => {
+        this.carsData.vehicles = updatedVehicles;
+        this.carsData.carModels = updatedModels;
+      });
+    } catch (error) {
+      this.messages.createError('Network error, please try again later'); // TODO - makeTranslations
+      return false; // Signal error while storing data
+    }
+    return true; // Signal data stored OK
   };
 
   getVehicle = (vehicleID) => {
-    // Find vehicle index by Ivehicle ID
-    const index = this.vehicles.findIndex(
+    // Find vehicles array index by vehicle ID
+    const index = this.carsData.vehicles.findIndex(
       (vehicle) => vehicle.id === vehicleID
     );
     // Return vehicle object
-    return this.vehicles[index];
+    return this.carsData.vehicles[index];
   };
 }
 
