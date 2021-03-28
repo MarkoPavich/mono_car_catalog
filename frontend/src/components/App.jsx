@@ -8,6 +8,7 @@ import Navbar from './layout/navbar/Navbar';
 import Footer from './layout/footer/Footer';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
+import MyVehicles from '../pages/MyVehicles';
 import StoreProvider from '../StoreProvider';
 import PrivateRoute from './common/PrivateRoute';
 
@@ -36,7 +37,10 @@ function App() {
               path="/add-new-vehicle"
               component={AddVehicle}
             />
+            <Route exact path="/my-vehicles-dev" component={MyVehicles} />
+            {/* Delete this after markup */}
             <PrivateRoute exact path="/edit-vehicle" component={AddVehicle} />
+            <PrivateRoute exact path="/my-vehicles" component={MyVehicles} />
           </Switch>
         </Router>
         <Footer />

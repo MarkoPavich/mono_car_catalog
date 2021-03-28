@@ -9,11 +9,13 @@ import vehiclesServices from './services/vehiclesServices';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
+import vehicles from '../stores/mockup/vehicles';
+
 class VehiclesStore {
   constructor(messages) {
     // Cars dataSets
     this.carsData = {
-      vehicles: [],
+      vehicles: vehicles,
       carMakes: {},
       carModels: {},
       carBodies: {},

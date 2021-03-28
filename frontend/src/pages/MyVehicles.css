@@ -1,0 +1,87 @@
+.p-myVehicles-top-container{
+  padding-top: 100px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 100px;
+
+  margin: auto;
+
+  min-height: 100vh;
+  max-width: 1500px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.p-myVehicles-inner-container{
+  max-width: 1000px;
+  width: 100%;
+}
+
+.p-myVehicles-inner-container > header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 60px;
+
+  border: solid 1px #3f704D;
+  border-radius: 5px;
+
+  background-color: #98FB98;
+
+  margin-bottom: 20px;
+}
+
+.p-myvehicles-content-container{
+  max-width: 100%;
+  width: 100%;
+}
+
+.p-myvehicles-content-container header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.p-myvehicles-content-container header span{
+  color: rgba(0,0,0,0.7);
+}
+
+.p-myVehicles-cards-container{
+  width: 100%;
+  border: solid 1px rgba(0,0,0,0.7);
+}
+
+.p-myVehicles-carCard-unit{
+  width: 100%;
+  height: 80px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-column-gap: 10px;
+  justify-items: center;
+}
+
+.p-myVehicles-carCard-img-container{
+  height: 100%;
+  width: 150px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-myVehicles-carCard-img-container img{
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.p-myVehicles-carCard-dataBox{
+  width: 100%;
+  padding-left: 30px;
+  border: solid 1px cyan;
+}
