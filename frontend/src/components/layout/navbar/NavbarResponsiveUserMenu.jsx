@@ -23,14 +23,4 @@ function NavbarResponsiveUserMenu({ isSmallScreen, t }) {
   return isSmallScreen ? <UserMenuSmallScreen /> : <UserMenu />;
 }
 
-function toggleMobileMenu() {
-  const activeClassName = 'l-navbar-user-menu-mobile mobile-menu-active';
-  const inactiveClassName = 'l-navbar-user-menu-mobile';
-  const toggleElem = document.querySelector('#l-navbar-user-menu-mobile');
-
-  if (toggleElem.className === activeClassName)
-    toggleElem.className = inactiveClassName;
-  else toggleElem.className = activeClassName;
-}
-
 export default withNamespaces()(NavbarResponsiveUserMenu);

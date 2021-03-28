@@ -3,16 +3,16 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import { transitions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import WindowResizeMonitor from './layout/WindowResizeMonitor';
+import WindowResizeMonitor from './common/WindowResizeMonitor';
 import Navbar from './layout/navbar/Navbar';
 import Footer from './layout/footer/Footer';
-import Login from './account/Login';
-import Dashboard from './dashboard/Dashboard';
+import Login from '../pages/Login';
+import Dashboard from '../pages/Dashboard';
 import StoreProvider from '../StoreProvider';
 import PrivateRoute from './common/PrivateRoute';
 
-import Alert from './layout/Alert';
-import AddVehicle from './forms/AddVehicle';
+import Alert from './common/Alert';
+import AddVehicle from '../pages/AddVehicle';
 
 const alertOptions = {
   timeout: 5000,

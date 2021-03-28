@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
 import './AddVehicle.css';
-import AddVehicleForm from './AddVehicleForm';
+import AddVehicleForm from './addVehicle/AddVehicleForm';
 
 const AddVehicle = observer(({ t }) => {
   const { search } = useLocation();

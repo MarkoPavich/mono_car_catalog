@@ -5,7 +5,6 @@ import {
   action,
   runInAction,
 } from 'mobx';
-import { nanoid } from 'nanoid';
 import vehiclesServices from './services/vehiclesServices';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';

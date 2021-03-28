@@ -133,10 +133,9 @@ class VehiclesServices {
     return { updatedVehicles, updatedModels };
   }
 
-  // Helper function - this will probably be handled on server-side in future versions
+  // Helper function - this will probably be handled server-side at some point..
   static handleModels(vehicleData, models) {
-    // Deep copy models
-    const updatedModels = JSON.parse(JSON.stringify(models));
+    const updatedModels = JSON.parse(JSON.stringify(models)); // Deep copy models
     const modelName = vehicleData.model;
 
     // Find if carMake exists in models
