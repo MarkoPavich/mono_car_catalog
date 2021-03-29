@@ -209,14 +209,22 @@ class VehiclesStore {
   };
 
   deleteVehicle = async (id) => {
-    // TODO - mark loading
-    const updatedVehicles = await vehiclesServices.deleteVehicle(
-      id,
-      this.carsData.vehicles
-    );
+    this.isLoading = true;
+    try {
+      const updatedVehicles = await vehiclesServices.deleteVehicle(
+        id,
+        this.carsData.vehicles
+      );
+
+      runInAction(() => {
+        this.carsData.vehicles = updatedVehicles;
+      });
+    } catch (error) {
+      this.messages.createError('Network error, please try again later'); // TODO - makeTranslations
+    }
 
     runInAction(() => {
-      this.carsData.vehicles = updatedVehicles;
+      this.isLoading = false;
     });
   };
 

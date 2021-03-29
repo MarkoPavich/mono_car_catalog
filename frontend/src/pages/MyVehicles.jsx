@@ -5,14 +5,16 @@ import { withNamespaces } from 'react-i18next';
 import { useVehiclesStore } from '../StoreProvider';
 import VehicleCard from './myVehicles/cards/VehicleCard';
 import NoResults from '../components/common/NoResults';
+import OverlaySpinner from '../components/common/OverlaySpinner';
 import './MyVehicles.css';
 
 const MyVehicles = observer(({ t }) => {
-  const { carsData } = useVehiclesStore();
+  const { carsData, isLoading } = useVehiclesStore();
   const { vehicles } = carsData;
 
   return (
     <main className="p-myVehicles-top-container">
+      {isLoading && <OverlaySpinner />}
       <div className="p-myVehicles-inner-container">
         <header>
           <span>{t('pageMyVehicles.pageHeader')}</span>
