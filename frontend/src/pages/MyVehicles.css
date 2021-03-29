@@ -140,3 +140,53 @@
   cursor: pointer;
   background-color: #D0312D;
 }
+
+@media(max-width: 880px){
+  .p-myVehicles-carCard-header{
+    margin-top: 5px;
+  }
+
+  .p-myVehicles-carCard-price-id-container{
+    margin-top: 4px;
+  }
+
+  .p-myVehicles-carCard-header{
+    font-size: 14px;
+  }
+
+  .p-myVehicles-carCard-price-id-container{
+    font-size: 10px;
+  }
+}
+
+@media(max-width: 600px){
+  .p-myVehicles-carCard-img-container{
+    max-width: 70px;
+  }
+
+  .p-myVehicles-carCard-optionsBox button{
+    width: 40px;
+
+    font-size: 8px;
+  }
+
+  .p-myVehicles-carCard-unit{
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-column-gap: 3px;
+
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .p-myVehicles-carCard-dataBox{
+    padding-left: 10px;
+  }
+
+  .p-myVehicles-carCard-header{
+    font-size: 11px;
+  }
+
+  .p-myVehicles-carCard-price-id-container{
+    font-size: 9px;
+  }
+}
