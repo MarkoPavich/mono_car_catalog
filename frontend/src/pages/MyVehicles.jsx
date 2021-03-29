@@ -6,7 +6,7 @@ import { useVehiclesStore } from '../StoreProvider';
 import VehicleCard from './myVehicles/cards/VehicleCard';
 import './MyVehicles.css';
 
-const MyVehicles = observer(() => {
+const MyVehicles = observer(({ t }) => {
   const { carsData } = useVehiclesStore();
   const { vehicles } = carsData;
 
@@ -14,12 +14,12 @@ const MyVehicles = observer(() => {
     <main className="p-myVehicles-top-container">
       <div className="p-myVehicles-inner-container">
         <header>
-          <span>Moja Vozila</span>
+          <span>{t('pageMyVehicles.pageHeader')}</span>
         </header>
         <section className="p-myvehicles-content-container">
           <header>
-            <a href="/#">Povratak</a>
-            <span>Broj rezultata: 0</span>
+            <a href="/#">{t('pageMyVehicles.headerBackHref')}</a>
+            <span>{t('pageMyVehicles.headerResCount')}: {vehicles.length}</span>
           </header>
           <div className="p-myVehicles-cards-container">
             {vehicles.map((vehicle) => (

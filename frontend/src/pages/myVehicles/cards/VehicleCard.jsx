@@ -19,17 +19,17 @@ const VehicleCard = observer(({ t, vehicle }) => {
         </div>
         <div className="p-myVehicles-carCard-price-id-container">
           <span>
-            <strong>price: </strong>
+            <strong>{t('pageMyVehicles.vehicleCardPrice')}: </strong>
             {price} €
           </span>
           <span>
-            <strong>vehicle ID: </strong>
+            <strong>{t('pageMyVehicles.vehiceCardID')}: </strong>
             {id}
           </span>
         </div>
       </div>
       <div className="p-myVehicles-carCard-optionsBox">
-        <button type="submit">Delete</button>
+        <button type="submit">{t('pageMyVehicles.vehicleCardDelBtn')}</button>
       </div>
     </div>
   );

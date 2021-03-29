@@ -119,5 +119,14 @@
         "modelNameDesc": "Make name - descending",
         "priceAsc": "Price - ascending",
         "priceDesc": "Price - descending"
+    },
+
+    "pageMyVehicles": {
+        "pageHeader": "My vehicles",
+        "headerBackHref": "Return",
+        "headerResCount": "Results",
+        "vehicleCardPrice": "price",
+        "vehiceCardID": "vehicle ID",
+        "vehicleCardDelBtn": "Delete"
     }
 }

@@ -119,5 +119,14 @@
         "modelNameDesc": "Machen - absteigend",
         "priceAsc": "Preis - aufsteigend",
         "priceDesc": "Preis - absteigend"
+    },
+
+    "pageMyVehicles": {
+        "pageHeader": "Meine Fahrzeuge ",
+        "headerBackHref": "Rückkehr ",
+        "headerResCount": "Ergebnisse zähle",
+        "vehicleCardPrice": "Preis",
+        "vehiceCardID": "Fahrzeugkennnummer",
+        "vehicleCardDelBtn": "Löschen "
     }
 }
