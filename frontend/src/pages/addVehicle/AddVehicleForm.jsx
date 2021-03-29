@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { observer } from 'mobx-react-lite';
 import { withNamespaces } from 'react-i18next';
-import { useFormsStore, useVehiclesStore } from '../../StoreProvider';
+import { useAddVehicleFormStore, useVehiclesStore } from '../../StoreProvider';
 
 const AddVehicleForm = observer(({ t, vehicleID }) => {
   const {
@@ -11,7 +11,7 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
     clearVehicleForm,
     setEditMode,
     submitAddEditvehicle,
-  } = useFormsStore();
+  } = useAddVehicleFormStore();
   const {
     make,
     model,
