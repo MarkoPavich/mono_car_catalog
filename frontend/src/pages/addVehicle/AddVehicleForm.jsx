@@ -37,7 +37,7 @@ const AddVehicleForm = observer(({ t, vehicleID }) => {
   useEffect(() => {
     if (vehicleID) setEditMode(vehicleID);
     else clearVehicleForm();
-  }, []);
+  }, [carMakes]);
 
   return (
     <form className="f-addVehicle-form">

@@ -20,8 +20,9 @@ class VehiclesStore {
       fuelTypes: {},
     };
 
-    this.sortOptions = sortOptions;
+    this.isLoading = true;
 
+    this.sortOptions = sortOptions;
     this.filters = filtersForms();
 
     this.getVehiclesData(); // Fetch data
@@ -40,6 +41,7 @@ class VehiclesStore {
       carsData: observable,
       filters: observable,
       currentPage: observable,
+      isLoading: observable,
 
       setBodyParams: action,
       setFuelParams: action,
@@ -82,6 +84,7 @@ class VehiclesStore {
   };
 
   async getVehiclesData() {
+    this.isLoading = true; // mark content loading
     try {
       const vehiclesData = await vehiclesServices.getVehiclesData();
       const vehicles = await vehiclesServices.getVehiclesList();
@@ -99,6 +102,9 @@ class VehiclesStore {
     } catch (error) {
       this.messages.createError('Network error! Please try again later'); // TODO - Make translations
     }
+    runInAction(() => {
+      this.isLoading = false; // Mark content requests complete
+    });
   }
 
   get activeFilters() {
@@ -211,7 +217,7 @@ class VehiclesStore {
 
     runInAction(() => {
       this.carsData.vehicles = updatedVehicles;
-    })
+    });
   };
 
   addVehicle = async (validatedData, editID) => {
