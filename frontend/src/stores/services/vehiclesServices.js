@@ -133,6 +133,15 @@ class VehiclesServices {
     return { updatedVehicles, updatedModels };
   }
 
+  static async deleteVehicle(id, vehiclesList) {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    const updatedVehicles = vehiclesList.filter((vehicle) => vehicle.id !== id);
+
+    localStorage.setItem('vehicles', JSON.stringify(updatedVehicles));
+
+    return updatedVehicles;
+  }
+
   // Helper function - this will probably be handled server-side at some point..
   static handleModels(vehicleData, models) {
     const updatedModels = JSON.parse(JSON.stringify(models)); // Deep copy models

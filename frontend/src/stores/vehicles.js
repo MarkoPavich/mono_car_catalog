@@ -9,13 +9,11 @@ import vehiclesServices from './services/vehiclesServices';
 import sortOptions from './mockup/sortOptions';
 import filtersForms from './templates/filtersForms';
 
-import vehicles from '../stores/mockup/vehicles';
-
 class VehiclesStore {
   constructor(messages) {
     // Cars dataSets
     this.carsData = {
-      vehicles: vehicles,
+      vehicles: [],
       carMakes: {},
       carModels: {},
       carBodies: {},
@@ -50,6 +48,7 @@ class VehiclesStore {
       addVehicle: action,
       selectPage: action,
       getVehiclesData: action,
+      deleteVehicle: action,
 
       activeFilters: computed,
       vehiclesList: computed,
@@ -201,6 +200,18 @@ class VehiclesStore {
       default:
         return filteredVehicles;
     }
+  };
+
+  deleteVehicle = async (id) => {
+    // TODO - mark loading
+    const updatedVehicles = await vehiclesServices.deleteVehicle(
+      id,
+      this.carsData.vehicles
+    );
+
+    runInAction(() => {
+      this.carsData.vehicles = updatedVehicles;
+    })
   };
 
   addVehicle = async (validatedData, editID) => {

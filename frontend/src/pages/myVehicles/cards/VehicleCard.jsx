@@ -1,8 +1,10 @@
 import React from 'react';
 import { withNamespaces } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
+import { useVehiclesStore } from '../../../StoreProvider';
 
 const VehicleCard = observer(({ t, vehicle }) => {
+  const { deleteVehicle } = useVehiclesStore();
   const { manufactureDate, make, model, variant, img, price, id } = vehicle;
   const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${
     model.name
@@ -29,7 +31,9 @@ const VehicleCard = observer(({ t, vehicle }) => {
         </div>
       </div>
       <div className="p-myVehicles-carCard-optionsBox">
-        <button type="submit">{t('pageMyVehicles.vehicleCardDelBtn')}</button>
+        <button onClick={() => deleteVehicle(id)} type="submit">
+          {t('pageMyVehicles.vehicleCardDelBtn')}
+        </button>
       </div>
     </div>
   );

@@ -19,7 +19,9 @@ const MyVehicles = observer(({ t }) => {
         <section className="p-myvehicles-content-container">
           <header>
             <a href="/#">{t('pageMyVehicles.headerBackHref')}</a>
-            <span>{t('pageMyVehicles.headerResCount')}: {vehicles.length}</span>
+            <span>
+              {t('pageMyVehicles.headerResCount')}: {vehicles.length}
+            </span>
           </header>
           <div className="p-myVehicles-cards-container">
             {vehicles.map((vehicle) => (
