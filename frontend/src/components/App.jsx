@@ -37,7 +37,6 @@ function App() {
               path="/add-new-vehicle"
               component={AddVehicle}
             />
-            <Route exact path="/my-vehicles-dev" component={MyVehicles} />
             {/* Delete this after markup */}
             <PrivateRoute exact path="/edit-vehicle" component={AddVehicle} />
             <PrivateRoute exact path="/my-vehicles" component={MyVehicles} />
