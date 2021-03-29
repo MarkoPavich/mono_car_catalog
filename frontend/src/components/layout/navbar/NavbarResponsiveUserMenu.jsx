@@ -13,7 +13,9 @@ function NavbarResponsiveUserMenu({ isSmallScreen, t }) {
         <li>
           <a href="/#/add-new-vehicle">{t('navOptions.addVehicle')}</a>
         </li>
-        <li>{t('navOptions.myVehicles')}</li>
+        <li>
+          <a href="/#/my-vehicles">{t('navOptions.myVehicles')}</a>
+        </li>
         <li onClick={requestLogout}>{t('common.logout')}</li>
       </ul>
     </div>

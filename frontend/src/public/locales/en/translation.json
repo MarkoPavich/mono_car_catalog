@@ -128,5 +128,11 @@
         "vehicleCardPrice": "price",
         "vehiceCardID": "vehicle ID",
         "vehicleCardDelBtn": "Delete"
+    },
+
+    "noResultsComponent": {
+        "header": "No Results",
+        "resetBtn": "Reset demo"
     }
+
 }

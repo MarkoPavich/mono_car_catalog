@@ -128,5 +128,10 @@
         "vehicleCardPrice": "cijena",
         "vehiceCardID": "ID oznaka",
         "vehicleCardDelBtn": "Izbriši"
+    },
+
+    "noResultsComponent": {
+        "header": "Nema rezultata",
+        "resetBtn": "Resetiraj demo"
     }
 }

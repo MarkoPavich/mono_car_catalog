@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { withNamespaces } from 'react-i18next';
 import { useVehiclesStore } from '../StoreProvider';
 import VehicleCard from './myVehicles/cards/VehicleCard';
+import NoResults from '../components/common/NoResults';
 import './MyVehicles.css';
 
 const MyVehicles = observer(({ t }) => {
@@ -24,9 +25,13 @@ const MyVehicles = observer(({ t }) => {
             </span>
           </header>
           <div className="p-myVehicles-cards-container">
-            {vehicles.map((vehicle) => (
-              <VehicleCard key={nanoid()} vehicle={vehicle} />
-            ))}
+            {vehicles.length !== 0 ? (
+              vehicles.map((vehicle) => (
+                <VehicleCard key={nanoid()} vehicle={vehicle} />
+              ))
+            ) : (
+              <NoResults />
+            )}
           </div>
         </section>
       </div>

@@ -128,5 +128,10 @@
         "vehicleCardPrice": "Preis",
         "vehiceCardID": "Fahrzeugkennnummer",
         "vehicleCardDelBtn": "Löschen "
+    },
+
+    "noResultsComponent": {
+        "header": "Keine Ergebnisse",
+        "resetBtn": "Demo zurücksetzen"
     }
 }
