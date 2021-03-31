@@ -54,11 +54,6 @@ const CarsGrid = observer(({ t }) => {
       ) : (
         <NoResults />
       )}
-      <div className="c-carsGrid-card-container">
-        {paginatedVehicles.map((vehicle) => (
-          <CarCard key={nanoid()} vehicle={vehicle} t={t} />
-        ))}
-      </div>
       <GridPagination />
     </div>
   );

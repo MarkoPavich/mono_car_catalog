@@ -98,13 +98,14 @@ class VehiclesStore {
           carModels: vehiclesData.models,
           vehicles,
         };
+        this.isLoading = false; // Mark content requests complete
       });
     } catch (error) {
       this.messages.createError('Network error! Please try again later'); // TODO - Make translations
+      runInAction(() => {
+        this.isLoading = false;
+      });
     }
-    runInAction(() => {
-      this.isLoading = false; // Mark content requests complete
-    });
   }
 
   get activeFilters() {
