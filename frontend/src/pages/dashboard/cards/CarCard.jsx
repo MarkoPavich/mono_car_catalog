@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withNamespaces } from 'react-i18next';
 import './CarCard.css';
 
@@ -14,10 +14,6 @@ function CarCard({ vehicle, t }) {
     manufactureDate,
     price,
   } = vehicle;
-
-  useEffect(() => {
-    console.log(id)
-  })
 
   const header = `${manufactureDate.slice(0, 4)}. ${make.name} ${
     model.name
