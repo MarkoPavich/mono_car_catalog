@@ -1,7 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { makeObservable, observable, action, runInAction } from 'mobx';
-import { validateVehicleForm, markFields } from './services/formsValidators';
-import { vehicleForm } from './templates/forms';
+import {
+  validateVehicleForm,
+  markFields,
+} from '../../stores/services/formsValidators';
+import { vehicleForm } from '../../stores/templates/forms';
 
 export default class AddVehicleFormStore {
   constructor(vehiclesStore, messages) {
