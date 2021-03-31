@@ -94,7 +94,7 @@ const vehicles = [
     price: 7450,
   },
   {
-    id: 'Lqg0afLZgwg4_1wjadeJ0',
+    id: 'Lqg0afsigpwg4_1wjadeJ0',
     make: astonMartin,
     model: carModels[astonMartin.id][0],
     bodyType: compact,
@@ -109,7 +109,7 @@ const vehicles = [
     price: 50000,
   },
   {
-    id: '03W1lE-ao4vB5JS1tX7nd',
+    id: '03W1lE-sr78ibnsprt',
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: LPG,
@@ -123,7 +123,7 @@ const vehicles = [
     price: 9000,
   },
   {
-    id: 'TfoVoQEhtHj-lSn5lQ0TG',
+    id: 'TfoVoQEhtHj-su4i_srl88',
     make: audi,
     model: carModels[audi.id][0],
     bodyType: coupe,
@@ -138,7 +138,7 @@ const vehicles = [
     price: 12000,
   },
   {
-    id: '5GKiOfisd3-y-DQ3VLoIE',
+    id: '5GKiOfisd3-y-D99mmkpLoIE',
     make: astonMartin,
     model: carModels[astonMartin.id][0],
     fuelType: BEV,
@@ -153,7 +153,7 @@ const vehicles = [
     price: 89000,
   },
   {
-    id: 'qbqB05FQsuwZJYQ_fq09h',
+    id: 'qbqBuxpQsuwZJYQ_fb09h',
     make: hyundai,
     model: carModels[hyundai.id][0],
     fuelType: petrol,
