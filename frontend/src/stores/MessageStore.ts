@@ -1,4 +1,4 @@
-import { makeObservable, action, observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 import { Dict } from '../types';
 
 // Handle user alert notifications, success, error, etc..
@@ -22,12 +22,14 @@ class MessageStore {
     txt: '',
     type: '',
   };
+
   // Allowed generic message types
   types: MessageTypes = {
     success: 'success',
     error: 'error',
     info: 'info',
   };
+
   // Common error and confirmation types implemented with translation system
   commonErrors: Dict = {
     userExists: 'userExists',
@@ -36,6 +38,7 @@ class MessageStore {
     invalidVehicleForm: 'invalidVehicleForm',
     noMatchingVehicleID: 'noMatchingVehicleID',
   };
+
   commonConfirmations: Dict = {
     userRegistered: 'userRegistered',
     userLogged: 'userLogged',
@@ -84,7 +87,7 @@ class MessageStore {
   @observable
   commonConfirmation = (type: string, txt: string = '') => {
     this.message = {
-      txt: txt,
+      txt,
       type: this.commonConfirmations[type],
     };
   };
