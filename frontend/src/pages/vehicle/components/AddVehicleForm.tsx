@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
@@ -41,7 +40,7 @@ const AddVehicleForm = observer(({ vehicleID }: { vehicleID: string }) => {
     if (vehicleID) {
       setEditMode(vehicleID);
     } else clearVehicleForm();
-  }, [vehicleID]);
+  }, [vehicleID, clearVehicleForm, setEditMode]);
 
   return (
     <form className="f-addVehicle-form">

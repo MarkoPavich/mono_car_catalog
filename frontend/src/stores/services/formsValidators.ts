@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import i18n from '../../i18n'; // Translations library
-import { inputStatus } from '../templates/forms';
-import { Form } from '../templates/forms';
+import { inputStatus, Form } from '../templates/forms';
 import { Dict } from '../../types';
 
 type Tooltip = {

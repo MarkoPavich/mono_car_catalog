@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore, useUIStore } from '../../../StoreProvider';
@@ -9,6 +11,7 @@ const UserMenuSmallScreen = observer(() => {
 
   return (
     <div
+      role="button"
       onClick={toggleNavbarMenu}
       className={navbarMobileMenu}
       id="l-navbar-user-menu-mobile"
@@ -34,8 +37,10 @@ const UserMenuSmallScreen = observer(() => {
           </li>
         </ul>
         <ul>
-          <li onClick={requestLogout}>
-            <a href="#">{t('common.logout')}</a>
+          <li>
+            <button type="button" onClick={requestLogout}>
+              {t('common.logout')}
+            </button>
           </li>
         </ul>
       </div>

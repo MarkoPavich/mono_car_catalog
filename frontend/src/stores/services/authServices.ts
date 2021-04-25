@@ -8,7 +8,7 @@ type LoginData = {
   email?: string;
 };
 
-class authServices {
+class AuthServices {
   static async validateToken(token: string) {
     const request = new Request(`${apiBaseUrl}/auth/user`);
     const options = {
@@ -40,7 +40,9 @@ class authServices {
     const options = { ...JSON.parse(postOptions) };
     options.headers.Authorization = `token ${token}`;
 
-    return await fetch(request, options);
+    const response = await fetch(request, options);
+
+    return response.status;
   }
 
   static async registerNewAccount(validatedData: Dict) {
@@ -57,4 +59,4 @@ class authServices {
   }
 }
 
-export default authServices;
+export default AuthServices;

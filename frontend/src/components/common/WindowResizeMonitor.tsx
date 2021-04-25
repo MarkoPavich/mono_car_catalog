@@ -16,7 +16,7 @@ function WindowResizeMonitor() {
     return function listenerCleanup() {
       window.removeEventListener('resize', updateWidth);
     };
-  }, []);
+  }, [setScreenWidth]);
 
   return <></>;
 }

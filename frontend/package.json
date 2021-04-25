@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack --mode development --watch ./src/index.tsx --output-path ./static/app",
     "build": "webpack --mode production ./src/index.tsx --output-path ./static/app",
-    "format": "prettier --write 'src/**/*.ts{,x}'",
+    "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}"
   },
   "eslintConfig": {

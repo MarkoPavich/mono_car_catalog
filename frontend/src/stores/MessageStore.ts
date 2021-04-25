@@ -85,7 +85,7 @@ class MessageStore {
   };
 
   @observable
-  commonConfirmation = (type: string, txt: string = '') => {
+  commonConfirmation = (type: string, txt = '') => {
     this.message = {
       txt,
       type: this.commonConfirmations[type],

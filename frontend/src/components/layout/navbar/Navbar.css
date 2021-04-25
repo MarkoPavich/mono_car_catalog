@@ -134,6 +134,14 @@
   width: 100%;
 }
 
+.l-navbar-user-menu li button{
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
 .l-navbar-user-menu li {
   max-width: 50px;
   text-align: center;

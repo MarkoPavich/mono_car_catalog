@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import { makeObservable, observable, action, runInAction } from 'mobx';
 import authServices from './services/authServices';
 import MessageStore from './MessageStore';
 import { AuthState, Dict } from '../types';
 
 // TODO - Replace console.logs with proper error handling, maybe something with returning values and messaging
+// ..Then enable eslint no-consoles rule
 
 class AuthStore {
   // Authentication state
@@ -13,6 +15,7 @@ class AuthStore {
     token: localStorage.getItem('token'),
     user: null,
   };
+
   messages: MessageStore;
 
   constructor(messages: MessageStore) {
@@ -101,8 +104,8 @@ class AuthStore {
 
     if (this.authState.token !== null) {
       try {
-        const response = await authServices.logout(this.authState.token);
-        if (response.status !== 204) console.log('invalid token');
+        const responseStatus = await authServices.logout(this.authState.token);
+        if (responseStatus !== 204) console.log('invalid token');
       } catch (error) {
         console.log('Problem logging out', error);
       }
@@ -150,11 +153,9 @@ class AuthStore {
 
         if (data.username) {
           this.messages.commonError(this.messages.commonErrors.userExists);
-          return 'username';
         }
         if (data.email) {
           this.messages.commonError(this.messages.commonErrors.emailExists);
-          return 'email';
         }
       }
     } catch (error) {

@@ -21,6 +21,7 @@ export default class AddVehicleFormStore {
   @observable vehicleForm: typeof vehicleForm = vehicleForm;
 
   messages: MessageStore;
+
   dataStore: CarsDataStore;
 
   @action markFields: typeof markFields = markFields;
@@ -132,10 +133,7 @@ export default class AddVehicleFormStore {
   };
 
   @action
-  addVehicle = async (
-    validatedData: ValidatedVehicleData,
-    editID: string = ''
-  ) => {
+  addVehicle = async (validatedData: ValidatedVehicleData, editID = '') => {
     const make = this.carsData.carMakes[validatedData.make]; // Adapt vehicle make
 
     // Adapt bodyType and FuelType data for vehicle object model

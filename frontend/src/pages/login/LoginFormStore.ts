@@ -16,6 +16,7 @@ export default class LoginFormStore {
 
   // Instantiate forms
   @observable loginForm: Form = loginForm;
+
   @observable registerForm: Form = registerForm;
 
   @observable modalRegisterStatus = this.modalRegisterClassNames.hide;

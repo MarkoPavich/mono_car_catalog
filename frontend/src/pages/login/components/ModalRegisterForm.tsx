@@ -18,7 +18,7 @@ const ModalRegisterForm = observer(() => {
 
   useEffect(() => {
     clearRegisterForm();
-  }, []);
+  }, [clearRegisterForm]);
 
   return (
     <div className={modalRegisterStatus} id="a-login-modal-container">
@@ -114,6 +114,7 @@ const ModalRegisterForm = observer(() => {
               type="checkbox"
             />
             <label htmlFor="touCheck">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a href="#">{t('login.tou')}</a>
             </label>
           </div>

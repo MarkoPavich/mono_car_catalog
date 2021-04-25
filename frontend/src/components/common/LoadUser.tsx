@@ -10,6 +10,7 @@ const LoadUser = observer(() => {
 
   useEffect(() => {
     if (token) getUser(); // If token in localStorage, try to authenticate
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // getUser function will remove token if invalid

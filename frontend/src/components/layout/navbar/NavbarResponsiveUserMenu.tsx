@@ -1,7 +1,7 @@
-import './NavbarResponsiveUserMenu.css';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../../StoreProvider';
 import UserMenuSmallScreen from './UserMenuSmallScreen';
+import './NavbarResponsiveUserMenu.css';
 
 function NavbarResponsiveUserMenu({
   isSmallScreen,
@@ -20,7 +20,11 @@ function NavbarResponsiveUserMenu({
         <li>
           <a href="/#/my-vehicles">{t('navOptions.myVehicles')}</a>
         </li>
-        <li onClick={requestLogout}>{t('common.logout')}</li>
+        <li>
+          <button type="button" onClick={requestLogout}>
+            {t('common.logout')}
+          </button>
+        </li>
       </ul>
     </div>
   );

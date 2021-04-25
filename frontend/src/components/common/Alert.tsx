@@ -47,6 +47,9 @@ const Alert = observer(() => {
             break;
           case 'info':
             alert.info(message.txt);
+            break;
+          default:
+            alert.info(message.txt);
         }
       }
 

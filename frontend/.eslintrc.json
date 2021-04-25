@@ -25,6 +25,8 @@
   },
   "rules": {
     "linebreak-style": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-useless-escape": "off",
     "prettier/prettier": [
       "error",
       {

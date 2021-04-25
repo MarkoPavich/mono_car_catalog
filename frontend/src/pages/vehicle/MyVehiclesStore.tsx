@@ -5,6 +5,7 @@ import CarsDataStore from '../../stores/CarsDataStore';
 
 class MyVehiclesStore {
   messages: MessageStore;
+
   dataStore: CarsDataStore;
 
   constructor(messages: MessageStore, dataStore: CarsDataStore) {

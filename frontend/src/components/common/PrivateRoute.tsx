@@ -4,8 +4,10 @@ import { Route, RouteProps } from 'react-router-dom';
 import { useAuthStore } from '../../StoreProvider';
 import LoadUser from './LoadUser';
 
-interface PrivateRouteProps extends RouteProps {
-  component?: any;
+interface PrivateRouteProps {
+  exact?: boolean;
+  path: RouteProps['path'];
+  component: React.ElementType;
   children?: FunctionComponent;
 }
 
@@ -25,8 +27,8 @@ const PrivateRoute = observer((props: PrivateRouteProps) => {
     <Route
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component props={props} /> : <LoadUser />
+      render={(routeProps) =>
+        isAuthenticated ? <Component props={routeProps} /> : <LoadUser />
       }
     />
   );

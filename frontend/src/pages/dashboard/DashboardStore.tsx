@@ -8,14 +8,18 @@ import { Vehicle } from '../../types';
 
 class DashboardStore {
   @observable filters: ReturnType<typeof filtersForms> = filtersForms(); // filters templates with editable properties - observable
+
   @observable currentPage = 1; // pagination observable
 
   dataStore: CarsDataStore;
+
   messages: MessageStore;
+
   sortOptions: typeof sortOptions = sortOptions; // Template with predefined sorting capabilities
 
   // Pagination config
   resultsPerPage = 6;
+
   maxPageNumLinks = 4;
 
   constructor(messages: MessageStore, dataStore: CarsDataStore) {

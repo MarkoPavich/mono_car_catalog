@@ -104,12 +104,18 @@
 
 .l-navbar-user-mobile-popup-menu li:hover {
   background-color: lightgrey;
-  cursor: pointer;
 }
 
 .l-navbar-user-mobile-popup-menu li a {
   text-decoration: none;
   color: black;
+}
+
+.l-navbar-user-mobile-popup-menu li button{
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 @media (max-width: 1000px) {

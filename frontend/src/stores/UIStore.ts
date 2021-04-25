@@ -15,6 +15,7 @@ class UIStore {
     active: 'l-navbar-user-menu-mobile mobile-menu-active',
     inactive: 'l-navbar-user-menu-mobile',
   };
+
   sidebarmenuClasses: Dict = {
     active:
       'c-filtersSidebar-filter-params-container c-filtersSidebar-modal-active',
@@ -30,6 +31,7 @@ class UIStore {
 
   // Navbar toggleable
   @observable navbarMobileMenu = this.navbarMobileMenuClasses.inactive;
+
   // sidebar filters menu
   @observable sidebarFiltersMenu = this.sidebarmenuClasses.inactive;
 

@@ -13,7 +13,7 @@ import { PreVehicle, CarsData } from '../types';
 // This store also facilitates communication between component specific stores..
 // ..and CRUD related services - a liaison, of sorts..
 
-interface iDataStore {
+interface IdataStore {
   carsData: CarsData;
   isLoading: boolean;
   addUpdateVehicle: (vehicleData: PreVehicle, editID?: string) => void;
@@ -22,7 +22,7 @@ interface iDataStore {
   clearLoading: () => void;
 }
 
-class CarsDataStore implements iDataStore {
+class CarsDataStore implements IdataStore {
   @observable
   carsData: CarsData = {
     vehicles: [],
@@ -32,8 +32,9 @@ class CarsDataStore implements iDataStore {
     fuelTypes: {},
   };
 
-  @observable internalLoading: boolean = false; // This store is loading data
-  @observable externalLoading: boolean = false; // Some other store is loading data
+  @observable internalLoading = false; // This store is loading data
+
+  @observable externalLoading = false; // Some other store is loading data
 
   private messages: MessageStore;
 
@@ -61,7 +62,6 @@ class CarsDataStore implements iDataStore {
         };
       });
     } catch (error) {
-      console.log(error);
       this.messages.createError('Network error! Please try again later'); // TODO - Make translations
     }
     runInAction(() => {
@@ -77,7 +77,7 @@ class CarsDataStore implements iDataStore {
 
   // Proxy data to vehiclesServices, and update store - error handling left to pageStores
   @action
-  async addUpdateVehicle(vehicleData: PreVehicle, editID: string = '') {
+  async addUpdateVehicle(vehicleData: PreVehicle, editID = '') {
     const { vehiclesList, updatedModels } = editID
       ? await vehiclesServices.updateVehicle(vehicleData, editID)
       : await vehiclesServices.addNewVehicle(vehicleData);
